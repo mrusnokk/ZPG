@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="cviceni2/cviceni2.vcxproj" Id="3b5ebf2d-5d81-4078-a45c-7480fb98988f" />
+</Solution>
