@@ -12,18 +12,16 @@
 #include "Model.h"
 #include "ShaderProgram.h"
 #include "Transformation.h"
+#include <vector>
 
 class DrawableObject {
 	Model* model;
 	ShaderProgram* shader;
-	Transformation transform;
+	std::vector<Transformation> transformations;
 
 public:
 	DrawableObject(Model* m, ShaderProgram* s);
-
-	void setPosition(float x, float y, float z);
-	void setScale(float x, float y, float z);
-	void setRotation(float angle, float axisX, float axisY, float axisZ);
 	
+	void addTransformation(const Transformation& t);
 	void draw();
 };
