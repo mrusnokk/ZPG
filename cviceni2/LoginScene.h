@@ -19,8 +19,8 @@ public:
         this->addModel(loginModel);
 
         DrawableObject* login = new DrawableObject(loginModel, shader);
-        login->setScale(0.5f, 0.5f, -1.0f);
-        login->setRotation(45.0f, 15.0f, 0.0f, 1.0f); 
+        //login->setScale(0.5f, 0.5f, -1.0f);
+        //login->setRotation(45.0f, 15.0f, 0.0f, 1.0f); 
         this->addObject(login);
     }
 };

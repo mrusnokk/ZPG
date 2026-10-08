@@ -149,7 +149,6 @@
     <ClCompile Include="gl.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
-    <ClCompile Include="Transformation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -173,6 +172,8 @@
     <ClInclude Include="SphereScene.h" />
     <ClInclude Include="sun.h" />
     <ClInclude Include="Transformation.h" />
+    <ClInclude Include="Transformations.h" />
+    <ClInclude Include="TransformComposite.h" />
     <ClInclude Include="TriangleScene.h" />
   </ItemGroup>
   <ItemGroup>

@@ -29,24 +29,24 @@ public:
 
         for (int i = 0; i < 12; i++) {
             DrawableObject* t = new DrawableObject(treeModel, shader);
-            t->setPosition(-1.0f + (i * 0.15f), -1.0f, 0.0f);
-            t->setScale(0.1f, 0.1f, 1.0f);
+            //t->setPosition(-1.0f + (i * 0.15f), -1.0f, 0.0f);
+            //t->setScale(0.1f, 0.1f, 1.0f);
             this->addObject(t);
         }
 
         for (int i = 0; i < 12; i++) {
             DrawableObject* b = new DrawableObject(bushModel, shader);
-            b->setPosition(-0.9f + (i * 0.15f), -1.0f, 0.0f);
-            b->setScale(0.3f, 0.3f, 1.0f);
+            //b->setPosition(-0.9f + (i * 0.15f), -1.0f, 0.0f);
+            //b->setScale(0.3f, 0.3f, 1.0f);
             this->addObject(b);
         }
         DrawableObject* sun = new DrawableObject(sunModel, shaderSun);
-        sun->setPosition(0.8f, 0.8f, 0.0f);
-        sun->setScale(0.1f,0.1f,1.0f);
+        //sun->setPosition(0.8f, 0.8f, 0.0f);
+        //sun->setScale(0.1f,0.1f,1.0f);
         this->addObject(sun);
         DrawableObject* mySignature = new DrawableObject(login, shader);
-        mySignature->setPosition(-0.8f, 0.8f, 0.0f);
-        mySignature->setScale(0.1f, 0.1f, -1.0f);
+        //mySignature->setPosition(-0.8f, 0.8f, 0.0f);
+        //mySignature->setScale(0.1f, 0.1f, -1.0f);
         this->addObject(mySignature);
     }
 };

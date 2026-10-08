@@ -11,9 +11,9 @@ int main()
     app->initialization();
 
     app->addScene(new TriangleScene());
-    app->addScene(new SphereScene());
-    app->addScene(new ForestScene());
-    app->addScene(new LoginScene());
+    //app->addScene(new SphereScene());
+    //app->addScene(new ForestScene());
+    //app->addScene(new LoginScene());
 
     app->run();
 

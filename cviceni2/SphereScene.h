@@ -24,8 +24,8 @@ public:
         this->addObject(sphereObj);
 
         DrawableObject* mySignature = new DrawableObject(loginModel, shader);
-        mySignature->setPosition(-0.8f, 0.8f, 0.0f);
-        mySignature->setScale(0.1f, 0.1f, -1.0f);
+        //mySignature->setPosition(-0.8f, 0.8f, 0.0f);
+        //mySignature->setScale(0.1f, 0.1f, -1.0f);
         this->addObject(mySignature);
     }
 };

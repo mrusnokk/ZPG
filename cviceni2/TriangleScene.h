@@ -21,12 +21,31 @@ public:
         this->addModel(loginModel);
 
         DrawableObject* triangleObj = new DrawableObject(triangleModel, shader);
+
+        Transformation* tPosun = new Transformation();
+        tPosun->setPosition(0.4f, 0.0f, 0.0f);
+
+        Transformation* tRotace = new Transformation();
+        tRotace->setRotation(45.0f, 0.0f, 0.0f, 1.0f);
+
+        //triangleObj->addTransformation(tPosun);
+        //triangleObj->addTransformation(tRotace);
+
+        triangleObj->addTransformation(tRotace);
+        triangleObj->addTransformation(tPosun);
+
+
         this->addObject(triangleObj);
 
         DrawableObject* mySignature = new DrawableObject(loginModel, shader);
-        mySignature->setPosition(-0.8f, 0.8f, 0.0f);
-        mySignature->setScale(0.1f, 0.1f, -1.0f);
+
+        Transformation* sigTransform = new Transformation();
+        sigTransform->setPosition(-0.8f, 0.8f, 0.0f);
+        sigTransform->setScale(0.1f, 0.1f, -1.0f);
+
+        mySignature->addTransformation(sigTransform);
 
         this->addObject(mySignature);
     }
+
 };

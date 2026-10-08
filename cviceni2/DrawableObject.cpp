@@ -3,19 +3,17 @@
 DrawableObject::DrawableObject(Model* m, ShaderProgram* s){
 	this->model = m;
 	this->shader = s;
+	transform = nullptr;
 }
 
-void DrawableObject::addTransformation(Transformation* t) {
-	transformations.push_back(t);
+void DrawableObject::setTransformation(Transformation* t) {
+	this->transform = t;
 }
 
 void DrawableObject::draw() {
 	shader->use();
-
-	glm::mat4 m(1.0f);
-	for (Transformation* t : transformations) {
-		m = m * t->getMatrix();
+	if (transform != nullptr) {
+		shader->setMatrix("modelMatrix", transform->getMatrix());
 	}
-	shader->setMatrix("modelMatrix", m);
 	model->draw();
 }
