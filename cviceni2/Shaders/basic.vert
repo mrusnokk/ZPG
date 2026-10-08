@@ -9,5 +9,5 @@ uniform mat4 modelMatrix;
 void main()
 {
     vertexColor = color;
-    gl_Position = modelMatrix * vec4(vec3(position), 1.0);
+    gl_Position = modelMatrix * vec4(position, 1.0);
 }

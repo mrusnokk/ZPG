@@ -10,11 +10,12 @@
 
 #pragma once
 #include <glad/gl.h>
+#include "glm-master/glm/glm.hpp";
 #include <string>
 
 class ShaderProgram {
+
 public:
-	GLuint id;
 	ShaderProgram(const char* vertexPaht, const char* fragmentPath);
 	~ShaderProgram();
 
@@ -22,8 +23,11 @@ public:
 	void setUniform(const char* name, float value);
 	void setUniform(const char* name, int value);
 	void setUniform(const char* name, float x, float y, float z);
+	GLuint getId() { return id; }
+	void setMatrix(const char* name, glm::mat4 matrix);
 
 	private:
 		void checkCompileErrors(GLuint shader, std::string type) const;
 		GLuint createShaderFromFile(GLenum shaderType, const char* shaderFile);
+		GLuint id;
 };

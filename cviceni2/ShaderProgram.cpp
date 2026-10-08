@@ -61,7 +61,7 @@ GLuint ShaderProgram::createShaderFromFile(GLenum shaderType, const char* shader
 	return shaderID;
 }
 void ShaderProgram::use() {
-	glUseProgram(id);
+	glUseProgram(getId());
 }
 ShaderProgram::~ShaderProgram() {
 	glDeleteProgram(id);
@@ -91,5 +91,15 @@ void ShaderProgram::setUniform(const char* name, float x, float y, float z) {
 	}
 	else {
 		glUniform3f(location, x, y, z);
+	}
+}
+void ShaderProgram::setMatrix(const char* name, glm::mat4 matrix) {
+	GLuint location = glGetUniformLocation(id, name);
+
+	if (location != -1) {
+		glUniformMatrix4fv(location, 1, GL_FALSE, &matrix[0][0]);
+	}
+	else {
+		std::cerr << "Warning! : variable '" << name << "' does not exist or is not used in shader!" << std::endl;
 	}
 }

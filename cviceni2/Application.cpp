@@ -1,17 +1,15 @@
 #include "Application.h"
-#include "Models/tree.h"
-#include "Models/bushes.h"
-#include "Models/triangle.h"
-#include "Models/sphere.h"
-#include "Models/rus0130.h"
 #include <iostream>
 
 Application::Application(int width, int height, const std::string& title)
-	: width(width), height(height), title(title), window(nullptr), activeSceneIndex(0), shaderProgram(nullptr),shaderProgram2(nullptr),
-	treeModel(nullptr), bushModel(nullptr), sphereModel(nullptr), triangleModel(nullptr), loginModel(nullptr){	
+	: width(width), height(height), title(title), window(nullptr), activeSceneIndex(0){	
 }
 
 Application::~Application() {
+	for (Scene* s : scenes) {
+		delete s;
+	}
+
 	if (window) {
 		glfwDestroyWindow(window);
 	}
@@ -44,11 +42,6 @@ void Application::initialization() {
 	glEnable(GL_DEPTH_TEST);
 }
 
-void Application::createShaders() {
-	shaderProgram = new ShaderProgram("Shaders/basic.vert", "Shaders/basic.frag");
-	shaderProgram2 = new ShaderProgram("Shaders/basic.vert", "Shaders/basic2.frag");
-}
-
 void Application::addScene(Scene* scene) {
 	scenes.push_back(scene);
 }
@@ -72,62 +65,4 @@ void Application::run() {
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-}
-
-void Application::createModels() {
-	bushModel = new Model(bushes, sizeof(bushes), 8730);
-	treeModel = new Model(tree, sizeof(tree), 92814);
-	sphereModel = new Model(sphere, sizeof(sphere), 17280);
-	triangleModel = new Model(triangle, sizeof(triangle), 3);
-	loginModel = new Model(login_model, sizeof(login_model), 6996);
-}
-
-void Application::createScenes() {
-
-	Scene* triangleScene = new Scene();
-	Scene* sphereScene = new Scene();
-	Scene* forestScene = new Scene();
-	Scene* loginScene = new Scene();
-
-	DrawableObject* login = new DrawableObject(loginModel, shaderProgram);
-	login->setScale(0.5f, 0.5f, -1.0f);
-	loginScene->addObject(login);
-
-	DrawableObject* mySignature = new DrawableObject(loginModel, shaderProgram);
-	mySignature->setPosition(-0.8f, 0.8f, 0.0f);
-	mySignature->setScale(0.1f, 0.1f, -1.0f);
-
-	DrawableObject* triangle = new DrawableObject(triangleModel, shaderProgram);
-	triangleScene->addObject(triangle);
-	triangleScene->addObject(mySignature);
-
-	DrawableObject* sphere = new DrawableObject(sphereModel, shaderProgram);
-	sphereScene->addObject(sphere);
-	sphereScene->addObject(mySignature);
-
-	for (size_t i = 0; i < 12; i++) {
-		DrawableObject* tree = new DrawableObject(treeModel, shaderProgram);
-		tree->setPosition(-1.0f + (i * 0.15f), -1.0f, 0.0f);
-		tree->setScale(0.1f, 0.1f, 1.0f);
-		forestScene->addObject(tree);
-	}
-
-	for (size_t i = 0; i < 12; i++) {
-		DrawableObject* bush = new DrawableObject(bushModel, shaderProgram);
-		bush->setPosition(-0.9f + (i * 0.15f), -1.0f, 0.0f);
-		bush->setScale(0.3f, 0.3f, 1.0f);
-		forestScene->addObject(bush);
-	}
-
-	DrawableObject* sun = new DrawableObject(sphereModel, shaderProgram2);
-	sun->setPosition(0.8f, 0.8f, 1.0f);
-	sun->setScale(0.1f, 0.1f, 1.0f);
-	
-	forestScene->addObject(sun);
-	forestScene->addObject(mySignature);
-
-	scenes.push_back(triangleScene);
-	scenes.push_back(sphereScene);
-	scenes.push_back(forestScene);
-	scenes.push_back(loginScene);
 }

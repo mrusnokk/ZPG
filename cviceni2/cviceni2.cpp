@@ -1,4 +1,8 @@
 #include "Application.h"          
+#include "ForestScene.h"
+#include "LoginScene.h"
+#include "TriangleScene.h"
+#include "SphereScene.h"
 
 int main()
 {
@@ -6,9 +10,10 @@ int main()
 
     app->initialization();
 
-    app->createShaders();
-    app->createModels();
-    app->createScenes();
+    app->addScene(new TriangleScene());
+    app->addScene(new SphereScene());
+    app->addScene(new ForestScene());
+    app->addScene(new LoginScene());
 
     app->run();
 

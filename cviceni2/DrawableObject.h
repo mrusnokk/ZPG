@@ -23,7 +23,7 @@ public:
 
 	void setPosition(float x, float y, float z);
 	void setScale(float x, float y, float z);
-	void setRoation(float angle, float axisX, float axisY, float axisZ);
+	void setRotation(float angle, float axisX, float axisY, float axisZ);
 	
 	void draw();
 };

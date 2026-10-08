@@ -1,8 +1,33 @@
 #include "Scene.h"
 
+Scene::Scene() {}
 
-void Scene::addObject(DrawableObject* obj) {
-	objects.push_back(obj);
+Scene::~Scene() {
+	for (DrawableObject* obj : objects)
+	{
+		delete obj;
+	}
+	for (Model* model : models)
+	{
+		delete model;
+	}
+	for (ShaderProgram* shader : shaders)
+	{ 
+		delete shader;
+	}
+}
+
+void Scene::addObject(DrawableObject* object) 
+{ 
+	objects.push_back(object);
+}
+void Scene::addModel(Model* model)
+{
+	models.push_back(model);
+}
+void Scene::addShader(ShaderProgram* shader) 
+{ 
+	shaders.push_back(shader);
 }
 
 void Scene::draw() {

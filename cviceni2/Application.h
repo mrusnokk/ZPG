@@ -9,13 +9,11 @@
  **/
 
 #pragma once
-
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <string>
 #include <vector>
 #include "Scene.h"
-#include "Model.h"
 
 class Application {
 private:
@@ -26,24 +24,11 @@ private:
 	std::vector<Scene*> scenes;
 	int activeSceneIndex;
 
-	ShaderProgram* shaderProgram;
-	ShaderProgram* shaderProgram2;
-
-	Model* bushModel;
-	Model* treeModel;
-	Model* sphereModel;
-	Model* triangleModel;
-	Model* loginModel;
-
-
 public:
 	Application(int width, int height, const std::string& title);
 	~Application();
 
 	void initialization();
-	void createShaders();
 	void addScene(Scene* scene);
 	void run();
-	void createModels();
-	void createScenes();
 };
