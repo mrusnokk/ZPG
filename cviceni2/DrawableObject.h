@@ -17,11 +17,11 @@
 class DrawableObject {
 	Model* model;
 	ShaderProgram* shader;
-	std::vector<Transformation> transformations;
+	std::vector<Transformation*> transformations;
 
 public:
 	DrawableObject(Model* m, ShaderProgram* s);
 	
-	void addTransformation(const Transformation& t);
+	void addTransformation(Transformation* t);
 	void draw();
 };

@@ -5,7 +5,7 @@ DrawableObject::DrawableObject(Model* m, ShaderProgram* s){
 	this->shader = s;
 }
 
-void DrawableObject::addTransformation(const Transformation& t) {
+void DrawableObject::addTransformation(Transformation* t) {
 	transformations.push_back(t);
 }
 
@@ -13,8 +13,8 @@ void DrawableObject::draw() {
 	shader->use();
 
 	glm::mat4 m(1.0f);
-	for (Transformation& t : transformations) {
-		m = m * t.getMatrix();
+	for (Transformation* t : transformations) {
+		m = m * t->getMatrix();
 	}
 	shader->setMatrix("modelMatrix", m);
 	model->draw();
