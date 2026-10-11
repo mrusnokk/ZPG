@@ -1,3 +1,8 @@
+/**@file SolarScene.h
+ * @brief Class representing a 3D solar system scene.
+ * @author Michael Rusnok (rus0130)
+ * @year 2026
+ */
 #pragma once
 #include "Scene.h"
 #include "sun.h"
@@ -82,9 +87,9 @@ public:
 			moonAngle -= 360.0f;
 		rMoon->setAngle(moonAngle);
 
-		//moonDayCycleAngle += 0.09;
-		//if (moonDayCycleAngle >= 360.0f)
-		//	moonDayCycleAngle -= 360.0f;
-		//rDayCycleMoon->setAngle(moonDayCycleAngle);
+		moonDayCycleAngle += 0.09;
+		if (moonDayCycleAngle >= 360.0f)
+			moonDayCycleAngle -= 360.0f;
+		rDayCycleMoon->setAngle(moonDayCycleAngle);
 	}
 };
