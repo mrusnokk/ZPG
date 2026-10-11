@@ -27,7 +27,6 @@ public:
 	void setMatrix(const char* name, glm::mat4 matrix);
 
 	private:
-		void checkCompileErrors(GLuint shader, std::string type) const;
 		GLuint createShaderFromFile(GLenum shaderType, const char* shaderFile);
 		GLuint id;
 };

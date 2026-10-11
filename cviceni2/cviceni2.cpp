@@ -3,6 +3,7 @@
 #include "LoginScene.h"
 #include "TriangleScene.h"
 #include "SphereScene.h"
+#include "SolarScene.h"
 
 int main()
 {
@@ -10,9 +11,10 @@ int main()
 
     app->initialization();
 
-    app->addScene(new TriangleScene());
+    //app->addScene(new TriangleScene());
     //app->addScene(new SphereScene());
-    //app->addScene(new ForestScene());
+    app->addScene(new ForestScene());
+    app->addScene(new SolarScene());
     //app->addScene(new LoginScene());
 
     app->run();

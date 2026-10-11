@@ -12,7 +12,9 @@ void DrawableObject::setTransformation(Transformation* t) {
 
 void DrawableObject::draw() {
 	shader->use();
+	glm::mat4 currentMatrix = this->transform->getMatrix();
 	if (transform != nullptr) {
+		
 		shader->setMatrix("modelMatrix", transform->getMatrix());
 	}
 	model->draw();

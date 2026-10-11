@@ -1,3 +1,9 @@
+/**
+ * @file TransformComposite.h
+ * @brief Composite implementation for stacking multiple transformations.
+ * @author Michael Rusnok (rus0130)
+ * @year 2026
+ */
 #pragma once
 #include "Transformation.h"
 #include <vector>

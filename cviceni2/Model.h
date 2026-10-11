@@ -17,7 +17,7 @@ private:
 	GLuint VAO, VBO;
 	int vertexCount;
 public:
-	Model(const float* vertices, size_t size, int count) {
+	Model(const float* vertices, size_t size, int count, int floatsPerVertex = 6) {
 		vertexCount = count;
 
 		glGenVertexArrays(1, &VAO);
@@ -27,12 +27,25 @@ public:
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(0);
+		int stride = floatsPerVertex * sizeof(float);
+		if (floatsPerVertex == 6) {
 
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-		glEnableVertexAttribArray(1);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+			glEnableVertexAttribArray(0);
 
+			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+			glEnableVertexAttribArray(1);
+		}
+		else if(floatsPerVertex==9){
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (GLvoid*)0);
+			glEnableVertexAttribArray(0);
+
+			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, stride, (GLvoid*)(3 * sizeof(float)));
+			glEnableVertexAttribArray(2);
+
+			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride, (GLvoid*)(6 * sizeof(float)));
+			glEnableVertexAttribArray(1);
+		}
 		glBindVertexArray(0);
 	}
 	void draw() {

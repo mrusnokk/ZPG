@@ -10,11 +10,15 @@
 #include "Models/bushes.h"
 #include "Models/sphere.h"
 #include "Models/rus0130.h"
+#include <cstdio>
+#include <ctime>
+
 class ForestScene : public Scene {
 public:
     ForestScene() {
         ShaderProgram* shader = new ShaderProgram("Shaders/basic.vert", "Shaders/basic.frag");
         ShaderProgram* shaderSun = new ShaderProgram("Shaders/basic.vert", "Shaders/basic2.frag");
+
         Model* treeModel = new Model(tree, sizeof(tree), 92814);
         Model* bushModel = new Model(bushes, sizeof(bushes), 8730);
         Model* sunModel = new Model(sphere, sizeof(sphere), 17280);
@@ -27,26 +31,60 @@ public:
         this->addModel(sunModel);
         this->addModel(login);
 
-        for (int i = 0; i < 12; i++) {
+        srand(static_cast<unsigned int>(time(nullptr)));
+
+        for (int i = 0; i < 11; i++) {
             DrawableObject* t = new DrawableObject(treeModel, shader);
-            //t->setPosition(-1.0f + (i * 0.15f), -1.0f, 0.0f);
-            //t->setScale(0.1f, 0.1f, 1.0f);
+            
+            float rX = (rand() % 200 - 100) / 100.0f;
+            float rZ = (rand() % 200 - 100) / 100.0f;
+            
+            float rRot = static_cast<float>(rand() % 360);
+            float rScale = (rand() % 16 + 10) / 100.0f;
+
+            TransformComposite* treeTc = new TransformComposite();
+            treeTc->addTransformation(new Translate(rX, -0.8f, rZ));
+            treeTc->addTransformation(new Rotate(rRot, 0.0f, 1.0f, 0.0f));
+            treeTc->addTransformation(new Scale(rScale, rScale, rScale));
+
+            t->setTransformation(treeTc);
             this->addObject(t);
         }
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 15; i++) {
             DrawableObject* b = new DrawableObject(bushModel, shader);
-            //b->setPosition(-0.9f + (i * 0.15f), -1.0f, 0.0f);
-            //b->setScale(0.3f, 0.3f, 1.0f);
+            
+            float rX = (rand() % 200 - 100) / 100.0f;
+            float rZ = (rand() % 200 - 100) / 100.0f;
+            float rRot = static_cast<float>(rand() % 360);
+            float rScale = (rand() % 70 + 10) / 100.0f;
+
+            TransformComposite* bushTc = new TransformComposite();
+
+            bushTc->addTransformation(new Translate(rX, -0.8f, rZ));
+            bushTc->addTransformation(new Rotate(rRot, 0.0f, 1.0f, 0.0f));
+            bushTc->addTransformation(new Scale(rScale, rScale, rScale));
+
+            b->setTransformation(bushTc);
             this->addObject(b);
         }
+        
         DrawableObject* sun = new DrawableObject(sunModel, shaderSun);
-        //sun->setPosition(0.8f, 0.8f, 0.0f);
-        //sun->setScale(0.1f,0.1f,1.0f);
+        TransformComposite* sunTc = new TransformComposite();
+
+        sunTc->addTransformation(new Translate(0.8f, 0.8f, 0.0f));
+        sunTc->addTransformation(new Scale(0.2f, 0.2f, 0.2f));
+        sun->setTransformation(sunTc);
+
         this->addObject(sun);
+
         DrawableObject* mySignature = new DrawableObject(login, shader);
-        //mySignature->setPosition(-0.8f, 0.8f, 0.0f);
-        //mySignature->setScale(0.1f, 0.1f, -1.0f);
+        TransformComposite* loginTc = new TransformComposite();
+
+        loginTc->addTransformation(new Translate(-0.8f, 0.8f, -1.0f));
+        loginTc->addTransformation(new Scale(0.2f, 0.2f, 0.2f));
+        mySignature->setTransformation(loginTc);
+
         this->addObject(mySignature);
     }
 };

@@ -101,10 +101,19 @@
     <ClInclude Include="moon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Transformations.h">
+    <ClInclude Include="Translate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TransformComposite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rotate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scale.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SolarScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -112,5 +121,7 @@
     <None Include="Shaders\basic.frag" />
     <None Include="Shaders\basic.vert" />
     <None Include="Shaders\basic2.frag" />
+    <None Include="color.vert" />
+    <None Include="color.frag" />
   </ItemGroup>
 </Project>

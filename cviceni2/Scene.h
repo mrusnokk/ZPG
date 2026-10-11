@@ -13,6 +13,10 @@
 #include "DrawableObject.h"
 #include "Model.h"
 #include "ShaderProgram.h"
+#include "TransformComposite.h"
+#include "Translate.h"
+#include "Rotate.h"
+#include "Scale.h"
 
 class Scene {
 private:
@@ -27,6 +31,6 @@ public:
     void addObject(DrawableObject* object);
     void addModel(Model* model);
     void addShader(ShaderProgram* shader);
-
+    virtual void update() {}
     virtual void draw();
 };

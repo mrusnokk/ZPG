@@ -50,6 +50,9 @@ void Application::run() {
 	glEnable(GL_DEPTH_TEST);
 
 	while (!glfwWindowShouldClose(window)) {
+
+		
+
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -60,7 +63,9 @@ void Application::run() {
 
 		if (!scenes.empty()) {
 			scenes[activeSceneIndex]->draw();
+			scenes[activeSceneIndex]->update();
 		}
+		
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
