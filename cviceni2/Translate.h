@@ -16,4 +16,8 @@ public:
     glm::mat4 getMatrix() override {
         return glm::translate(glm::mat4(1.0f), position);
     }
+    void setPosition(float x, float y, float z) 
+    {
+        position = glm::vec3(x, y, z); 
+    }
 };

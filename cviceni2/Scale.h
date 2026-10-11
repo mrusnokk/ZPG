@@ -16,4 +16,8 @@ public:
     glm::mat4 getMatrix() override {
         return glm::scale(glm::mat4(1.0f), scaleVec);
     }
+    void setScale(float x, float y, float z) 
+    { 
+        scaleVec = glm::vec3(x, y, z); 
+    }
 };
