@@ -12,6 +12,7 @@
 #include "Model.h"
 #include "ShaderProgram.h"
 #include "Transformation.h"
+#include "Camera.h"
 
 class DrawableObject {
 	Model* model;
@@ -22,5 +23,5 @@ public:
 	DrawableObject(Model* m, ShaderProgram* s);
 	
 	void setTransformation(Transformation* t);
-	void draw();
+	void draw(Camera* cam);
 };

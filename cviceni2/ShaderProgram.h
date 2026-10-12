@@ -25,7 +25,6 @@ public:
 	void setUniform(const char* name, float x, float y, float z);
 	GLuint getId() { return id; }
 	void setMatrix(const char* name, glm::mat4 matrix);
-
 	private:
 		GLuint createShaderFromFile(GLenum shaderType, const char* shaderFile);
 		GLuint id;

@@ -4,6 +4,7 @@
 #include "TriangleScene.h"
 #include "SphereScene.h"
 #include "SolarScene.h"
+#include "ClockScene.h"
 
 int main()
 {
@@ -12,6 +13,7 @@ int main()
     app->initialization();
     app->addScene(new ForestScene());
     app->addScene(new SolarScene());
+    app->addScene(new ClockScene());
     app->run();
 
     delete app;

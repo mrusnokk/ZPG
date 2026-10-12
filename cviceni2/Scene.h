@@ -17,12 +17,15 @@
 #include "Translate.h"
 #include "Rotate.h"
 #include "Scale.h"
+#include "Camera.h"
 
 class Scene {
 private:
     std::vector<DrawableObject*> objects;
     std::vector<Model*> models;
     std::vector<ShaderProgram*> shaders;
+protected:
+    Camera* cam;
 
 public:
     Scene();
@@ -33,4 +36,5 @@ public:
     void addShader(ShaderProgram* shader);
     virtual void update() {}
     virtual void draw();
+    Camera* getCam();
 };

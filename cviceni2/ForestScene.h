@@ -14,8 +14,15 @@
 #include <ctime>
 
 class ForestScene : public Scene {
+private:
+    glm::vec3 cPos;
+    glm::vec3 cTar;
 public:
     ForestScene() {
+
+        this->cam = new Camera();
+        this->cam->setProjection(90.0f, 800 / 600.0f, 0.1f, 100.0f);
+
         ShaderProgram* shader = new ShaderProgram("Shaders/basic.vert", "Shaders/basic.frag");
         ShaderProgram* shaderSun = new ShaderProgram("Shaders/basic.vert", "Shaders/basic2.frag");
 
@@ -86,5 +93,8 @@ public:
         mySignature->setTransformation(loginTc);
 
         this->addObject(mySignature);
+    }
+    void update() override{
+        cam->updateViewMatrix();
     }
 };
