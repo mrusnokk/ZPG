@@ -1,6 +1,12 @@
+/**@file Camera.h
+ * @brief Class representing a camera.
+ * @author Michael Rusnok (rus0130)
+ * @year 2026
+ */
 #pragma once
 #include "glm-master/glm/glm.hpp";
 #include <glm/gtc/matrix_transform.hpp>
+#include "Application.h"
 class Camera {
 private:
 	glm::mat4 viewMatrix;

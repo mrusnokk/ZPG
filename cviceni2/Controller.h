@@ -9,7 +9,7 @@
 
 class Controller {
 private:
-	double lastX, lastY;
+	double lastX = 0.0f, lastY=0.0f;
 	bool firstMouse = true;
 public:
 	Controller() = default;

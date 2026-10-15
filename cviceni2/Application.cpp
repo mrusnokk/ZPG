@@ -24,7 +24,6 @@ void Application::initialization() {
 	}
 
 	window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
-
 	if (!window) {
 		glfwTerminate();
 		exit(EXIT_FAILURE);

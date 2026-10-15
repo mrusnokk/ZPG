@@ -10,15 +10,17 @@
 #include "Models/bushes.h"
 #include "Models/sphere.h"
 #include "Models/rus0130.h"
+#include "Models/plain.h"
 #include "Camera.h"
 #include <cstdio>
 #include <ctime>
 
 class ForestScene : public Scene {
 public:
-    ForestScene() {
+    ForestScene(int w,int h) {
+        
         this->cam = new Camera(glm::vec3(0.0f, 1.0f, 5.0f));
-        this->cam->setProjection(60.0f, 800.0f / 600.0f, 0.1f, 100.0f);
+        this->cam->setProjection(60.0f, w/static_cast<float>(h), 0.1f, 100.0f);
 
         ShaderProgram* shader = new ShaderProgram("Shaders/basic.vert", "Shaders/basic.frag");
         ShaderProgram* shaderSun = new ShaderProgram("Shaders/basic.vert", "Shaders/basic2.frag");
@@ -27,6 +29,7 @@ public:
         Model* bushModel = new Model(bushes, sizeof(bushes), 8730);
         Model* sunModel = new Model(sphere, sizeof(sphere), 17280);
         Model* login = new Model(login_model, sizeof(login_model), 6996);
+        Model* plainModel = new Model(plain, sizeof(plain), 6);
 
         this->addShader(shader);
         this->addShader(shaderSun);
@@ -37,11 +40,11 @@ public:
 
         srand(static_cast<unsigned int>(time(nullptr)));
 
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 73; i++) {
             DrawableObject* t = new DrawableObject(treeModel, shader);
             
-            float rX = (rand() % 200 - 100) / 100.0f;
-            float rZ = (rand() % 200 - 100) / 100.0f;
+            float rX = (rand() % 1000 - 500) / 100.0f;
+            float rZ = (rand() % 1000 - 500) / 100.0f;
             
             float rRot = static_cast<float>(rand() % 360);
             float rScale = (rand() % 16 + 10) / 100.0f;
@@ -55,11 +58,11 @@ public:
             this->addObject(t);
         }
 
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 73; i++) {
             DrawableObject* b = new DrawableObject(bushModel, shader);
             
-            float rX = (rand() % 200 - 100) / 100.0f;
-            float rZ = (rand() % 200 - 100) / 100.0f;
+            float rX = (rand() % 1000 - 500) / 100.0f;
+            float rZ = (rand() % 1000 - 500) / 100.0f;
             float rRot = static_cast<float>(rand() % 360);
             float rScale = (rand() % 70 + 10) / 100.0f;
 
@@ -90,6 +93,15 @@ public:
         mySignature->setTransformation(loginTc);
 
         this->addObject(mySignature);
+
+        DrawableObject* ground = new DrawableObject(plainModel, shader);
+        TransformComposite* groundTc = new TransformComposite();
+
+        groundTc->addTransformation(new Translate(0.0f, -0.8f, 0.0f));
+        groundTc->addTransformation(new Scale(10.0f, 1.0f, 10.0f));
+        ground->setTransformation(groundTc);
+        this->addObject(ground);
+
     }
     void update() override{
         //cam->updateViewMatrix();
