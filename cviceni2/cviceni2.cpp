@@ -8,12 +8,12 @@
 
 int main()
 {
-    int width = 800, height = 600;
+    int width = 1920, height = 1080;
     Application* app = new Application(width,height,"ZPG");
 
     app->initialization();
     app->addScene(new ForestScene(width, height));
-    app->addScene(new SolarScene());
+    app->addScene(new SolarScene(width,height));
     app->addScene(new ClockScene());
     app->run();
 

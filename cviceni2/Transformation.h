@@ -5,7 +5,7 @@
  * @year 2026
  */
 #pragma once
-#include "glm-master/glm/glm.hpp";
+#include "glm-master/glm/glm.hpp"
 
 class Transformation {
 public:

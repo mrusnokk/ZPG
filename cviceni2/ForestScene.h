@@ -11,11 +11,15 @@
 #include "Models/sphere.h"
 #include "Models/rus0130.h"
 #include "Models/plain.h"
+#include "clock.h"
 #include "Camera.h"
 #include <cstdio>
 #include <ctime>
+#include <numbers>
 
 class ForestScene : public Scene {
+private:
+    ShaderProgram* clockShader;
 public:
     ForestScene(int w,int h) {
         
@@ -24,13 +28,15 @@ public:
 
         ShaderProgram* shader = new ShaderProgram("Shaders/basic.vert", "Shaders/basic.frag");
         ShaderProgram* shaderSun = new ShaderProgram("Shaders/basic.vert", "Shaders/basic2.frag");
-
+        clockShader = new ShaderProgram("Shaders/clockShader.vert", "Shaders/clockShader.frag");
         Model* treeModel = new Model(tree, sizeof(tree), 92814);
         Model* bushModel = new Model(bushes, sizeof(bushes), 8730);
         Model* sunModel = new Model(sphere, sizeof(sphere), 17280);
         Model* login = new Model(login_model, sizeof(login_model), 6996);
         Model* plainModel = new Model(plain, sizeof(plain), 6);
+        Model* clModel = new Model(clockModel, sizeof(clockModel), 44826, 9);
 
+        this->addModel(clModel);
         this->addShader(shader);
         this->addShader(shaderSun);
         this->addModel(treeModel);
@@ -40,7 +46,7 @@ public:
 
         srand(static_cast<unsigned int>(time(nullptr)));
 
-        for (int i = 0; i < 73; i++) {
+        for (int i = 0; i < 100; i++) {
             DrawableObject* t = new DrawableObject(treeModel, shader);
             
             float rX = (rand() % 1000 - 500) / 100.0f;
@@ -58,7 +64,7 @@ public:
             this->addObject(t);
         }
 
-        for (int i = 0; i < 73; i++) {
+        for (int i = 0; i < 100; i++) {
             DrawableObject* b = new DrawableObject(bushModel, shader);
             
             float rX = (rand() % 1000 - 500) / 100.0f;
@@ -102,8 +108,28 @@ public:
         ground->setTransformation(groundTc);
         this->addObject(ground);
 
+        DrawableObject* clock = new DrawableObject(clModel, clockShader);
+        TransformComposite* clockTc = new TransformComposite();
+        clockTc->addTransformation(new Rotate(180.0f, 0.0f, 1.0f, 0.0f));
+        clockTc->addTransformation(new Translate(0.0f,3.0f,6.0f));
+        clockTc->addTransformation(new Scale(-1.5f, 1.5f, 1.5f));
+        clock->setTransformation(clockTc);
+        this->addObject(clock);
+
     }
     void update() override{
-        //cam->updateViewMatrix();
+        std::time_t t = std::time(nullptr);
+        std::tm lt;
+        localtime_s(&lt, &t);
+
+        const float TWO_PI = std::numbers::pi * 2;
+        float seconds = static_cast<float>(lt.tm_sec);
+        float minutes = lt.tm_min + seconds / 60.0f;
+        float hours = (lt.tm_hour % 12) + minutes / 60.0f;
+
+        clockShader->use();
+        clockShader->setUniform("secondAngle", -(seconds / 60.0f * TWO_PI));
+        clockShader->setUniform("minuteAngle", -(minutes / 60.0f * TWO_PI));
+        clockShader->setUniform("hourAngle", -(hours / 12.0f * TWO_PI));
     }
 };

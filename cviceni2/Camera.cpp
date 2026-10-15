@@ -45,8 +45,6 @@ void Camera::processMouseMovement(float x, float y) {
 	if (alpha > 179.0f)alpha = 179.0f;
 	if (alpha < 1.0f)alpha = 1.0f;
 
-
-
 	glm::vec3 newTarget;
 	newTarget.x = sin(glm::radians(alpha)) * cos(glm::radians(fi));
 	newTarget.y = cos(glm::radians(alpha));

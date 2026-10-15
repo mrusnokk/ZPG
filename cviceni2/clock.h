@@ -1,4 +1,3 @@
-#pragma once
 /**
 * @file clock.h
 *
@@ -12,7 +11,7 @@
 * @year 2026
 *
 **/
-
+#pragma once
 static const size_t vertexCount = 44826;
 
 static const float clockModel[] =

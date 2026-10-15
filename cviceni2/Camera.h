@@ -4,9 +4,8 @@
  * @year 2026
  */
 #pragma once
-#include "glm-master/glm/glm.hpp";
+#include "glm-master/glm/glm.hpp"
 #include <glm/gtc/matrix_transform.hpp>
-#include "Application.h"
 class Camera {
 private:
 	glm::mat4 viewMatrix;
@@ -18,7 +17,7 @@ private:
 
 	float alpha;
 	float fi;
-	float speed = 0.01f;
+	float speed = 0.0025f;
 	float sensitivity = 0.1f;
 
 public:
@@ -33,7 +32,6 @@ public:
 	void toBack();
 	void toRight();
 	void toLeft();
-
 	void processMouseMovement(float x, float y);
 
 	glm::mat4 getViewMatrix();

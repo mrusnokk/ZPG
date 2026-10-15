@@ -10,7 +10,7 @@
 
 #pragma once
 #include <glad/gl.h>
-#include "glm-master/glm/glm.hpp";
+#include "glm-master/glm/glm.hpp"
 #include <string>
 
 class ShaderProgram {
