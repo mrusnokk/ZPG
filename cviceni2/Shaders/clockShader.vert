@@ -13,8 +13,5 @@ void main()
 {
     
     vertexColor = color;
-    if(vertexColor == vec3(1.0,0.0,0.0)){
-         
-    }
     gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
 }

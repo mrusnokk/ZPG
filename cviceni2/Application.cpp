@@ -2,14 +2,16 @@
 #include <iostream>
 
 Application::Application(int width, int height, const std::string& title)
-	: width(width), height(height), title(title), window(nullptr), activeSceneIndex(0){	
+	: width(width), height(height), title(title), window(nullptr), activeSceneIndex(0){
+	this->controller = new Controller();
 }
 
 Application::~Application() {
+	
 	for (Scene* s : scenes) {
 		delete s;
 	}
-
+	delete this->controller;
 	if (window) {
 		glfwDestroyWindow(window);
 	}
@@ -61,7 +63,9 @@ void Application::run() {
 		if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS && scenes.size() > 2) activeSceneIndex = 2;
 		if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS && scenes.size() > 3) activeSceneIndex = 3;
 
+		
 		if (!scenes.empty()) {
+			controller->processInput(window, scenes[activeSceneIndex]->getCam());
 			scenes[activeSceneIndex]->draw();
 			scenes[activeSceneIndex]->update();
 		}

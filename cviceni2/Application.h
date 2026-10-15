@@ -14,6 +14,7 @@
 #include <string>
 #include <vector>
 #include "Scene.h"
+#include "Controller.h"
 
 class Application {
 private:
@@ -23,6 +24,7 @@ private:
 	std::string title;
 	std::vector<Scene*> scenes;
 	int activeSceneIndex;
+	Controller* controller = nullptr;
 
 public:
 	Application(int width, int height, const std::string& title);
