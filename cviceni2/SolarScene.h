@@ -25,7 +25,7 @@ private:
 public:
 	SolarScene(int w, int h) {
 		this->cam = new Camera(glm::vec3(0.0f,1.0f,-3.0f));
-		cam->setProjection(60,w/h,0.1,100);
+		cam->setProjection(60,w/static_cast<float>(h),0.1,100);
 
 		ShaderProgram* shader = new ShaderProgram("Shaders/color.vert", "Shaders/color.frag");
 		this->addShader(shader);

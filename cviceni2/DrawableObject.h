@@ -21,7 +21,9 @@ class DrawableObject {
 
 public:
 	DrawableObject(Model* m, ShaderProgram* s);
-	
+	~DrawableObject() {
+		delete transform;
+	}
 	void setTransformation(Transformation* t);
 	void draw(Camera* cam);
 };

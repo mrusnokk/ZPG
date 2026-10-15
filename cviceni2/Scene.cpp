@@ -15,6 +15,7 @@ Scene::~Scene() {
 	{ 
 		delete shader;
 	}
+	delete cam;
 }
 
 void Scene::addObject(DrawableObject* object) 

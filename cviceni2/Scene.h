@@ -21,20 +21,19 @@
 
 class Scene {
 private:
-    std::vector<DrawableObject*> objects;
-    std::vector<Model*> models;
-    std::vector<ShaderProgram*> shaders;
+	std::vector<DrawableObject*> objects;
+	std::vector<Model*> models;
+	std::vector<ShaderProgram*> shaders;
 protected:
-    Camera* cam;
+	Camera* cam;
 
 public:
-    Scene();
-    virtual ~Scene();
-
-    void addObject(DrawableObject* object);
-    void addModel(Model* model);
-    void addShader(ShaderProgram* shader);
-    virtual void update() {}
-    virtual void draw();
-    Camera* getCam();
+	Scene();
+	~Scene();
+	void addObject(DrawableObject* object);
+	void addModel(Model* model);
+	void addShader(ShaderProgram* shader);
+	virtual void update() {}
+	virtual void draw();
+	Camera* getCam();
 };

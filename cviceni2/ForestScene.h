@@ -43,6 +43,7 @@ public:
         this->addModel(bushModel);
         this->addModel(sunModel);
         this->addModel(login);
+        this->addModel(plainModel);
 
         srand(static_cast<unsigned int>(time(nullptr)));
 
@@ -84,7 +85,6 @@ public:
         
         DrawableObject* sun = new DrawableObject(sunModel, shaderSun);
         TransformComposite* sunTc = new TransformComposite();
-
         sunTc->addTransformation(new Translate(0.8f, 0.8f, 0.0f));
         sunTc->addTransformation(new Scale(0.2f, 0.2f, 0.2f));
         sun->setTransformation(sunTc);
@@ -109,6 +109,7 @@ public:
         this->addObject(ground);
 
         DrawableObject* clock = new DrawableObject(clModel, clockShader);
+        this->addShader(clockShader);
         TransformComposite* clockTc = new TransformComposite();
         clockTc->addTransformation(new Rotate(180.0f, 0.0f, 1.0f, 0.0f));
         clockTc->addTransformation(new Translate(0.0f,3.0f,6.0f));
