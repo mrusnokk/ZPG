@@ -28,7 +28,6 @@ void main() {
     if      (color.r > 0.9 && color.g < 0.1 && color.b < 0.1) hand = rotZ(secondAngle);
     else if (color.g > 0.9 && color.r < 0.1 && color.b < 0.1) hand = rotZ(minuteAngle);
     else if (color.b > 0.9 && color.r < 0.1 && color.g < 0.1) hand = rotZ(hourAngle);
-
     vertexColor = color;
     gl_Position = projectionMatrix * viewMatrix * modelMatrix * hand * vec4(position, 1.0);
 }
