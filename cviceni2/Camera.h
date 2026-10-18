@@ -4,6 +4,7 @@
  * @year 2026
  */
 #pragma once
+#include <vector>
 #include "glm-master/glm/glm.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 #include "ICameraObserver.h"

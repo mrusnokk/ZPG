@@ -25,5 +25,5 @@ public:
 		delete transform;
 	}
 	void setTransformation(Transformation* t);
-	void draw(Camera* cam);
+	void draw();
 };

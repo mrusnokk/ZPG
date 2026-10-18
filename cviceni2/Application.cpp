@@ -52,9 +52,7 @@ void Application::run() {
 
 	while (!glfwWindowShouldClose(window)) {
 
-		
-
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClearColor(130/255.0f, 200 / 255.0f, 229 / 255.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS && scenes.size() > 0) activeSceneIndex = 0;

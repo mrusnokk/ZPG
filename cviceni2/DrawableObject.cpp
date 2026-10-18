@@ -10,14 +10,10 @@ void DrawableObject::setTransformation(Transformation* t) {
 	this->transform = t;
 }
 
-void DrawableObject::draw(Camera* cam) {
+void DrawableObject::draw() {
 	shader->use();
 	if (transform != nullptr) {
 		shader->setMatrix("modelMatrix", transform->getMatrix());
-	}
-	if (cam != nullptr) {
-		shader->setMatrix("viewMatrix", cam->getViewMatrix());
-		shader->setMatrix("projectionMatrix", cam->getProjectionMatrix());
 	}
 	model->draw();
 }

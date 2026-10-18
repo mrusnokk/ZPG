@@ -36,7 +36,7 @@ void Scene::addShader(ShaderProgram* shader)
 
 void Scene::draw() {
 	for (DrawableObject* obj : objects) {
-		obj->draw(this->cam);
+		obj->draw();
 	}
 }
 Camera* Scene::getCam() {

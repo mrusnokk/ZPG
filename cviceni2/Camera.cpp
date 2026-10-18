@@ -19,6 +19,7 @@ void Camera::obs_remove(ICameraObserver* obs) {
 
 void Camera::setProjection(float fov, float aspectRatio, float nearPlane, float farPlane) {
 	this->projectionMatrix = glm::perspective(glm::radians(fov), aspectRatio, nearPlane, farPlane);
+	notifyObservers();
 }
 
 void Camera::notifyObservers() {
