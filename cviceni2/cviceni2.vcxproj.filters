@@ -143,5 +143,11 @@
     <None Include="color.frag" />
     <None Include="Shaders\clockShader.vert" />
     <None Include="Shaders\clockShader.frag" />
+    <None Include="Shaders\treeShader.frag" />
+    <None Include="Shaders\color.vert" />
+    <None Include="Shaders\color.frag" />
+    <None Include="Shaders\treeShader.vert" />
+    <None Include="Shaders\bushShader.vert" />
+    <None Include="Shaders\bushShader.frag" />
   </ItemGroup>
 </Project>

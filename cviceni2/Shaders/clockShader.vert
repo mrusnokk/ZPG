@@ -15,19 +15,16 @@ uniform float hourAngle;
 uniform float minuteAngle;
 uniform float secondAngle;
 
-mat4 rotZ(float a) {
+vec3 rot(vec3 p,float a) {
     float c = cos(a), s = sin(a);
-    return mat4( c,   s,   0.0, 0.0,
-                -s,   c,   0.0, 0.0,
-                 0.0, 0.0, 1.0, 0.0,
-                 0.0, 0.0, 0.0, 1.0);
+    return vec3(p.x * c - p.y * s, p.x * s + p.y * c, p.z);
 }
 
 void main() {
-    mat4 hand = mat4(1.0);
-    if      (color.r > 0.9 && color.g < 0.1 && color.b < 0.1) hand = rotZ(secondAngle);
-    else if (color.g > 0.9 && color.r < 0.1 && color.b < 0.1) hand = rotZ(minuteAngle);
-    else if (color.b > 0.9 && color.r < 0.1 && color.g < 0.1) hand = rotZ(hourAngle);
+    vec3 finalPosition = position;
+    if      (color.r == 1.0 && color.g == 0.0 && color.b == 0.0) finalPosition = rot(position,secondAngle);
+    else if (color.g == 1.0 && color.r == 0.0 && color.b == 0.0) finalPosition = rot(position,minuteAngle);
+    else if (color.b == 1.0 && color.r == 0.0 && color.g == 0.0) finalPosition = rot(position,hourAngle);
     vertexColor = color;
-    gl_Position = projectionMatrix * viewMatrix * modelMatrix * hand * vec4(position, 1.0);
+    gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(finalPosition, 1.0);
 }

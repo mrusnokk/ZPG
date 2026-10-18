@@ -29,6 +29,9 @@ public:
         ShaderProgram* shader = new ShaderProgram("Shaders/basic.vert", "Shaders/basic.frag");
         ShaderProgram* shaderSun = new ShaderProgram("Shaders/basic.vert", "Shaders/basic2.frag");
         clockShader = new ShaderProgram("Shaders/clockShader.vert", "Shaders/clockShader.frag");
+        ShaderProgram* tShader = new ShaderProgram("Shaders/treeShader.vert", "Shaders/treeShader.frag");
+        ShaderProgram* bShader = new ShaderProgram("Shaders/bushShader.vert", "Shaders/bushShader.frag");
+
         Model* treeModel = new Model(tree, sizeof(tree), 92814);
         Model* bushModel = new Model(bushes, sizeof(bushes), 8730);
         Model* sunModel = new Model(sphere, sizeof(sphere), 17280);
@@ -48,7 +51,7 @@ public:
         srand(static_cast<unsigned int>(time(nullptr)));
 
         for (int i = 0; i < 100; i++) {
-            DrawableObject* t = new DrawableObject(treeModel, shader);
+            DrawableObject* t = new DrawableObject(treeModel, tShader);
             
             float rX = (rand() % 1000 - 500) / 100.0f;
             float rZ = (rand() % 1000 - 500) / 100.0f;
@@ -66,7 +69,7 @@ public:
         }
 
         for (int i = 0; i < 100; i++) {
-            DrawableObject* b = new DrawableObject(bushModel, shader);
+            DrawableObject* b = new DrawableObject(bushModel, bShader);
             
             float rX = (rand() % 1000 - 500) / 100.0f;
             float rZ = (rand() % 1000 - 500) / 100.0f;
@@ -109,14 +112,21 @@ public:
         this->addObject(ground);
 
         DrawableObject* clock = new DrawableObject(clModel, clockShader);
+        DrawableObject* clock2 = new DrawableObject(clModel, clockShader);
         this->addShader(clockShader);
         TransformComposite* clockTc = new TransformComposite();
         clockTc->addTransformation(new Rotate(180.0f, 0.0f, 1.0f, 0.0f));
         clockTc->addTransformation(new Translate(0.0f,3.0f,6.0f));
         clockTc->addTransformation(new Scale(-1.5f, 1.5f, 1.5f));
         clock->setTransformation(clockTc);
-        this->addObject(clock);
+        TransformComposite* clockTc2 = new TransformComposite();
+        clockTc2->addTransformation(new Translate(0.0f, 3.0f, 6.0f));
+        clockTc2->addTransformation(new Scale(-1.5f, 1.5f, 1.5f));
+        clock2->setTransformation(clockTc2);
 
+        
+        this->addObject(clock);
+        this->addObject(clock2);
     }
     void update() override{
         std::time_t t = std::time(nullptr);
