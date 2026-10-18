@@ -9,12 +9,27 @@ Camera::Camera(glm::vec3 eye, float alpha, float fi) {
 	processMouseMovement(0.0f, 0.0f);
     this->projectionMatrix = glm::mat4(1.0f);
 }
+void Camera::obs_register(ICameraObserver* obs) {
+	observers.push_back(obs);
+	obs->onCameraChange(viewMatrix, projectionMatrix);
+}
+void Camera::obs_remove(ICameraObserver* obs) {
+	std::erase(observers, obs);
+}
+
 void Camera::setProjection(float fov, float aspectRatio, float nearPlane, float farPlane) {
 	this->projectionMatrix = glm::perspective(glm::radians(fov), aspectRatio, nearPlane, farPlane);
 }
 
+void Camera::notifyObservers() {
+	for (auto* obs : observers) {
+		obs->onCameraChange(viewMatrix, projectionMatrix);
+	}
+}
+
 void Camera::updateViewMatrix() {
 	this->viewMatrix = glm::lookAt(eye, eye + center, up);
+	notifyObservers();
 }
 
 void Camera::toFront() {

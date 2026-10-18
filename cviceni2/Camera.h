@@ -6,8 +6,10 @@
 #pragma once
 #include "glm-master/glm/glm.hpp"
 #include <glm/gtc/matrix_transform.hpp>
+#include "ICameraObserver.h"
 class Camera {
 private:
+	std::vector<ICameraObserver*> observers;
 	glm::mat4 viewMatrix;
 	glm::mat4 projectionMatrix;
 	
@@ -25,6 +27,10 @@ public:
 		float alpha = 90.0f,
 		float fi = -90.0f
 	);
+	void obs_register(ICameraObserver* obs);
+	void obs_remove(ICameraObserver* obs);
+	void notifyObservers();
+
 	void setProjection(float fov, float aspectRatio, float nearPlane, float farPlane);
 	void updateViewMatrix();
 

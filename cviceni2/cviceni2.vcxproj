@@ -161,6 +161,7 @@
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="earth.h" />
     <ClInclude Include="ForestScene.h" />
+    <ClInclude Include="ICameraObserver.h" />
     <ClInclude Include="LoginScene.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Models\bushes.h" />

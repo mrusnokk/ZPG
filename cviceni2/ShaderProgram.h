@@ -12,8 +12,9 @@
 #include <glad/gl.h>
 #include "glm-master/glm/glm.hpp"
 #include <string>
+#include "ICameraObserver.h"
 
-class ShaderProgram {
+class ShaderProgram :public ICameraObserver{
 
 public:
 	ShaderProgram(const char* vertexPaht, const char* fragmentPath);
@@ -25,6 +26,7 @@ public:
 	void setUniform(const char* name, float x, float y, float z);
 	GLuint getId() { return id; }
 	void setMatrix(const char* name, glm::mat4 matrix);
+	void onCameraChange(const glm::mat4& view, const glm::mat4& projection) override;
 	private:
 		GLuint createShaderFromFile(GLenum shaderType, const char* shaderFile);
 		GLuint id;

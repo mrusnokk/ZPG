@@ -29,6 +29,9 @@ void Scene::addModel(Model* model)
 void Scene::addShader(ShaderProgram* shader) 
 { 
 	shaders.push_back(shader);
+	if (this->cam != nullptr) {
+		this->cam->obs_register(shader);
+	}
 }
 
 void Scene::draw() {
