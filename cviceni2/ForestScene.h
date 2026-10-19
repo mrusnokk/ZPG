@@ -54,7 +54,7 @@ public:
 
         srand(static_cast<unsigned int>(time(nullptr)));
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             DrawableObject* t = new DrawableObject(treeModel, tShader);
 
             float rX = (rand() % 1000 - 500) / 100.0f;
@@ -71,7 +71,7 @@ public:
             this->addObject(t);
         }
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 3000; i++) {
             DrawableObject* b = new DrawableObject(bushModel, bShader);
 
             float rX = (rand() % 1000 - 500) / 100.0f;

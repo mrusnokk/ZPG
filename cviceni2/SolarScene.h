@@ -24,11 +24,13 @@ private:
 
 public:
 	SolarScene(int w, int h) {
-		this->cam = new Camera(glm::vec3(0.0f,1.0f,-3.0f));
-		cam->setProjection(60,w/static_cast<float>(h),0.1,100);
+		this->cam = new Camera(glm::vec3(0.0f,1.0f,3.0f));
+		cam->setProjection(90,w/static_cast<float>(h),0.1,100);
 
-		ShaderProgram* shader = new ShaderProgram("Shaders/color.vert", "Shaders/color.frag");
+		ShaderProgram* shader = new ShaderProgram("Shaders/phongLight.vert", "Shaders/phongLight.frag");
+		ShaderProgram* shader2 = new ShaderProgram("Shaders/color.vert", "Shaders/color.frag");
 		this->addShader(shader);
+		this->addShader(shader2);
 
 		Model* sunModel = new Model(sun, sizeof(sun), 11520, 9);
 		Model* moonModel = new Model(moon, sizeof(moon), 11520, 9);
@@ -38,7 +40,7 @@ public:
 		this->addModel(moonModel);
 		this->addModel(earthModel);
 
-		DrawableObject* sunOb = new DrawableObject(sunModel, shader);
+		DrawableObject* sunOb = new DrawableObject(sunModel, shader2);
 		TransformComposite* sunTc = new TransformComposite();
 
 		sunTc->addTransformation(new Scale(0.2f, 0.2f, 0.2f));

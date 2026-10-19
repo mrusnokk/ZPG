@@ -26,7 +26,8 @@ public:
 	void setUniform(const char* name, float x, float y, float z);
 	GLuint getId() { return id; }
 	void setMatrix(const char* name, glm::mat4 matrix);
-	void onCameraChange(const glm::mat4& view, const glm::mat4& projection) override;
+	//void onCameraChange(const glm::mat4& view, const glm::mat4& projection) override;
+	void onCameraChange(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& cameraPosition) override;
 	private:
 		GLuint createShaderFromFile(GLenum shaderType, const char* shaderFile);
 		GLuint id;

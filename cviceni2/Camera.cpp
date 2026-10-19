@@ -11,7 +11,7 @@ Camera::Camera(glm::vec3 eye, float alpha, float fi) {
 }
 void Camera::obs_register(ICameraObserver* obs) {
 	observers.push_back(obs);
-	obs->onCameraChange(viewMatrix, projectionMatrix);
+	obs->onCameraChange(viewMatrix, projectionMatrix, eye);
 }
 void Camera::obs_remove(ICameraObserver* obs) {
 	std::erase(observers, obs);
@@ -24,13 +24,14 @@ void Camera::setProjection(float fov, float aspectRatio, float nearPlane, float 
 
 void Camera::notifyObservers() {
 	for (auto* obs : observers) {
-		obs->onCameraChange(viewMatrix, projectionMatrix);
+		obs->onCameraChange(viewMatrix, projectionMatrix, eye);
 	}
 }
 
 void Camera::updateViewMatrix() {
 	this->viewMatrix = glm::lookAt(eye, eye + center, up);
 	notifyObservers();
+
 }
 
 void Camera::toFront() {
@@ -74,4 +75,7 @@ glm::mat4 Camera::getViewMatrix() {
 }
 glm::mat4 Camera::getProjectionMatrix() {
 	return this->projectionMatrix;
+}
+glm::vec3 Camera::getPosition() {
+	return this->eye;
 }

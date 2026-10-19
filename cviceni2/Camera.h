@@ -20,7 +20,7 @@ private:
 
 	float alpha;
 	float fi;
-	float speed = 0.0025f;
+	float speed = 0.025f;
 	float sensitivity = 0.1f;
 
 public:
@@ -41,6 +41,7 @@ public:
 	void toLeft();
 	void processMouseMovement(float x, float y);
 
+	glm::vec3 getPosition();
 	glm::mat4 getViewMatrix();
 	glm::mat4 getProjectionMatrix();
 };

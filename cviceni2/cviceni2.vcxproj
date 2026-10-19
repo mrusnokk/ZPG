@@ -154,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="ballsScene.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="clock.h" />
     <ClInclude Include="ClockScene.h" />
@@ -187,6 +188,8 @@
     <ClInclude Include="TriangleScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Shaders\BlinnPhong.frag" />
+    <None Include="Shaders\BlinnPhong.vert" />
     <None Include="Shaders\bushShader.frag" />
     <None Include="Shaders\bushShader.vert" />
     <None Include="Shaders\clockShader.frag" />
@@ -198,6 +201,8 @@
     <None Include="Shaders\basic2.frag" />
     <None Include="Shaders\color.frag" />
     <None Include="Shaders\color.vert" />
+    <None Include="Shaders\phongLight.frag" />
+    <None Include="Shaders\phongLight.vert" />
     <None Include="Shaders\treeShader.frag" />
     <None Include="Shaders\treeShader.vert" />
   </ItemGroup>
