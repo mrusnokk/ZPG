@@ -3,7 +3,6 @@
 in vec3 worldPos;
 in vec3 worldNorm;
 in vec3 vertexColor;
-in vec3 viewDir;
 
 uniform vec3 cameraPosition;
 

@@ -93,6 +93,9 @@ void ShaderProgram::setUniform(const char* name, float x, float y, float z) {
 		glUniform3f(location, x, y, z);
 	}
 }
+bool ShaderProgram::hasUniform(const char* name)const{
+	return glGetUniformLocation(id, name) != -1;
+}
 void ShaderProgram::setMatrix(const char* name, glm::mat4 matrix) {
 	GLuint location = glGetUniformLocation(id, name);
 
@@ -103,10 +106,10 @@ void ShaderProgram::setMatrix(const char* name, glm::mat4 matrix) {
 		std::cerr << "Warning! : variable '" << name << "' does not exist or is not used in shader!" << std::endl;
 	}
 }
-
 void ShaderProgram::onCameraChange(const glm::mat4& view, const glm::mat4& projection,const glm::vec3& cameraPosition) {
 	this->use();
 	this->setMatrix("viewMatrix", view);
 	this->setMatrix("projectionMatrix", projection);
-	this->setUniform("cameraPosition", cameraPosition.x, cameraPosition.y, cameraPosition.z);
+	if (hasUniform("cameraPosition"))
+		this->setUniform("cameraPosition", cameraPosition.x, cameraPosition.y, cameraPosition.z);
 }
