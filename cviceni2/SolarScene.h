@@ -1,100 +1,128 @@
-/**@file SolarScene.h
- * @brief Class representing a 3D solar system scene.
- * @author Michael Rusnok (rus0130)
- * @year 2026
- */
 #pragma once
+
 #include "Scene.h"
 #include "sun.h"
 #include "moon.h"
 #include "earth.h"
-#include <iostream>
+#include "Models/cybertruck.h"
 
 class SolarScene : public Scene {
 private:
+	Rotate* rSystem;
 	Rotate* rEarth;
 	Rotate* rMoon;
 	Rotate* rDayCycleEarth;
 	Rotate* rDayCycleMoon;
+	Rotate* rCyberTruckOrbit;
+	Rotate* rCyberTruckSpin;
 
+	float systemAngle = 0.0f;
 	float earthAngle = 0.0f;
 	float moonAngle = 0.0f;
 	float earthDayCycleAngle = 0.0f;
 	float moonDayCycleAngle = 0.0f;
+	float cyberTruckOrbitAngle = 0.0f;
+	float cyberTruckSpinAngle = 0.0f;
 
 public:
 	SolarScene(int w, int h) {
-		this->cam = new Camera(glm::vec3(0.0f,1.0f,3.0f));
-		cam->setProjection(90,w/static_cast<float>(h),0.1,100);
+		cam = new Camera(glm::vec3(0.0f, 1.0f, 3.0f));
+		cam->setProjection(90, w / static_cast<float>(h), 0.1f, 100.0f);
 
 		ShaderProgram* shader = new ShaderProgram("Shaders/phongLight.vert", "Shaders/phongLight.frag");
 		ShaderProgram* shader2 = new ShaderProgram("Shaders/color.vert", "Shaders/color.frag");
-		this->addShader(shader);
-		this->addShader(shader2);
+		addShader(shader);
+		addShader(shader2);
 
 		Model* sunModel = new Model(sun, sizeof(sun), 11520, 9);
 		Model* moonModel = new Model(moon, sizeof(moon), 11520, 9);
 		Model* earthModel = new Model(earth, sizeof(earth), 11520, 9);
+		Model* cyberTruckModel = new Model(cybertruck, sizeof(cybertruck),
+			CYBERTRUCK_VERTEX_COUNT, CYBERTRUCK_FLOATS_PER_VERTEX);
 
-		this->addModel(sunModel);
-		this->addModel(moonModel);
-		this->addModel(earthModel);
+		addModel(sunModel);
+		addModel(moonModel);
+		addModel(earthModel);
+		addModel(cyberTruckModel);
+
+		TransformComposite* systemTc = new TransformComposite();
+		rSystem = new Rotate(0.0f, 0.0f, 1.0f, 0.0f);
+		systemTc->addTransformation(rSystem);
+		systemTc->addTransformation(new Scale(2.0f, 2.0f, 2.0f));
 
 		DrawableObject* sunOb = new DrawableObject(sunModel, shader2);
 		TransformComposite* sunTc = new TransformComposite();
-
-		sunTc->addTransformation(new Scale(0.2f, 0.2f, 0.2f));
+		sunTc->addTransformation(systemTc);
 		sunOb->setTransformation(sunTc);
-		this->addObject(sunOb);
+		addObject(sunOb);
 
 		TransformComposite* earthOrbit = new TransformComposite();
-		this->rEarth = new Rotate(0.0f, 0.0f, 0.0f, 1.0f);
-		earthOrbit->addTransformation(this->rEarth);
-		earthOrbit->addTransformation(new Translate(0.6f, 0.0, 0.0f));
+		rEarth = new Rotate(0.0f, 0.0f, 1.0f, 0.0f);
+		earthOrbit->addTransformation(rEarth);
+		earthOrbit->addTransformation(new Translate(5.0f, 0.0f, 0.0f));
 
 		DrawableObject* earthOb = new DrawableObject(earthModel, shader);
 		TransformComposite* earthTc = new TransformComposite();
-
+		earthTc->addTransformation(systemTc);
 		earthTc->addTransformation(earthOrbit);
-		this->rDayCycleEarth = new Rotate(0.0f, 0.0f, 0.0f, 1.0f);
-		earthTc->addTransformation(this->rDayCycleEarth);
-		earthTc->addTransformation(new Scale(0.1f, 0.1f, 0.1f));
+		rDayCycleEarth = new Rotate(0.0f, 0.0f, 1.0f, 0.0f);
+		earthTc->addTransformation(rDayCycleEarth);
+		earthTc->addTransformation(new Scale(1.0f, 1.0f, 1.0f));
 		earthOb->setTransformation(earthTc);
-		this->addObject(earthOb);
+		addObject(earthOb);
 
 		DrawableObject* moonOb = new DrawableObject(moonModel, shader);
 		TransformComposite* moonTc = new TransformComposite();
-
+		moonTc->addTransformation(systemTc);
 		moonTc->addTransformation(earthOrbit);
-		this->rMoon = new Rotate(0.0f, 0.0f, 0.0f, 1.0f);
-		moonTc->addTransformation(this->rMoon);
-		moonTc->addTransformation(new Translate(0.15f, 0.0f, 0.0f));
-		this->rDayCycleMoon = new Rotate(0.0f, 0.0f, 0.0f, 1.0f);
+		rMoon = new Rotate(0.0f, 0.0f, 1.0f, 0.0f);
+		moonTc->addTransformation(rMoon);
+		moonTc->addTransformation(new Translate(2.0f, 0.0f, 0.0f));
+		rDayCycleMoon = new Rotate(0.0f, 0.0f, 1.0f, 0.0f);
 		moonTc->addTransformation(rDayCycleMoon);
-		moonTc->addTransformation(new Scale(0.03f, 0.03f, 0.03f));
+		moonTc->addTransformation(new Scale(0.5f, 0.5f, 0.5f));
 		moonOb->setTransformation(moonTc);
-		this->addObject(moonOb);
+		addObject(moonOb);
 
+		DrawableObject* cyberTruckOb = new DrawableObject(cyberTruckModel, shader);
+		TransformComposite* cbTruckTc = new TransformComposite();
+		cbTruckTc->addTransformation(systemTc);
+		rCyberTruckOrbit = new Rotate(0.0f, 0.0f, 1.0f, 0.0f);
+		cbTruckTc->addTransformation(rCyberTruckOrbit);
+		cbTruckTc->addTransformation(new Translate(3.0f, 0.0f, 0.0f));
+		rCyberTruckSpin = new Rotate(0.0f, 0.0f, 0.0f, 1.0f);
+		cbTruckTc->addTransformation(rCyberTruckSpin);
+		cbTruckTc->addTransformation(new Scale(0.1f, 0.1f, 0.1f));
+		cyberTruckOb->setTransformation(cbTruckTc);
+		addObject(cyberTruckOb);
 	}
+
 	void update() override {
-		earthAngle += 0.025f;
-		if (earthAngle >= 360.0f)
-			earthAngle -= 360.0f;
+		auto advance = [](float& angle, float step) {
+			angle += step;
+			if (angle >= 360.0f)
+				angle -= 360.0f;
+			};
+
+		advance(systemAngle, 0.01f);
+		rSystem->setAngle(systemAngle);
+
+		advance(earthAngle, 0.025f);
 		rEarth->setAngle(earthAngle);
 
-		earthDayCycleAngle += 0.03;
-		if (earthDayCycleAngle >= 360.0f)
-			earthDayCycleAngle -= 360.0f;
+		advance(earthDayCycleAngle, 0.03f);
 		rDayCycleEarth->setAngle(earthDayCycleAngle);
 
-		moonAngle += 0.05f;
-		if (moonAngle >= 360.0f)
-			moonAngle -= 360.0f;
+		advance(moonAngle, 0.05f);
 		rMoon->setAngle(moonAngle);
 
-		moonDayCycleAngle += 0.09;
-		if (moonDayCycleAngle >= 360.0f)
-			moonDayCycleAngle -= 360.0f;
+		advance(moonDayCycleAngle, 0.09f);
 		rDayCycleMoon->setAngle(moonDayCycleAngle);
+
+		advance(cyberTruckOrbitAngle, 0.02f);
+		rCyberTruckOrbit->setAngle(cyberTruckOrbitAngle);
+
+		advance(cyberTruckSpinAngle, 0.005f);
+		rCyberTruckSpin->setAngle(cyberTruckSpinAngle);
 	}
 };

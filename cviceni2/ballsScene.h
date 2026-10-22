@@ -9,7 +9,7 @@ public:
 
 		Model* ball = new Model(sphere, sizeof(sphere), 17280);
 
-		ShaderProgram* bShader = new ShaderProgram("Shaders/phongLight.vert", "Shaders/phongLight.frag");
+		ShaderProgram* bShader = new ShaderProgram("Shaders/blinnPhong.vert", "Shaders/blinnPhong.frag");
 
 		this->addModel(ball);
 		this->addShader(bShader);
