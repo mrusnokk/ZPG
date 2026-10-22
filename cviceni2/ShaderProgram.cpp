@@ -103,11 +103,6 @@ void ShaderProgram::setMatrix(const char* name, glm::mat4 matrix) {
 		std::cerr << "Warning! : variable '" << name << "' does not exist or is not used in shader!" << std::endl;
 	}
 }
-//void ShaderProgram::onCameraChange(const glm::mat4& view, const glm::mat4& projection) {
-//	this->use();
-//	this->setMatrix("viewMatrix", view);
-//	this->setMatrix("projectionMatrix", projection);
-//}
 
 void ShaderProgram::onCameraChange(const glm::mat4& view, const glm::mat4& projection,const glm::vec3& cameraPosition) {
 	this->use();
