@@ -11,7 +11,6 @@ int main()
 {
     int width = 1920, height = 1080;
     Application* app = new Application(width,height,"ZPG");
-
     app->initialization();
     app->addScene(new ForestScene(width, height));
     app->addScene(new BallsScene(width, height));

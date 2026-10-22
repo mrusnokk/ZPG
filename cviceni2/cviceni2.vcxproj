@@ -167,7 +167,6 @@
     <ClInclude Include="LoginScene.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Models\bushes.h" />
-    <ClInclude Include="Models\cybertruck.h" />
     <ClInclude Include="Models\gift.h" />
     <ClInclude Include="Models\plain.h" />
     <ClInclude Include="Models\rus0130.h" />
