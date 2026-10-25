@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.h"
 #include "Models/sphere.h"
+#include "Models/rus0130.h"
 class BallsScene : public Scene {
 public:
 	BallsScene(int w, int h) {
@@ -8,17 +9,29 @@ public:
 		this->cam->setProjection(60.0f, w / static_cast<float>(h), 0.1f, 100.0f);
 
 		Model* ball = new Model(sphere, sizeof(sphere), 17280);
+		Model* loginModel = new Model(login_model, sizeof(login_model), 6996);
 
-		ShaderProgram* bShader = new ShaderProgram("Shaders/blinnPhong.vert", "Shaders/blinnPhong.frag");
+		ShaderProgram* basic = new ShaderProgram("Shaders/basic.vert", "Shaders/basic.frag");
+		ShaderProgram* b1Shader = new ShaderProgram("Shaders/blinnPhong.vert", "Shaders/blinnPhong.frag");
+		ShaderProgram* b2Shader = new ShaderProgram("Shaders/PhongLight.vert", "Shaders/PhongLight.frag");
+		ShaderProgram* b3Shader = new ShaderProgram("Shaders/ambient.vert", "Shaders/ambient.frag");
+		ShaderProgram* b4Shader = new ShaderProgram("Shaders/Lambert.vert", "Shaders/Lambert.frag");
+
 
 		this->addModel(ball);
-		this->addShader(bShader);
+		this->addModel(loginModel);
+		this->addShader(basic);
+		this->addShader(b1Shader);
+		this->addShader(b2Shader);
+		this->addShader(b3Shader);
+		this->addShader(b4Shader);
 
-		DrawableObject* ballObj1 = new DrawableObject(ball, bShader);
-		DrawableObject* ballObj2 = new DrawableObject(ball, bShader);
-		DrawableObject* ballObj3 = new DrawableObject(ball, bShader);
-		DrawableObject* ballObj4 = new DrawableObject(ball, bShader);
-			
+		DrawableObject* loginObj = new DrawableObject(loginModel, basic);
+		DrawableObject* ballObj1 = new DrawableObject(ball, b1Shader);
+		DrawableObject* ballObj2 = new DrawableObject(ball, b2Shader);
+		DrawableObject* ballObj3 = new DrawableObject(ball, b3Shader);
+		DrawableObject* ballObj4 = new DrawableObject(ball, b4Shader);
+
 		TransformComposite* composite1 = new TransformComposite();
 		TransformComposite* composite2 = new TransformComposite();
 		TransformComposite* composite3 = new TransformComposite();
@@ -34,13 +47,10 @@ public:
 		ballObj3->setTransformation(composite3);
 		ballObj4->setTransformation(composite4);
 
+		this->addObject(loginObj);
 		this->addObject(ballObj1);
 		this->addObject(ballObj2);
 		this->addObject(ballObj3);
 		this->addObject(ballObj4);
-
-		
-
-
 	}
 };

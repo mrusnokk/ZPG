@@ -25,13 +25,13 @@ void main(void)
 
 	vec3 reflectDir = reflect(-normLightDir, normWorldNorm);
 
-	float diff= calculateDiffuse(lightPosition - worldPos, worldNorm);
+	float diff = calculateDiffuse(lightPosition - worldPos, worldNorm);
 
 	float spec = pow(max(dot(normViewDir, reflectDir), 0.0), 32.0);
 
 	vec3 ambient=vec3(0.1,0.1,0.1);
 
-	vec3 resultColor = ambient + (diff * vertexColor ) + (spec * vec3(1.0));
+	vec3 resultColor = (ambient*vertexColor) + (diff * vertexColor ) + (spec * vec3(1.0));
 
 	fragColor=vec4(resultColor, 1.0);
 }

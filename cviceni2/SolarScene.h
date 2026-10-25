@@ -29,20 +29,29 @@ public:
 		cam = new Camera(glm::vec3(0.0f, 1.0f, 3.0f));
 		cam->setProjection(90, w / static_cast<float>(h), 0.1f, 100.0f);
 
-		ShaderProgram* shader = new ShaderProgram("Shaders/phongLight.vert", "Shaders/phongLight.frag");
-		ShaderProgram* shader2 = new ShaderProgram("Shaders/color.vert", "Shaders/color.frag");
+		ShaderProgram* shader = new ShaderProgram("Shaders/SpaceObject.vert", "Shaders/SpaceObject.frag");
+		ShaderProgram* shader2 = new ShaderProgram("Shaders/SunAmbient.vert", "Shaders/SunAmbient.frag");
 		addShader(shader);
 		addShader(shader2);
 
+		Model* loginModel = new Model(login_model, sizeof(login_model), 6996);
 		Model* sunModel = new Model(sun, sizeof(sun), 11520, 9);
 		Model* moonModel = new Model(moon, sizeof(moon), 11520, 9);
 		Model* earthModel = new Model(earth, sizeof(earth), 11520, 9);
 		Model* cyberTruckModel = new Model(cybertruck, sizeof(cybertruck),CYBERTRUCK_VERTEX_COUNT, CYBERTRUCK_FLOATS_PER_VERTEX);
 
+		addModel(loginModel);
 		addModel(sunModel);
 		addModel(moonModel);
 		addModel(earthModel);
 		addModel(cyberTruckModel);
+
+		DrawableObject* loginObj = new DrawableObject(loginModel, shader);
+		TransformComposite* loginTc = new TransformComposite();
+		loginTc->addTransformation(new Translate(8.0f, 0.0f, 0.0f));
+		loginTc->addTransformation(new Rotate(315.0f, 0.0f, 1.0f, 0.0f));
+		loginObj->setTransformation(loginTc);
+		addObject(loginObj);
 
 		DrawableObject* sunOb = new DrawableObject(sunModel, shader2);
 		TransformComposite* sunTc = new TransformComposite();

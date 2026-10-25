@@ -167,6 +167,7 @@
     <ClInclude Include="LoginScene.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Models\bushes.h" />
+    <ClInclude Include="Models\cybertruck.h" />
     <ClInclude Include="Models\gift.h" />
     <ClInclude Include="Models\plain.h" />
     <ClInclude Include="Models\rus0130.h" />
@@ -208,6 +209,10 @@
     <None Include="Shaders\Lambert.vert" />
     <None Include="Shaders\phongLight.frag" />
     <None Include="Shaders\phongLight.vert" />
+    <None Include="Shaders\SpaceObject.frag" />
+    <None Include="Shaders\SpaceObject.vert" />
+    <None Include="Shaders\SunAmbient.frag" />
+    <None Include="Shaders\SunAmbient.vert" />
     <None Include="Shaders\treeShader.frag" />
     <None Include="Shaders\treeShader.vert" />
   </ItemGroup>

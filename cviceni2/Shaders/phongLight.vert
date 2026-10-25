@@ -14,11 +14,11 @@ out vec3 worldNorm;
 out vec3 vertexColor;
 
 void main(void){
-
+    
     worldPos = vec3(modelMatrix * vec4(vp,1.0));  
     worldNorm = mat3(transpose(inverse(modelMatrix))) * vn;
 
-    vertexColor = inColor;
+    vertexColor = vec3 (0.385f, 0.647f, 0.812f);
 
     gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(vp,1.0);
 }

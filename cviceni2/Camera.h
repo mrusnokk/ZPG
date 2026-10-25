@@ -18,6 +18,10 @@ private:
 	glm::vec3 center;
 	glm::vec3 up;
 
+	float fov;
+	float nearPlane;
+	float farPlane;
+
 	float alpha;
 	float fi;
 	float speed = 0.0025f;
@@ -33,6 +37,7 @@ public:
 	void notifyObservers();
 
 	void setProjection(float fov, float aspectRatio, float nearPlane, float farPlane);
+	void setAspectRatio(float aspectRatio);
 	void updateViewMatrix();
 
 	void toFront();

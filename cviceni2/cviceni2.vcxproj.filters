@@ -137,6 +137,15 @@
     <ClInclude Include="ICameraObserver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ballsScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\micha\Downloads\cybertruck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\cybertruck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\basic.frag" />
@@ -152,5 +161,17 @@
     <None Include="Shaders\treeShader.vert" />
     <None Include="Shaders\bushShader.vert" />
     <None Include="Shaders\bushShader.frag" />
+    <None Include="Shaders\ambient.frag" />
+    <None Include="Shaders\ambient.vert" />
+    <None Include="Shaders\BlinnPhong.frag" />
+    <None Include="Shaders\BlinnPhong.vert" />
+    <None Include="Shaders\Lambert.frag" />
+    <None Include="Shaders\Lambert.vert" />
+    <None Include="Shaders\phongLight.frag" />
+    <None Include="Shaders\phongLight.vert" />
+    <None Include="Shaders\SunAmbient.frag" />
+    <None Include="Shaders\SunAmbient.vert" />
+    <None Include="Shaders\SpaceObject.frag" />
+    <None Include="Shaders\SpaceObject.vert" />
   </ItemGroup>
 </Project>

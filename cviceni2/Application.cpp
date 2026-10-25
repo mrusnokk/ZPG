@@ -41,14 +41,34 @@ void Application::initialization() {
 	std::cout << "Renderer: " << glGetString(GL_RENDERER) << std::endl;
 
 	glEnable(GL_DEPTH_TEST);
+	glfwSetWindowUserPointer(window, this);
+	glfwSetFramebufferSizeCallback(window, frameBufferSizeCallback);
 }
 
 void Application::addScene(Scene* scene) {
 	scenes.push_back(scene);
 }
+
+void Application::frameBufferSizeCallback(GLFWwindow* window, int w, int h) {
+	auto* app = static_cast<Application*>(glfwGetWindowUserPointer(window));
+	if (app) app->onResize(w, h);
+}
+
+void Application::onResize(int w, int h) {
+	if (w == 0 || h == 0) return;
+	glViewport(0, 0, w, h);
+	float aspect = w / static_cast<float>(h);
+	for (Scene* s : scenes)
+		s->getCam()->setAspectRatio(aspect);
+}
+
 void Application::run() {
 
 	glEnable(GL_DEPTH_TEST);
+
+	int fbW, fbH;
+	glfwGetFramebufferSize(window, &fbW, &fbH);
+	onResize(fbW, fbH);
 
 	while (!glfwWindowShouldClose(window)) {
 

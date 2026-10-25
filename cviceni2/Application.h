@@ -25,6 +25,8 @@ private:
 	std::vector<Scene*> scenes;
 	int activeSceneIndex;
 	Controller* controller = nullptr;
+	static void frameBufferSizeCallback(GLFWwindow* window, int w, int h);
+	void onResize(int w, int h);
 
 public:
 	Application(int width, int height, const std::string& title);
