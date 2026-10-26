@@ -105,7 +105,7 @@ public:
         mySignature->setTransformation(loginTc);
         this->addObject(mySignature);
 
-        DrawableObject* ground = new DrawableObject(plainModel, shader);
+        DrawableObject* ground = new DrawableObject(plainModel, tShader);
         TransformComposite* groundTc = new TransformComposite();
         groundTc->addTransformation(new Translate(0.0f, -0.8f, 0.0f));
         groundTc->addTransformation(new Scale(10.0f, 1.0f, 10.0f));
