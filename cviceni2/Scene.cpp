@@ -16,6 +16,7 @@ Scene::~Scene() {
 		delete shader;
 	}
 	delete cam;
+	delete light;
 }
 
 void Scene::addObject(DrawableObject* object) 
@@ -31,6 +32,9 @@ void Scene::addShader(ShaderProgram* shader)
 	shaders.push_back(shader);
 	if (this->cam != nullptr) {
 		this->cam->obs_register(shader);
+	}
+	if(this->light != nullptr) {
+		this->light->registerObserver(shader);
 	}
 }
 

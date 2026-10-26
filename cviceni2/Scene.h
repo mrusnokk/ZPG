@@ -18,6 +18,7 @@
 #include "Rotate.h"
 #include "Scale.h"
 #include "Camera.h"
+#include "Light.h"
 
 class Scene {
 private:
@@ -26,6 +27,7 @@ private:
 	std::vector<ShaderProgram*> shaders;
 protected:
 	Camera* cam;
+	Light* light;
 
 public:
 	Scene();
@@ -33,6 +35,7 @@ public:
 	void addObject(DrawableObject* object);
 	void addModel(Model* model);
 	void addShader(ShaderProgram* shader);
+	void setLight(Light* light) { this->light = light; }	
 	virtual void update() {}
 	virtual void draw();
 	Camera* getCam();

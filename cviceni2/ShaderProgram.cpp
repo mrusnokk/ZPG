@@ -113,3 +113,12 @@ void ShaderProgram::onCameraChange(const glm::mat4& view, const glm::mat4& proje
 	if (hasUniform("cameraPosition"))
 		this->setUniform("cameraPosition", cameraPosition.x, cameraPosition.y, cameraPosition.z);
 }
+void ShaderProgram::onLightChange(const Light& light) {
+	this->use();
+	if (hasUniform("lightPosition"))
+		this->setUniform("lightPosition", light.getPosition().x, light.getPosition().y, light.getPosition().z);
+	if (hasUniform("lightColor"))
+		this->setUniform("lightColor", light.getColor().x, light.getColor().y, light.getColor().z);
+	if (hasUniform("lightIntensity"))
+		this->setUniform("lightIntensity", light.getIntensity());
+}

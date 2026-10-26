@@ -13,8 +13,9 @@
 #include "glm-master/glm/glm.hpp"
 #include <string>
 #include "ICameraObserver.h"
+#include "ILightObserver.h"
 
-class ShaderProgram :public ICameraObserver{
+class ShaderProgram :public ICameraObserver, public ILightObserver {
 
 public:
 	ShaderProgram(const char* vertexPaht, const char* fragmentPath);
@@ -28,6 +29,7 @@ public:
 	GLuint getId() { return id; }
 	void setMatrix(const char* name, glm::mat4 matrix);
 	void onCameraChange(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& cameraPosition) override;
+	void onLightChange(const Light& light) override;
 	private:
 		GLuint createShaderFromFile(GLenum shaderType, const char* shaderFile);
 		GLuint id;
