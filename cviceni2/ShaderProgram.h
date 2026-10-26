@@ -14,6 +14,7 @@
 #include <string>
 #include "ICameraObserver.h"
 #include "ILightObserver.h"
+#include "Light.h"
 
 class ShaderProgram :public ICameraObserver, public ILightObserver {
 

@@ -11,7 +11,7 @@ out vec4 fragColor;
 float calculateDiffuse(vec3 lightDir, vec3 normal)
 {
 	float dotLN = dot(normalize(lightDir),normalize(normal));
-
+	
 	return max(dotLN, 0.0);
 }
 
@@ -27,8 +27,8 @@ void main(void)
 
 	float diff = calculateDiffuse(lightPosition - worldPos, worldNorm);
 
-	float spec = pow(max(dot(normViewDir, reflectDir), 0.0), 32.0);
-
+	float spec = pow(max(dot(normViewDir, reflectDir), 0.0), 1.0);
+	
 	vec3 ambient=vec3(0.1,0.1,0.1);
 
 	vec3 resultColor = (ambient*vertexColor) + (diff * vertexColor ) + (spec * vec3(1.0));

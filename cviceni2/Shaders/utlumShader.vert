@@ -13,10 +13,21 @@ out vec3 wNormal;
 out vec3 fColor;
 
 void main()
-{
+{	
+
+	
 	fColor = color;
+
+	 if (gl_VertexID < 36443) {
+	 fColor = vec3(186/255.0f, 140/255.0f, 99/255.0f);
+        
+    } else {
+        fColor = vec3(92/255.0f, 169/255.0f, 4/255.0f);
+    }
+
 	wPosition = vec3(modelMatrix * vec4(position, 1.0));
 	mat3 normalMatrix = mat3(transpose(inverse(modelMatrix)));
 	wNormal = normalize(normalMatrix * normal);
+
 	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
 }

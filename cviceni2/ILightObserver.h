@@ -1,7 +1,6 @@
 #pragma once
 #include <glm/glm.hpp>
-#include "Light.h"
-
+class Light;
 class ILightObserver {
 public:
 	virtual ~ILightObserver() = default;

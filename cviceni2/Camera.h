@@ -24,7 +24,7 @@ private:
 
 	float alpha;
 	float fi;
-	float speed = 0.0025f;
+	float speed = 0.025f;
 	float sensitivity = 0.1f;
 
 public:

@@ -12,7 +12,7 @@ private:
 public:
 	Light(glm::vec3 position, glm::vec3 color, float intensity) :
 		position(position), color(color), intensity(intensity) {}
-	~Light();
+	~Light() = default;
 	void notifyObservers() {
 		for (ILightObserver* observer : observers) {
 			observer->onLightChange(*this);

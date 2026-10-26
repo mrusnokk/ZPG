@@ -26,8 +26,8 @@ private:
 	std::vector<Model*> models;
 	std::vector<ShaderProgram*> shaders;
 protected:
-	Camera* cam;
-	Light* light;
+	Camera* cam = nullptr;
+	Light* light = nullptr;
 
 public:
 	Scene();

@@ -26,10 +26,13 @@ public:
         this->cam = new Camera(glm::vec3(0.0f, 1.0f, 5.0f));
         this->cam->setProjection(60.0f, w / static_cast<float>(h), 0.1f, 100.0f);
 
+		this->light = new Light(glm::vec3(0.8f, 0.8f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
+
+
         ShaderProgram* shader = new ShaderProgram("Shaders/basic.vert", "Shaders/basic.frag");
         ShaderProgram* shaderSun = new ShaderProgram("Shaders/basic.vert", "Shaders/basic2.frag");
-        ShaderProgram* tShader = new ShaderProgram("Shaders/treeShader.vert", "Shaders/treeShader.frag");
-        ShaderProgram* bShader = new ShaderProgram("Shaders/bushShader.vert", "Shaders/bushShader.frag");
+        ShaderProgram* tShader = new ShaderProgram("Shaders/utlumShader.vert", "Shaders/utlumShader.frag");
+        ShaderProgram* bShader = new ShaderProgram("Shaders/utlumShader.vert", "Shaders/utlumShader.frag");
         clockShader = new ShaderProgram("Shaders/clockShader.vert", "Shaders/clockShader.frag");
 
         Model* treeModel = new Model(tree, sizeof(tree), 92814);
@@ -54,7 +57,7 @@ public:
 
         srand(static_cast<unsigned int>(time(nullptr)));
 
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             DrawableObject* t = new DrawableObject(treeModel, tShader);
 
             float rX = (rand() % 1000 - 500) / 100.0f;
@@ -71,7 +74,7 @@ public:
             this->addObject(t);
         }
 
-        for (int i = 0; i < 3000; i++) {
+        for (int i = 0; i < 100; i++) {
             DrawableObject* b = new DrawableObject(bushModel, bShader);
 
             float rX = (rand() % 1000 - 500) / 100.0f;
