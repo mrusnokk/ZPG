@@ -25,7 +25,7 @@ void main (void)
 
 	float diff = max(dot(normalize(nLightDir),normalize (wNormal)),0.0);
 
-	float attenuation = att(distance, 1.0f, 0.1f, 0.3f);
+	float attenuation = att(distance, 1.0f, 0.7f, 3.8f);
 
 	vec3 ambient = fColor * lightIntensity * lightColor;
 	fragColor =  vec4((ambient*fColor*attenuation), 1.0) + vec4(diff * fColor * attenuation, 1.0);

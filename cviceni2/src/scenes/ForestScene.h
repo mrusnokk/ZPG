@@ -16,23 +16,28 @@
 #include <cstdio>
 #include <ctime>
 #include <numbers>
+#include <GLFW/glfw3.h>
 
 class ForestScene : public Scene {
 private:
     ShaderProgram* clockShader;
+    ShaderProgram* tShader;
+    ShaderProgram* bShader;
+    Translate* fireflyMove = new Translate(0.8f,0.8f,0.0f);
+    float speed = 0.5f;
 
 public:
     ForestScene(int w, int h) {
         this->cam = new Camera(glm::vec3(0.0f, 1.0f, 5.0f));
         this->cam->setProjection(60.0f, w / static_cast<float>(h), 0.1f, 100.0f);
 
-		this->light = new Light(glm::vec3(0.8f, 0.8f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
+		this->light = new Light(glm::vec3(0.8f, 0.8f, 0.0f), glm::vec3(195/255.0f, 223/255.0f, 224/255.0f), 1.0f);
 
 
         ShaderProgram* shader = new ShaderProgram("Shaders/basic.vert", "Shaders/basic.frag");
         ShaderProgram* shaderSun = new ShaderProgram("Shaders/basic.vert", "Shaders/basic2.frag");
-        ShaderProgram* tShader = new ShaderProgram("Shaders/utlumTreeShader.vert", "Shaders/utlumTreeShader.frag");
-        ShaderProgram* bShader = new ShaderProgram("Shaders/utlumBushShader.vert", "Shaders/utlumBushShader.frag");
+        tShader = new ShaderProgram("Shaders/utlumTreeShader.vert", "Shaders/utlumTreeShader.frag");
+        bShader = new ShaderProgram("Shaders/utlumBushShader.vert", "Shaders/utlumBushShader.frag");
         clockShader = new ShaderProgram("Shaders/clockShader.vert", "Shaders/clockShader.frag");
 
         Model* treeModel = new Model(tree, sizeof(tree), 92814);
@@ -91,12 +96,12 @@ public:
             this->addObject(b);
         }
 
-        DrawableObject* sun = new DrawableObject(sunModel, shaderSun);
-        TransformComposite* sunTc = new TransformComposite();
-        sunTc->addTransformation(new Translate(0.8f, 0.8f, 0.0f));
-        sunTc->addTransformation(new Scale(0.2f, 0.2f, 0.2f));
-        sun->setTransformation(sunTc);
-        this->addObject(sun);
+        DrawableObject* firefly = new DrawableObject(sunModel, shaderSun);
+        TransformComposite* fireflyTc = new TransformComposite();
+        fireflyTc->addTransformation(fireflyMove);
+        fireflyTc->addTransformation(new Scale(0.008f, 0.008f, 0.008f));
+        firefly->setTransformation(fireflyTc);
+        this->addObject(firefly);
 
         DrawableObject* mySignature = new DrawableObject(login, shader);
         TransformComposite* loginTc = new TransformComposite();
@@ -137,10 +142,26 @@ public:
         float seconds = static_cast<float>(lt.tm_sec);
         float minutes = lt.tm_min + seconds / 60.0f;
         float hours = (lt.tm_hour % 12) + minutes / 60.0f;
+        
+        float currentTime = glfwGetTime();
+
+        float fX = sin(currentTime * speed) * 3.0f;
+        float fY = sin(currentTime * speed * 2.0f) * 0.5f;
+        float fZ = cos(currentTime * speed) * 3.0f;
+        
+        fireflyMove->setPosition(fX,fY,fZ);
+        
+        tShader->use();
+        tShader->setUniform("lightPosition", fX, fY, fZ);
+        bShader->use();
+        bShader->setUniform("lightPosition", fX, fY, fZ);
 
         clockShader->use();
         clockShader->setUniform("secondAngle", -(seconds / 60.0f * TWO_PI));
         clockShader->setUniform("minuteAngle", -(minutes / 60.0f * TWO_PI));
         clockShader->setUniform("hourAngle", -(hours / 12.0f * TWO_PI));
+
+        
+
     }
 };
