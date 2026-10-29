@@ -1,177 +1,307 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{D38EED99-7571-5725-B280-3B2913962B23}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="src">
+      <UniqueIdentifier>{CF973C10-D91D-5540-9305-66B079F67F7C}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cviceni2.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\camera\Camera.cpp">
+      <Filter>
+      </Filter>
     </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\core\Application.cpp">
+      <Filter>
+      </Filter>
     </ClCompile>
-    <ClCompile Include="ShaderProgram.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\core\Controller.cpp">
+      <Filter>
+      </Filter>
     </ClCompile>
-    <ClCompile Include="gl.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\core\gl.cpp">
+      <Filter>
+      </Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\cviceni2.cpp">
+      <Filter>
+      </Filter>
     </ClCompile>
-    <ClCompile Include="DrawableObject.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\rendering\DrawableObject.cpp">
+      <Filter>
+      </Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\rendering\ShaderProgram.cpp">
+      <Filter>
+      </Filter>
     </ClCompile>
-    <ClCompile Include="Controller.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\scenes\Scene.cpp">
+      <Filter>
+      </Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\camera\Camera.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\camera\ICameraObserver.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="ShaderProgram.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\core\Application.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Models\bushes.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\core\Controller.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Models\gift.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\lighting\ILightObserver.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Models\plain.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\lighting\Light.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Models\sphere.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\lighting\Material.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Models\suzi_flat.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\models\bushes.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Models\suzi_smooth.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\models\clock.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Models\tree.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\models\cybertruck.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Models\triangle.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\models\earth.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\models\gift.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="DrawableObject.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\models\moon.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Models\rus0130.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\models\plain.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Transformation.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\models\rus0130.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="ForestScene.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\models\sphere.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="LoginScene.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\models\sun.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="TriangleScene.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\models\suzi_flat.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="SphereScene.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\models\suzi_smooth.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="earth.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\models\tree.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="sun.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\models\triangle.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="moon.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\rendering\DrawableObject.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Translate.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\rendering\Model.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="TransformComposite.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\rendering\ShaderProgram.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Rotate.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\scenes\BallsScene.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Scale.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\scenes\ClockScene.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="SolarScene.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\scenes\ForestScene.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\scenes\LoginScene.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="clock.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\scenes\Scene.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="ClockScene.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\scenes\SolarScene.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Controller.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\scenes\SphereScene.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="ICameraObserver.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\scenes\TriangleScene.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="ballsScene.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\transform\Rotate.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\micha\Downloads\cybertruck.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\transform\Scale.h">
+      <Filter>
+      </Filter>
     </ClInclude>
-    <ClInclude Include="Models\cybertruck.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\transform\Transformation.h">
+      <Filter>
+      </Filter>
+    </ClInclude>
+    <ClInclude Include="src\transform\TransformComposite.h">
+      <Filter>
+      </Filter>
+    </ClInclude>
+    <ClInclude Include="src\transform\Translate.h">
+      <Filter>
+      </Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\basic.frag" />
-    <None Include="Shaders\basic.vert" />
-    <None Include="Shaders\basic2.frag" />
-    <None Include="color.vert" />
-    <None Include="color.frag" />
-    <None Include="Shaders\clockShader.vert" />
-    <None Include="Shaders\clockShader.frag" />
-    <None Include="Shaders\treeShader.frag" />
-    <None Include="Shaders\color.vert" />
-    <None Include="Shaders\color.frag" />
-    <None Include="Shaders\treeShader.vert" />
-    <None Include="Shaders\bushShader.vert" />
-    <None Include="Shaders\bushShader.frag" />
-    <None Include="Shaders\ambient.frag" />
-    <None Include="Shaders\ambient.vert" />
-    <None Include="Shaders\BlinnPhong.frag" />
-    <None Include="Shaders\BlinnPhong.vert" />
-    <None Include="Shaders\Lambert.frag" />
-    <None Include="Shaders\Lambert.vert" />
-    <None Include="Shaders\phongLight.frag" />
-    <None Include="Shaders\phongLight.vert" />
-    <None Include="Shaders\SunAmbient.frag" />
-    <None Include="Shaders\SunAmbient.vert" />
-    <None Include="Shaders\SpaceObject.frag" />
-    <None Include="Shaders\SpaceObject.vert" />
+    <None Include="Shaders\ambient.frag">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\ambient.vert">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\basic.frag">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\basic.vert">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\basic2.frag">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\basic2.vert">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\BlinnPhong.frag">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\BlinnPhong.vert">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\bushShader.frag">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\bushShader.vert">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\clockShader.frag">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\clockShader.vert">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\color.frag">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\color.vert">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\Lambert.frag">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\Lambert.vert">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\phongLight.frag">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\phongLight.vert">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\SpaceObject.frag">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\SpaceObject.vert">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\SunAmbient.frag">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\SunAmbient.vert">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\treeShader.frag">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\treeShader.vert">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\utlumShader.frag">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\utlumShader.vert">
+      <Filter>
+      </Filter>
+    </None>
+    <None Include="Shaders\phongLightwrong.frag" />
+    <None Include="Shaders\phongLightwrong.vert" />
+    <None Include="Shaders\utlumBushShader.frag" />
+    <None Include="Shaders\utlumBushShader.vert" />
+    <None Include="Shaders\utlumTreeShader.frag" />
+    <None Include="Shaders\utlumTreeShader.vert" />
   </ItemGroup>
 </Project>

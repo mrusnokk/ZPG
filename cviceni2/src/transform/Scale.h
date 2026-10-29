@@ -5,7 +5,7 @@
  * @year 2026
  */
 #pragma once
-#include "Transformation.h"
+#include "transform/Transformation.h"
 #include <glm/gtc/matrix_transform.hpp>
 
 class Scale : public Transformation {

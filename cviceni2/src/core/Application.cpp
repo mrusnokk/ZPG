@@ -1,4 +1,4 @@
-#include "Application.h"
+#include "core/Application.h"
 #include <iostream>
 
 Application::Application(int width, int height, const std::string& title)

@@ -1,15 +1,15 @@
-#include "Application.h"          
-#include "ForestScene.h"
-#include "LoginScene.h"
-#include "TriangleScene.h"
-#include "SphereScene.h"
-#include "SolarScene.h"
-#include "ClockScene.h"
-#include "BallsScene.h"
+#include "core/Application.h"          
+#include "scenes/ForestScene.h"
+#include "scenes/LoginScene.h"
+#include "scenes/TriangleScene.h"
+#include "scenes/SphereScene.h"
+#include "scenes/SolarScene.h"
+#include "scenes/ClockScene.h"
+#include "scenes/BallsScene.h"
 
 int main()
 {
-    int width = 1920, height = 1080;
+    int width = 800, height = 600;
     Application* app = new Application(width,height,"ZPG");
     app->initialization();
     app->addScene(new ForestScene(width, height));

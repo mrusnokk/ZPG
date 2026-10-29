@@ -9,10 +9,10 @@
  **/
 
 #pragma once
-#include "Model.h"
-#include "ShaderProgram.h"
-#include "Transformation.h"
-#include "Camera.h"
+#include "rendering/Model.h"
+#include "rendering/ShaderProgram.h"
+#include "transform/Transformation.h"
+#include "camera/Camera.h"
 
 class DrawableObject {
 	Model* model;

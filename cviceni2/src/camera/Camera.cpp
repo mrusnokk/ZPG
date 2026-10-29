@@ -1,4 +1,4 @@
-#include "Camera.h"
+#include "camera/Camera.h"
 
 Camera::Camera(glm::vec3 eye, float alpha, float fi) {
 	this->eye = eye;

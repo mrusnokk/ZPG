@@ -1,4 +1,4 @@
-#include "Controller.h"
+#include "core/Controller.h"
 
 void Controller::processInput(GLFWwindow* window, Camera* camera) {
 	if (camera == nullptr || window == nullptr) {

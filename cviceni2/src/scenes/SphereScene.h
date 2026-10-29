@@ -5,9 +5,9 @@
  * @year 2026
  */
 #pragma once
-#include "Scene.h"
-#include "Models/sphere.h"
-#include "Models/rus0130.h"
+#include "scenes/Scene.h"
+#include "models/sphere.h"
+#include "models/rus0130.h"
 
 class SphereScene : public Scene {
 public:

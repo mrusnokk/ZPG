@@ -1,4 +1,4 @@
-#include "DrawableObject.h"
+#include "rendering/DrawableObject.h"
 #include <iostream>
 DrawableObject::DrawableObject(Model* m, ShaderProgram* s){
 	this->model = m;

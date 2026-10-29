@@ -1,7 +1,7 @@
 #pragma once
-#include "Scene.h"
-#include "Models/sphere.h"
-#include "Models/rus0130.h"
+#include "scenes/Scene.h"
+#include "models/sphere.h"
+#include "models/rus0130.h"
 class BallsScene : public Scene {
 public:
 	BallsScene(int w, int h) {
@@ -12,10 +12,10 @@ public:
 		Model* loginModel = new Model(login_model, sizeof(login_model), 6996);
 
 		ShaderProgram* basic = new ShaderProgram("Shaders/basic.vert", "Shaders/basic.frag");
-		ShaderProgram* b1Shader = new ShaderProgram("Shaders/blinnPhong.vert", "Shaders/blinnPhong.frag");
-		ShaderProgram* b2Shader = new ShaderProgram("Shaders/PhongLight.vert", "Shaders/PhongLight.frag");
-		ShaderProgram* b3Shader = new ShaderProgram("Shaders/ambient.vert", "Shaders/ambient.frag");
-		ShaderProgram* b4Shader = new ShaderProgram("Shaders/Lambert.vert", "Shaders/Lambert.frag");
+		ShaderProgram* b1Shader = new ShaderProgram("Shaders/phongLight.vert", "Shaders/phongLight.frag");
+		ShaderProgram* b2Shader = new ShaderProgram("Shaders/phongLight.vert", "Shaders/phongLight.frag");
+		ShaderProgram* b3Shader = new ShaderProgram("Shaders/phongLight.vert", "Shaders/phongLight.frag");
+		ShaderProgram* b4Shader = new ShaderProgram("Shaders/phongLight.vert", "Shaders/phongLight.frag");
 
 
 		this->addModel(ball);
@@ -38,9 +38,13 @@ public:
 		TransformComposite* composite4 = new TransformComposite();
 
 		composite1->addTransformation(new Translate(-3.0f, 0.0f, 0.0f));
+		//composite1->addTransformation(new Scale(1.5f, 0.5f, 1.0f));
 		composite2->addTransformation(new Translate(3.0f, 0.0f, 0.0f));
+		//composite2->addTransformation(new Scale(1.5f, 0.5f, 1.0f));
 		composite3->addTransformation(new Translate(0.0f, 3.0f, 0.0f));
+		//composite3->addTransformation(new Scale(1.5f, 0.5f, 1.0f));
 		composite4->addTransformation(new Translate(0.0f, -3.0f, 0.0f));
+		//composite4->addTransformation(new Scale(1.5f, 0.5f, 1.0f));
 
 		ballObj1->setTransformation(composite1);
 		ballObj2->setTransformation(composite2);

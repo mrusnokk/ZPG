@@ -5,14 +5,14 @@
  * @year 2026
  */
 #pragma once
-#include "Scene.h"
-#include "Models/tree.h"
-#include "Models/bushes.h"
-#include "Models/sphere.h"
-#include "Models/rus0130.h"
-#include "Models/plain.h"
-#include "clock.h"
-#include "Camera.h"
+#include "scenes/Scene.h"
+#include "models/tree.h"
+#include "models/bushes.h"
+#include "models/sphere.h"
+#include "models/rus0130.h"
+#include "models/plain.h"
+#include "models/clock.h"
+#include "camera/Camera.h"
 #include <cstdio>
 #include <ctime>
 #include <numbers>
@@ -31,8 +31,8 @@ public:
 
         ShaderProgram* shader = new ShaderProgram("Shaders/basic.vert", "Shaders/basic.frag");
         ShaderProgram* shaderSun = new ShaderProgram("Shaders/basic.vert", "Shaders/basic2.frag");
-        ShaderProgram* tShader = new ShaderProgram("Shaders/utlumShader.vert", "Shaders/utlumShader.frag");
-        ShaderProgram* bShader = new ShaderProgram("Shaders/utlumShader.vert", "Shaders/utlumShader.frag");
+        ShaderProgram* tShader = new ShaderProgram("Shaders/utlumTreeShader.vert", "Shaders/utlumTreeShader.frag");
+        ShaderProgram* bShader = new ShaderProgram("Shaders/utlumBushShader.vert", "Shaders/utlumBushShader.frag");
         clockShader = new ShaderProgram("Shaders/clockShader.vert", "Shaders/clockShader.frag");
 
         Model* treeModel = new Model(tree, sizeof(tree), 92814);
@@ -105,7 +105,7 @@ public:
         mySignature->setTransformation(loginTc);
         this->addObject(mySignature);
 
-        DrawableObject* ground = new DrawableObject(plainModel, tShader);
+        DrawableObject* ground = new DrawableObject(plainModel, bShader);
         TransformComposite* groundTc = new TransformComposite();
         groundTc->addTransformation(new Translate(0.0f, -0.8f, 0.0f));
         groundTc->addTransformation(new Scale(10.0f, 1.0f, 10.0f));

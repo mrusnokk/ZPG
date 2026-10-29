@@ -1,7 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <vector>
-#include "ILightObserver.h"
+#include "lighting/ILightObserver.h"
 
 class Light {
 private:

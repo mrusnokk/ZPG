@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Scene.h"
-#include "sun.h"
-#include "moon.h"
-#include "earth.h"
-#include "Models/cybertruck.h"
+#include "scenes/Scene.h"
+#include "models/sun.h"
+#include "models/moon.h"
+#include "models/earth.h"
+#include "models/cybertruck.h"
 
 class SolarScene : public Scene {
 private:

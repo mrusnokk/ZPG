@@ -13,8 +13,8 @@
 #include <GLFW/glfw3.h>
 #include <string>
 #include <vector>
-#include "Scene.h"
-#include "Controller.h"
+#include "scenes/Scene.h"
+#include "core/Controller.h"
 
 class Application {
 private:

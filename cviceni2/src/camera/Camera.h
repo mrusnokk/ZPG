@@ -7,7 +7,7 @@
 #include <vector>
 #include "glm-master/glm/glm.hpp"
 #include <glm/gtc/matrix_transform.hpp>
-#include "ICameraObserver.h"
+#include "camera/ICameraObserver.h"
 class Camera {
 private:
 	std::vector<ICameraObserver*> observers;
@@ -24,7 +24,7 @@ private:
 
 	float alpha;
 	float fi;
-	float speed = 0.025f;
+	float speed = 0.0025f;
 	float sensitivity = 0.1f;
 
 public:

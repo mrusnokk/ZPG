@@ -1,0 +1,1061 @@
+diff --git a/cviceni2/cviceni2.vcxproj b/cviceni2/cviceni2.vcxproj
+index cfa44c6..804d92c 100644
+--- a/cviceni2/cviceni2.vcxproj
++++ b/cviceni2/cviceni2.vcxproj
+@@ -77,6 +77,7 @@
+       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+       <ConformanceMode>true</ConformanceMode>
+       <LanguageStandard>stdcpp20</LanguageStandard>
++      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+@@ -95,6 +96,7 @@
+       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+       <ConformanceMode>true</ConformanceMode>
+       <LanguageStandard>stdcpp20</LanguageStandard>
++      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+@@ -111,7 +113,7 @@
+       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+       <ConformanceMode>true</ConformanceMode>
+       <LanguageStandard>stdcpp20</LanguageStandard>
+-      <AdditionalIncludeDirectories>$(SolutionDir)/lib/glm-master;$(SolutionDir)/lib;$(SolutionDir)\lib\glfw-3.5.1.bin.WIN64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
++      <AdditionalIncludeDirectories>$(ProjectDir)src;$(SolutionDir)/lib/glm-master;$(SolutionDir)/lib;$(SolutionDir)\lib\glfw-3.5.1.bin.WIN64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+     </ClCompile>
+     <Link>
+@@ -133,6 +135,7 @@
+       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+       <ConformanceMode>true</ConformanceMode>
+       <LanguageStandard>stdcpp20</LanguageStandard>
++      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+@@ -143,69 +146,67 @@
+     </Manifest>
+   </ItemDefinitionGroup>
+   <ItemGroup>
+-    <ClCompile Include="Application.cpp" />
+-    <ClCompile Include="Camera.cpp" />
+-    <ClCompile Include="Controller.cpp" />
+-    <ClCompile Include="cviceni2.cpp" />
+-    <ClCompile Include="DrawableObject.cpp" />
+-    <ClCompile Include="gl.cpp" />
+-    <ClCompile Include="Scene.cpp" />
+-    <ClCompile Include="ShaderProgram.cpp" />
++    <ClCompile Include="src\camera\Camera.cpp" />
++    <ClCompile Include="src\core\Application.cpp" />
++    <ClCompile Include="src\core\Controller.cpp" />
++    <ClCompile Include="src\core\gl.cpp" />
++    <ClCompile Include="src\cviceni2.cpp" />
++    <ClCompile Include="src\rendering\DrawableObject.cpp" />
++    <ClCompile Include="src\rendering\ShaderProgram.cpp" />
++    <ClCompile Include="src\scenes\Scene.cpp" />
+   </ItemGroup>
+   <ItemGroup>
+-    <ClInclude Include="Application.h" />
+-    <ClInclude Include="ballsScene.h" />
+-    <ClInclude Include="C:\Users\micha\Downloads\cybertruck.h" />
+-    <ClInclude Include="Camera.h" />
+-    <ClInclude Include="clock.h" />
+-    <ClInclude Include="ClockScene.h" />
+-    <ClInclude Include="Controller.h" />
+-    <ClInclude Include="DrawableObject.h" />
+-    <ClInclude Include="earth.h" />
+-    <ClInclude Include="ForestScene.h" />
+-    <ClInclude Include="ICameraObserver.h" />
+-    <ClInclude Include="ILightObserver.h" />
+-    <ClInclude Include="Light.h" />
+-    <ClInclude Include="LoginScene.h" />
+-    <ClInclude Include="Material.h" />
+-    <ClInclude Include="Model.h" />
+-    <ClInclude Include="Models\bushes.h" />
+-    <ClInclude Include="Models\cybertruck.h" />
+-    <ClInclude Include="Models\gift.h" />
+-    <ClInclude Include="Models\plain.h" />
+-    <ClInclude Include="Models\rus0130.h" />
+-    <ClInclude Include="Models\sphere.h" />
+-    <ClInclude Include="Models\suzi_flat.h" />
+-    <ClInclude Include="Models\suzi_smooth.h" />
+-    <ClInclude Include="Models\tree.h" />
+-    <ClInclude Include="Models\triangle.h" />
+-    <ClInclude Include="moon.h" />
+-    <ClInclude Include="Rotate.h" />
+-    <ClInclude Include="Scale.h" />
+-    <ClInclude Include="Scene.h" />
+-    <ClInclude Include="ShaderProgram.h" />
+-    <ClInclude Include="SolarScene.h" />
+-    <ClInclude Include="SphereScene.h" />
+-    <ClInclude Include="sun.h" />
+-    <ClInclude Include="Transformation.h" />
+-    <ClInclude Include="Translate.h" />
+-    <ClInclude Include="TransformComposite.h" />
+-    <ClInclude Include="TriangleScene.h" />
++    <ClInclude Include="src\camera\Camera.h" />
++    <ClInclude Include="src\camera\ICameraObserver.h" />
++    <ClInclude Include="src\core\Application.h" />
++    <ClInclude Include="src\core\Controller.h" />
++    <ClInclude Include="src\lighting\ILightObserver.h" />
++    <ClInclude Include="src\lighting\Light.h" />
++    <ClInclude Include="src\lighting\Material.h" />
++    <ClInclude Include="src\models\bushes.h" />
++    <ClInclude Include="src\models\clock.h" />
++    <ClInclude Include="src\models\cybertruck.h" />
++    <ClInclude Include="src\models\earth.h" />
++    <ClInclude Include="src\models\gift.h" />
++    <ClInclude Include="src\models\moon.h" />
++    <ClInclude Include="src\models\plain.h" />
++    <ClInclude Include="src\models\rus0130.h" />
++    <ClInclude Include="src\models\sphere.h" />
++    <ClInclude Include="src\models\sun.h" />
++    <ClInclude Include="src\models\suzi_flat.h" />
++    <ClInclude Include="src\models\suzi_smooth.h" />
++    <ClInclude Include="src\models\tree.h" />
++    <ClInclude Include="src\models\triangle.h" />
++    <ClInclude Include="src\rendering\DrawableObject.h" />
++    <ClInclude Include="src\rendering\Model.h" />
++    <ClInclude Include="src\rendering\ShaderProgram.h" />
++    <ClInclude Include="src\scenes\BallsScene.h" />
++    <ClInclude Include="src\scenes\ClockScene.h" />
++    <ClInclude Include="src\scenes\ForestScene.h" />
++    <ClInclude Include="src\scenes\LoginScene.h" />
++    <ClInclude Include="src\scenes\Scene.h" />
++    <ClInclude Include="src\scenes\SolarScene.h" />
++    <ClInclude Include="src\scenes\SphereScene.h" />
++    <ClInclude Include="src\scenes\TriangleScene.h" />
++    <ClInclude Include="src\transform\Rotate.h" />
++    <ClInclude Include="src\transform\Scale.h" />
++    <ClInclude Include="src\transform\Transformation.h" />
++    <ClInclude Include="src\transform\TransformComposite.h" />
++    <ClInclude Include="src\transform\Translate.h" />
+   </ItemGroup>
+   <ItemGroup>
+     <None Include="Shaders\ambient.frag" />
+     <None Include="Shaders\ambient.vert" />
++    <None Include="Shaders\basic.frag" />
++    <None Include="Shaders\basic.vert" />
++    <None Include="Shaders\basic2.frag" />
++    <None Include="Shaders\basic2.vert" />
+     <None Include="Shaders\BlinnPhong.frag" />
+     <None Include="Shaders\BlinnPhong.vert" />
+     <None Include="Shaders\bushShader.frag" />
+     <None Include="Shaders\bushShader.vert" />
+     <None Include="Shaders\clockShader.frag" />
+     <None Include="Shaders\clockShader.vert" />
+-    <None Include="color.frag" />
+-    <None Include="color.vert" />
+-    <None Include="Shaders\basic.frag" />
+-    <None Include="Shaders\basic.vert" />
+-    <None Include="Shaders\basic2.frag" />
+     <None Include="Shaders\color.frag" />
+     <None Include="Shaders\color.vert" />
+     <None Include="Shaders\Lambert.frag" />
+diff --git a/cviceni2/cviceni2.vcxproj.filters b/cviceni2/cviceni2.vcxproj.filters
+index 57eda66..e47d9bb 100644
+--- a/cviceni2/cviceni2.vcxproj.filters
++++ b/cviceni2/cviceni2.vcxproj.filters
+@@ -1,177 +1,230 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+ <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <ItemGroup>
+-    <Filter Include="Source Files">
+-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
++    <Filter Include="Shaders">
++      <UniqueIdentifier>{D38EED99-7571-5725-B280-3B2913962B23}</UniqueIdentifier>
+     </Filter>
+-    <Filter Include="Header Files">
+-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+-    </Filter>
+-    <Filter Include="Resource Files">
+-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
++    <Filter Include="src">
++      <UniqueIdentifier>{CF973C10-D91D-5540-9305-66B079F67F7C}</UniqueIdentifier>
+     </Filter>
+   </ItemGroup>
+   <ItemGroup>
+-    <ClCompile Include="cviceni2.cpp">
+-      <Filter>Source Files</Filter>
++    <ClCompile Include="src\camera\Camera.cpp">
++      <Filter></Filter>
+     </ClCompile>
+-    <ClCompile Include="Application.cpp">
+-      <Filter>Source Files</Filter>
++    <ClCompile Include="src\core\Application.cpp">
++      <Filter></Filter>
+     </ClCompile>
+-    <ClCompile Include="ShaderProgram.cpp">
+-      <Filter>Source Files</Filter>
++    <ClCompile Include="src\core\Controller.cpp">
++      <Filter></Filter>
+     </ClCompile>
+-    <ClCompile Include="gl.cpp">
+-      <Filter>Source Files</Filter>
++    <ClCompile Include="src\core\gl.cpp">
++      <Filter></Filter>
+     </ClCompile>
+-    <ClCompile Include="Scene.cpp">
+-      <Filter>Source Files</Filter>
++    <ClCompile Include="src\cviceni2.cpp">
++      <Filter></Filter>
+     </ClCompile>
+-    <ClCompile Include="DrawableObject.cpp">
+-      <Filter>Source Files</Filter>
++    <ClCompile Include="src\rendering\DrawableObject.cpp">
++      <Filter></Filter>
+     </ClCompile>
+-    <ClCompile Include="Camera.cpp">
+-      <Filter>Source Files</Filter>
++    <ClCompile Include="src\rendering\ShaderProgram.cpp">
++      <Filter></Filter>
+     </ClCompile>
+-    <ClCompile Include="Controller.cpp">
+-      <Filter>Source Files</Filter>
++    <ClCompile Include="src\scenes\Scene.cpp">
++      <Filter></Filter>
+     </ClCompile>
+   </ItemGroup>
+   <ItemGroup>
+-    <ClInclude Include="Application.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\camera\Camera.h">
++      <Filter></Filter>
++    </ClInclude>
++    <ClInclude Include="src\camera\ICameraObserver.h">
++      <Filter></Filter>
++    </ClInclude>
++    <ClInclude Include="src\core\Application.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Model.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\core\Controller.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="ShaderProgram.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\lighting\ILightObserver.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Models\bushes.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\lighting\Light.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Models\gift.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\lighting\Material.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Models\plain.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\models\bushes.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Models\sphere.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\models\clock.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Models\suzi_flat.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\models\cybertruck.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Models\suzi_smooth.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\models\earth.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Models\tree.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\models\gift.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Models\triangle.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\models\moon.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Scene.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\models\plain.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="DrawableObject.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\models\rus0130.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Models\rus0130.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\models\sphere.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Transformation.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\models\sun.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="ForestScene.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\models\suzi_flat.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="LoginScene.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\models\suzi_smooth.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="TriangleScene.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\models\tree.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="SphereScene.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\models\triangle.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="earth.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\rendering\DrawableObject.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="sun.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\rendering\Model.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="moon.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\rendering\ShaderProgram.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Translate.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\scenes\BallsScene.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="TransformComposite.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\scenes\ClockScene.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Rotate.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\scenes\ForestScene.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Scale.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\scenes\LoginScene.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="SolarScene.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\scenes\Scene.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Camera.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\scenes\SolarScene.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="clock.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\scenes\SphereScene.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="ClockScene.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\scenes\TriangleScene.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Controller.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\transform\Rotate.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="ICameraObserver.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\transform\Scale.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="ballsScene.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\transform\Transformation.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="C:\Users\micha\Downloads\cybertruck.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\transform\TransformComposite.h">
++      <Filter></Filter>
+     </ClInclude>
+-    <ClInclude Include="Models\cybertruck.h">
+-      <Filter>Header Files</Filter>
++    <ClInclude Include="src\transform\Translate.h">
++      <Filter></Filter>
+     </ClInclude>
+   </ItemGroup>
+   <ItemGroup>
+-    <None Include="Shaders\basic.frag" />
+-    <None Include="Shaders\basic.vert" />
+-    <None Include="Shaders\basic2.frag" />
+-    <None Include="color.vert" />
+-    <None Include="color.frag" />
+-    <None Include="Shaders\clockShader.vert" />
+-    <None Include="Shaders\clockShader.frag" />
+-    <None Include="Shaders\treeShader.frag" />
+-    <None Include="Shaders\color.vert" />
+-    <None Include="Shaders\color.frag" />
+-    <None Include="Shaders\treeShader.vert" />
+-    <None Include="Shaders\bushShader.vert" />
+-    <None Include="Shaders\bushShader.frag" />
+-    <None Include="Shaders\ambient.frag" />
+-    <None Include="Shaders\ambient.vert" />
+-    <None Include="Shaders\BlinnPhong.frag" />
+-    <None Include="Shaders\BlinnPhong.vert" />
+-    <None Include="Shaders\Lambert.frag" />
+-    <None Include="Shaders\Lambert.vert" />
+-    <None Include="Shaders\phongLight.frag" />
+-    <None Include="Shaders\phongLight.vert" />
+-    <None Include="Shaders\SunAmbient.frag" />
+-    <None Include="Shaders\SunAmbient.vert" />
+-    <None Include="Shaders\SpaceObject.frag" />
+-    <None Include="Shaders\SpaceObject.vert" />
++    <None Include="Shaders\ambient.frag">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\ambient.vert">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\basic.frag">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\basic.vert">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\basic2.frag">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\basic2.vert">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\BlinnPhong.frag">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\BlinnPhong.vert">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\bushShader.frag">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\bushShader.vert">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\clockShader.frag">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\clockShader.vert">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\color.frag">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\color.vert">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\Lambert.frag">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\Lambert.vert">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\phongLight.frag">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\phongLight.vert">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\SpaceObject.frag">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\SpaceObject.vert">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\SunAmbient.frag">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\SunAmbient.vert">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\treeShader.frag">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\treeShader.vert">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\utlumShader.frag">
++      <Filter></Filter>
++    </None>
++    <None Include="Shaders\utlumShader.vert">
++      <Filter></Filter>
++    </None>
+   </ItemGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+diff --git a/cviceni2/Camera.cpp b/cviceni2/src/camera/Camera.cpp
+similarity index 98%
+rename from cviceni2/Camera.cpp
+rename to cviceni2/src/camera/Camera.cpp
+index 21f1122..37020e0 100644
+--- a/cviceni2/Camera.cpp
++++ b/cviceni2/src/camera/Camera.cpp
+@@ -1,4 +1,4 @@
+-#include "Camera.h"
++#include "camera/Camera.h"
+ 
+ Camera::Camera(glm::vec3 eye, float alpha, float fi) {
+ 	this->eye = eye;
+diff --git a/cviceni2/Camera.h b/cviceni2/src/camera/Camera.h
+similarity index 96%
+rename from cviceni2/Camera.h
+rename to cviceni2/src/camera/Camera.h
+index f275fe9..7f1448d 100644
+--- a/cviceni2/Camera.h
++++ b/cviceni2/src/camera/Camera.h
+@@ -7,7 +7,7 @@
+ #include <vector>
+ #include "glm-master/glm/glm.hpp"
+ #include <glm/gtc/matrix_transform.hpp>
+-#include "ICameraObserver.h"
++#include "camera/ICameraObserver.h"
+ class Camera {
+ private:
+ 	std::vector<ICameraObserver*> observers;
+diff --git a/cviceni2/ICameraObserver.h b/cviceni2/src/camera/ICameraObserver.h
+similarity index 100%
+rename from cviceni2/ICameraObserver.h
+rename to cviceni2/src/camera/ICameraObserver.h
+diff --git a/cviceni2/Application.cpp b/cviceni2/src/core/Application.cpp
+similarity index 98%
+rename from cviceni2/Application.cpp
+rename to cviceni2/src/core/Application.cpp
+index e749339..8f071c7 100644
+--- a/cviceni2/Application.cpp
++++ b/cviceni2/src/core/Application.cpp
+@@ -1,4 +1,4 @@
+-#include "Application.h"
++#include "core/Application.h"
+ #include <iostream>
+ 
+ Application::Application(int width, int height, const std::string& title)
+diff --git a/cviceni2/Application.h b/cviceni2/src/core/Application.h
+similarity index 92%
+rename from cviceni2/Application.h
+rename to cviceni2/src/core/Application.h
+index 4488c82..13bd1f0 100644
+--- a/cviceni2/Application.h
++++ b/cviceni2/src/core/Application.h
+@@ -13,8 +13,8 @@
+ #include <GLFW/glfw3.h>
+ #include <string>
+ #include <vector>
+-#include "Scene.h"
+-#include "Controller.h"
++#include "scenes/Scene.h"
++#include "core/Controller.h"
+ 
+ class Application {
+ private:
+diff --git a/cviceni2/Controller.cpp b/cviceni2/src/core/Controller.cpp
+similarity index 97%
+rename from cviceni2/Controller.cpp
+rename to cviceni2/src/core/Controller.cpp
+index 470260b..2170418 100644
+--- a/cviceni2/Controller.cpp
++++ b/cviceni2/src/core/Controller.cpp
+@@ -1,4 +1,4 @@
+-#include "Controller.h"
++#include "core/Controller.h"
+ 
+ void Controller::processInput(GLFWwindow* window, Camera* camera) {
+ 	if (camera == nullptr || window == nullptr) {
+diff --git a/cviceni2/Controller.h b/cviceni2/src/core/Controller.h
+similarity index 92%
+rename from cviceni2/Controller.h
+rename to cviceni2/src/core/Controller.h
+index 1722004..7bbfd63 100644
+--- a/cviceni2/Controller.h
++++ b/cviceni2/src/core/Controller.h
+@@ -5,7 +5,7 @@
+  */
+ #pragma once
+ #include <GLFW/glfw3.h>
+-#include "Camera.h"
++#include "camera/Camera.h"
+ 
+ class Controller {
+ private:
+diff --git a/cviceni2/gl.cpp b/cviceni2/src/core/gl.cpp
+similarity index 100%
+rename from cviceni2/gl.cpp
+rename to cviceni2/src/core/gl.cpp
+diff --git a/cviceni2/cviceni2.cpp b/cviceni2/src/cviceni2.cpp
+similarity index 58%
+rename from cviceni2/cviceni2.cpp
+rename to cviceni2/src/cviceni2.cpp
+index 42ad230..3b1b83d 100644
+--- a/cviceni2/cviceni2.cpp
++++ b/cviceni2/src/cviceni2.cpp
+@@ -1,11 +1,11 @@
+-#include "Application.h"          
+-#include "ForestScene.h"
+-#include "LoginScene.h"
+-#include "TriangleScene.h"
+-#include "SphereScene.h"
+-#include "SolarScene.h"
+-#include "ClockScene.h"
+-#include "BallsScene.h"
++#include "core/Application.h"          
++#include "scenes/ForestScene.h"
++#include "scenes/LoginScene.h"
++#include "scenes/TriangleScene.h"
++#include "scenes/SphereScene.h"
++#include "scenes/SolarScene.h"
++#include "scenes/ClockScene.h"
++#include "scenes/BallsScene.h"
+ 
+ int main()
+ {
+diff --git a/cviceni2/ILightObserver.h b/cviceni2/src/lighting/ILightObserver.h
+similarity index 100%
+rename from cviceni2/ILightObserver.h
+rename to cviceni2/src/lighting/ILightObserver.h
+diff --git a/cviceni2/Light.h b/cviceni2/src/lighting/Light.h
+similarity index 94%
+rename from cviceni2/Light.h
+rename to cviceni2/src/lighting/Light.h
+index 6291393..6b7ddfc 100644
+--- a/cviceni2/Light.h
++++ b/cviceni2/src/lighting/Light.h
+@@ -1,7 +1,7 @@
+ #pragma once
+ #include <glm/glm.hpp>
+ #include <vector>
+-#include "ILightObserver.h"
++#include "lighting/ILightObserver.h"
+ 
+ class Light {
+ private:
+diff --git a/cviceni2/Material.h b/cviceni2/src/lighting/Material.h
+similarity index 100%
+rename from cviceni2/Material.h
+rename to cviceni2/src/lighting/Material.h
+diff --git a/cviceni2/Models/bushes.h b/cviceni2/src/models/bushes.h
+similarity index 100%
+rename from cviceni2/Models/bushes.h
+rename to cviceni2/src/models/bushes.h
+diff --git a/cviceni2/clock.h b/cviceni2/src/models/clock.h
+similarity index 100%
+rename from cviceni2/clock.h
+rename to cviceni2/src/models/clock.h
+diff --git a/cviceni2/Models/cybertruck.h b/cviceni2/src/models/cybertruck.h
+similarity index 100%
+rename from cviceni2/Models/cybertruck.h
+rename to cviceni2/src/models/cybertruck.h
+diff --git a/cviceni2/earth.h b/cviceni2/src/models/earth.h
+similarity index 100%
+rename from cviceni2/earth.h
+rename to cviceni2/src/models/earth.h
+diff --git a/cviceni2/Models/gift.h b/cviceni2/src/models/gift.h
+similarity index 100%
+rename from cviceni2/Models/gift.h
+rename to cviceni2/src/models/gift.h
+diff --git a/cviceni2/moon.h b/cviceni2/src/models/moon.h
+similarity index 100%
+rename from cviceni2/moon.h
+rename to cviceni2/src/models/moon.h
+diff --git a/cviceni2/Models/plain.h b/cviceni2/src/models/plain.h
+similarity index 100%
+rename from cviceni2/Models/plain.h
+rename to cviceni2/src/models/plain.h
+diff --git a/cviceni2/Models/rus0130.h b/cviceni2/src/models/rus0130.h
+similarity index 100%
+rename from cviceni2/Models/rus0130.h
+rename to cviceni2/src/models/rus0130.h
+diff --git a/cviceni2/Models/sphere.h b/cviceni2/src/models/sphere.h
+similarity index 100%
+rename from cviceni2/Models/sphere.h
+rename to cviceni2/src/models/sphere.h
+diff --git a/cviceni2/sun.h b/cviceni2/src/models/sun.h
+similarity index 100%
+rename from cviceni2/sun.h
+rename to cviceni2/src/models/sun.h
+diff --git a/cviceni2/Models/suzi_flat.h b/cviceni2/src/models/suzi_flat.h
+similarity index 100%
+rename from cviceni2/Models/suzi_flat.h
+rename to cviceni2/src/models/suzi_flat.h
+diff --git a/cviceni2/Models/suzi_smooth.h b/cviceni2/src/models/suzi_smooth.h
+similarity index 100%
+rename from cviceni2/Models/suzi_smooth.h
+rename to cviceni2/src/models/suzi_smooth.h
+diff --git a/cviceni2/Models/tree.h b/cviceni2/src/models/tree.h
+similarity index 100%
+rename from cviceni2/Models/tree.h
+rename to cviceni2/src/models/tree.h
+diff --git a/cviceni2/Models/triangle.h b/cviceni2/src/models/triangle.h
+similarity index 100%
+rename from cviceni2/Models/triangle.h
+rename to cviceni2/src/models/triangle.h
+diff --git a/cviceni2/DrawableObject.cpp b/cviceni2/src/rendering/DrawableObject.cpp
+similarity index 90%
+rename from cviceni2/DrawableObject.cpp
+rename to cviceni2/src/rendering/DrawableObject.cpp
+index 1126498..161291e 100644
+--- a/cviceni2/DrawableObject.cpp
++++ b/cviceni2/src/rendering/DrawableObject.cpp
+@@ -1,4 +1,4 @@
+-#include "DrawableObject.h"
++#include "rendering/DrawableObject.h"
+ #include <iostream>
+ DrawableObject::DrawableObject(Model* m, ShaderProgram* s){
+ 	this->model = m;
+diff --git a/cviceni2/DrawableObject.h b/cviceni2/src/rendering/DrawableObject.h
+similarity index 77%
+rename from cviceni2/DrawableObject.h
+rename to cviceni2/src/rendering/DrawableObject.h
+index c9c5f67..689ebe8 100644
+--- a/cviceni2/DrawableObject.h
++++ b/cviceni2/src/rendering/DrawableObject.h
+@@ -9,10 +9,10 @@
+  **/
+ 
+ #pragma once
+-#include "Model.h"
+-#include "ShaderProgram.h"
+-#include "Transformation.h"
+-#include "Camera.h"
++#include "rendering/Model.h"
++#include "rendering/ShaderProgram.h"
++#include "transform/Transformation.h"
++#include "camera/Camera.h"
+ 
+ class DrawableObject {
+ 	Model* model;
+diff --git a/cviceni2/Model.h b/cviceni2/src/rendering/Model.h
+similarity index 100%
+rename from cviceni2/Model.h
+rename to cviceni2/src/rendering/Model.h
+diff --git a/cviceni2/ShaderProgram.cpp b/cviceni2/src/rendering/ShaderProgram.cpp
+similarity index 99%
+rename from cviceni2/ShaderProgram.cpp
+rename to cviceni2/src/rendering/ShaderProgram.cpp
+index 4228f51..75f6f37 100644
+--- a/cviceni2/ShaderProgram.cpp
++++ b/cviceni2/src/rendering/ShaderProgram.cpp
+@@ -1,4 +1,4 @@
+-#include "ShaderProgram.h"
++#include "rendering/ShaderProgram.h"
+ #include <iostream>
+ #include <fstream>
+ #include <sstream>
+diff --git a/cviceni2/ShaderProgram.h b/cviceni2/src/rendering/ShaderProgram.h
+similarity index 90%
+rename from cviceni2/ShaderProgram.h
+rename to cviceni2/src/rendering/ShaderProgram.h
+index 4304643..1779ee4 100644
+--- a/cviceni2/ShaderProgram.h
++++ b/cviceni2/src/rendering/ShaderProgram.h
+@@ -12,9 +12,9 @@
+ #include <glad/gl.h>
+ #include "glm-master/glm/glm.hpp"
+ #include <string>
+-#include "ICameraObserver.h"
+-#include "ILightObserver.h"
+-#include "Light.h"
++#include "camera/ICameraObserver.h"
++#include "lighting/ILightObserver.h"
++#include "lighting/Light.h"
+ 
+ class ShaderProgram :public ICameraObserver, public ILightObserver {
+ 
+diff --git a/cviceni2/ballsScene.h b/cviceni2/src/scenes/BallsScene.h
+similarity index 87%
+rename from cviceni2/ballsScene.h
+rename to cviceni2/src/scenes/BallsScene.h
+index a33baa3..e56ce78 100644
+--- a/cviceni2/ballsScene.h
++++ b/cviceni2/src/scenes/BallsScene.h
+@@ -1,7 +1,7 @@
+ #pragma once
+-#include "Scene.h"
+-#include "Models/sphere.h"
+-#include "Models/rus0130.h"
++#include "scenes/Scene.h"
++#include "models/sphere.h"
++#include "models/rus0130.h"
+ class BallsScene : public Scene {
+ public:
+ 	BallsScene(int w, int h) {
+@@ -12,8 +12,8 @@ public:
+ 		Model* loginModel = new Model(login_model, sizeof(login_model), 6996);
+ 
+ 		ShaderProgram* basic = new ShaderProgram("Shaders/basic.vert", "Shaders/basic.frag");
+-		ShaderProgram* b1Shader = new ShaderProgram("Shaders/blinnPhong.vert", "Shaders/blinnPhong.frag");
+-		ShaderProgram* b2Shader = new ShaderProgram("Shaders/PhongLight.vert", "Shaders/PhongLight.frag");
++		ShaderProgram* b1Shader = new ShaderProgram("Shaders/BlinnPhong.vert", "Shaders/BlinnPhong.frag");
++		ShaderProgram* b2Shader = new ShaderProgram("Shaders/phongLight.vert", "Shaders/phongLight.frag");
+ 		ShaderProgram* b3Shader = new ShaderProgram("Shaders/ambient.vert", "Shaders/ambient.frag");
+ 		ShaderProgram* b4Shader = new ShaderProgram("Shaders/Lambert.vert", "Shaders/Lambert.frag");
+ 
+diff --git a/cviceni2/ClockScene.h b/cviceni2/src/scenes/ClockScene.h
+similarity index 95%
+rename from cviceni2/ClockScene.h
+rename to cviceni2/src/scenes/ClockScene.h
+index e62bfb8..5d4e70e 100644
+--- a/cviceni2/ClockScene.h
++++ b/cviceni2/src/scenes/ClockScene.h
+@@ -1,6 +1,6 @@
+ #pragma once
+-#include "Scene.h"
+-#include "clock.h"
++#include "scenes/Scene.h"
++#include "models/clock.h"
+ #include <ctime>
+ #include <numbers>
+ 
+diff --git a/cviceni2/ForestScene.h b/cviceni2/src/scenes/ForestScene.h
+similarity index 96%
+rename from cviceni2/ForestScene.h
+rename to cviceni2/src/scenes/ForestScene.h
+index 54fdf40..32f1779 100644
+--- a/cviceni2/ForestScene.h
++++ b/cviceni2/src/scenes/ForestScene.h
+@@ -5,14 +5,14 @@
+  * @year 2026
+  */
+ #pragma once
+-#include "Scene.h"
+-#include "Models/tree.h"
+-#include "Models/bushes.h"
+-#include "Models/sphere.h"
+-#include "Models/rus0130.h"
+-#include "Models/plain.h"
+-#include "clock.h"
+-#include "Camera.h"
++#include "scenes/Scene.h"
++#include "models/tree.h"
++#include "models/bushes.h"
++#include "models/sphere.h"
++#include "models/rus0130.h"
++#include "models/plain.h"
++#include "models/clock.h"
++#include "camera/Camera.h"
+ #include <cstdio>
+ #include <ctime>
+ #include <numbers>
+diff --git a/cviceni2/LoginScene.h b/cviceni2/src/scenes/LoginScene.h
+similarity index 88%
+rename from cviceni2/LoginScene.h
+rename to cviceni2/src/scenes/LoginScene.h
+index d3830e5..faac138 100644
+--- a/cviceni2/LoginScene.h
++++ b/cviceni2/src/scenes/LoginScene.h
+@@ -5,9 +5,9 @@
+  * @year 2026
+  */
+ #pragma once
+-#include "Scene.h"
+-#include "Transformation.h"
+-#include "Models/rus0130.h"
++#include "scenes/Scene.h"
++#include "transform/Transformation.h"
++#include "models/rus0130.h"
+ 
+ class LoginScene : public Scene {
+ public:
+diff --git a/cviceni2/Scene.cpp b/cviceni2/src/scenes/Scene.cpp
+similarity index 96%
+rename from cviceni2/Scene.cpp
+rename to cviceni2/src/scenes/Scene.cpp
+index 3b9b667..16d9621 100644
+--- a/cviceni2/Scene.cpp
++++ b/cviceni2/src/scenes/Scene.cpp
+@@ -1,4 +1,4 @@
+-#include "Scene.h"
++#include "scenes/Scene.h"
+ 
+ Scene::Scene() {}
+ 
+diff --git a/cviceni2/Scene.h b/cviceni2/src/scenes/Scene.h
+similarity index 68%
+rename from cviceni2/Scene.h
+rename to cviceni2/src/scenes/Scene.h
+index 50515f1..09fa04f 100644
+--- a/cviceni2/Scene.h
++++ b/cviceni2/src/scenes/Scene.h
+@@ -10,15 +10,15 @@
+ 
+ #pragma once
+ #include <vector>
+-#include "DrawableObject.h"
+-#include "Model.h"
+-#include "ShaderProgram.h"
+-#include "TransformComposite.h"
+-#include "Translate.h"
+-#include "Rotate.h"
+-#include "Scale.h"
+-#include "Camera.h"
+-#include "Light.h"
++#include "rendering/DrawableObject.h"
++#include "rendering/Model.h"
++#include "rendering/ShaderProgram.h"
++#include "transform/TransformComposite.h"
++#include "transform/Translate.h"
++#include "transform/Rotate.h"
++#include "transform/Scale.h"
++#include "camera/Camera.h"
++#include "lighting/Light.h"
+ 
+ class Scene {
+ private:
+diff --git a/cviceni2/SolarScene.h b/cviceni2/src/scenes/SolarScene.h
+similarity index 97%
+rename from cviceni2/SolarScene.h
+rename to cviceni2/src/scenes/SolarScene.h
+index 5ef4d11..a1e9c2e 100644
+--- a/cviceni2/SolarScene.h
++++ b/cviceni2/src/scenes/SolarScene.h
+@@ -1,10 +1,10 @@
+ #pragma once
+ 
+-#include "Scene.h"
+-#include "sun.h"
+-#include "moon.h"
+-#include "earth.h"
+-#include "Models/cybertruck.h"
++#include "scenes/Scene.h"
++#include "models/sun.h"
++#include "models/moon.h"
++#include "models/earth.h"
++#include "models/cybertruck.h"
+ 
+ class SolarScene : public Scene {
+ private:
+diff --git a/cviceni2/SphereScene.h b/cviceni2/src/scenes/SphereScene.h
+similarity index 91%
+rename from cviceni2/SphereScene.h
+rename to cviceni2/src/scenes/SphereScene.h
+index 9d8de6f..3260c19 100644
+--- a/cviceni2/SphereScene.h
++++ b/cviceni2/src/scenes/SphereScene.h
+@@ -5,9 +5,9 @@
+  * @year 2026
+  */
+ #pragma once
+-#include "Scene.h"
+-#include "Models/sphere.h"
+-#include "Models/rus0130.h"
++#include "scenes/Scene.h"
++#include "models/sphere.h"
++#include "models/rus0130.h"
+ 
+ class SphereScene : public Scene {
+ public:
+diff --git a/cviceni2/TriangleScene.h b/cviceni2/src/scenes/TriangleScene.h
+similarity index 94%
+rename from cviceni2/TriangleScene.h
+rename to cviceni2/src/scenes/TriangleScene.h
+index da7b249..e1ce0a0 100644
+--- a/cviceni2/TriangleScene.h
++++ b/cviceni2/src/scenes/TriangleScene.h
+@@ -5,9 +5,9 @@
+  * @year 2026
+  */
+ #pragma once
+-#include "Scene.h"
+-#include "Models/triangle.h"
+-#include "Models/rus0130.h"
++#include "scenes/Scene.h"
++#include "models/triangle.h"
++#include "models/rus0130.h"
+ 
+ class TriangleScene : public Scene {
+ public:
+diff --git a/cviceni2/Rotate.h b/cviceni2/src/transform/Rotate.h
+similarity index 93%
+rename from cviceni2/Rotate.h
+rename to cviceni2/src/transform/Rotate.h
+index 4b4da4a..1601ffa 100644
+--- a/cviceni2/Rotate.h
++++ b/cviceni2/src/transform/Rotate.h
+@@ -5,7 +5,7 @@
+  * @year 2026
+  */
+ #pragma once
+-#include "Transformation.h"
++#include "transform/Transformation.h"
+ #include <glm/gtc/matrix_transform.hpp>
+ 
+ class Rotate : public Transformation {
+diff --git a/cviceni2/Scale.h b/cviceni2/src/transform/Scale.h
+similarity index 92%
+rename from cviceni2/Scale.h
+rename to cviceni2/src/transform/Scale.h
+index f51fe58..243b10c 100644
+--- a/cviceni2/Scale.h
++++ b/cviceni2/src/transform/Scale.h
+@@ -5,7 +5,7 @@
+  * @year 2026
+  */
+ #pragma once
+-#include "Transformation.h"
++#include "transform/Transformation.h"
+ #include <glm/gtc/matrix_transform.hpp>
+ 
+ class Scale : public Transformation {
+diff --git a/cviceni2/TransformComposite.h b/cviceni2/src/transform/TransformComposite.h
+similarity index 94%
+rename from cviceni2/TransformComposite.h
+rename to cviceni2/src/transform/TransformComposite.h
+index d86a14b..6b0dc55 100644
+--- a/cviceni2/TransformComposite.h
++++ b/cviceni2/src/transform/TransformComposite.h
+@@ -5,7 +5,7 @@
+  * @year 2026
+  */
+ #pragma once
+-#include "Transformation.h"
++#include "transform/Transformation.h"
+ #include <vector>
+ 
+ class TransformComposite : public Transformation {
+diff --git a/cviceni2/Transformation.h b/cviceni2/src/transform/Transformation.h
+similarity index 100%
+rename from cviceni2/Transformation.h
+rename to cviceni2/src/transform/Transformation.h
+diff --git a/cviceni2/Translate.h b/cviceni2/src/transform/Translate.h
+similarity index 93%
+rename from cviceni2/Translate.h
+rename to cviceni2/src/transform/Translate.h
+index 7691df6..1fb261d 100644
+--- a/cviceni2/Translate.h
++++ b/cviceni2/src/transform/Translate.h
+@@ -5,7 +5,7 @@
+  * @year 2026
+  */
+ #pragma once
+-#include "Transformation.h"
++#include "transform/Transformation.h"
+ #include <glm/gtc/matrix_transform.hpp>
+ 
+ class Translate : public Transformation {

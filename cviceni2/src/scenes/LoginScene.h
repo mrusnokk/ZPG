@@ -5,9 +5,9 @@
  * @year 2026
  */
 #pragma once
-#include "Scene.h"
-#include "Transformation.h"
-#include "Models/rus0130.h"
+#include "scenes/Scene.h"
+#include "transform/Transformation.h"
+#include "models/rus0130.h"
 
 class LoginScene : public Scene {
 public:

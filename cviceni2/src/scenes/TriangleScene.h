@@ -5,9 +5,9 @@
  * @year 2026
  */
 #pragma once
-#include "Scene.h"
-#include "Models/triangle.h"
-#include "Models/rus0130.h"
+#include "scenes/Scene.h"
+#include "models/triangle.h"
+#include "models/rus0130.h"
 
 class TriangleScene : public Scene {
 public:

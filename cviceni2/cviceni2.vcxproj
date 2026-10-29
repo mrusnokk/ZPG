@@ -77,6 +77,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -95,6 +96,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -111,7 +113,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)/lib/glm-master;$(SolutionDir)/lib;$(SolutionDir)\lib\glfw-3.5.1.bin.WIN64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(SolutionDir)/lib/glm-master;$(SolutionDir)/lib;$(SolutionDir)\lib\glfw-3.5.1.bin.WIN64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -133,6 +135,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,83 +146,87 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Controller.cpp" />
-    <ClCompile Include="cviceni2.cpp" />
-    <ClCompile Include="DrawableObject.cpp" />
-    <ClCompile Include="gl.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="src\camera\Camera.cpp" />
+    <ClCompile Include="src\core\Application.cpp" />
+    <ClCompile Include="src\core\Controller.cpp" />
+    <ClCompile Include="src\core\gl.cpp" />
+    <ClCompile Include="src\cviceni2.cpp" />
+    <ClCompile Include="src\rendering\DrawableObject.cpp" />
+    <ClCompile Include="src\rendering\ShaderProgram.cpp" />
+    <ClCompile Include="src\scenes\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h" />
-    <ClInclude Include="ballsScene.h" />
-    <ClInclude Include="C:\Users\micha\Downloads\cybertruck.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="clock.h" />
-    <ClInclude Include="ClockScene.h" />
-    <ClInclude Include="Controller.h" />
-    <ClInclude Include="DrawableObject.h" />
-    <ClInclude Include="earth.h" />
-    <ClInclude Include="ForestScene.h" />
-    <ClInclude Include="ICameraObserver.h" />
-    <ClInclude Include="ILightObserver.h" />
-    <ClInclude Include="Light.h" />
-    <ClInclude Include="LoginScene.h" />
-    <ClInclude Include="Material.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="Models\bushes.h" />
-    <ClInclude Include="Models\cybertruck.h" />
-    <ClInclude Include="Models\gift.h" />
-    <ClInclude Include="Models\plain.h" />
-    <ClInclude Include="Models\rus0130.h" />
-    <ClInclude Include="Models\sphere.h" />
-    <ClInclude Include="Models\suzi_flat.h" />
-    <ClInclude Include="Models\suzi_smooth.h" />
-    <ClInclude Include="Models\tree.h" />
-    <ClInclude Include="Models\triangle.h" />
-    <ClInclude Include="moon.h" />
-    <ClInclude Include="Rotate.h" />
-    <ClInclude Include="Scale.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="ShaderProgram.h" />
-    <ClInclude Include="SolarScene.h" />
-    <ClInclude Include="SphereScene.h" />
-    <ClInclude Include="sun.h" />
-    <ClInclude Include="Transformation.h" />
-    <ClInclude Include="Translate.h" />
-    <ClInclude Include="TransformComposite.h" />
-    <ClInclude Include="TriangleScene.h" />
+    <ClInclude Include="src\camera\Camera.h" />
+    <ClInclude Include="src\camera\ICameraObserver.h" />
+    <ClInclude Include="src\core\Application.h" />
+    <ClInclude Include="src\core\Controller.h" />
+    <ClInclude Include="src\lighting\ILightObserver.h" />
+    <ClInclude Include="src\lighting\Light.h" />
+    <ClInclude Include="src\lighting\Material.h" />
+    <ClInclude Include="src\models\bushes.h" />
+    <ClInclude Include="src\models\clock.h" />
+    <ClInclude Include="src\models\cybertruck.h" />
+    <ClInclude Include="src\models\earth.h" />
+    <ClInclude Include="src\models\gift.h" />
+    <ClInclude Include="src\models\moon.h" />
+    <ClInclude Include="src\models\plain.h" />
+    <ClInclude Include="src\models\rus0130.h" />
+    <ClInclude Include="src\models\sphere.h" />
+    <ClInclude Include="src\models\sun.h" />
+    <ClInclude Include="src\models\suzi_flat.h" />
+    <ClInclude Include="src\models\suzi_smooth.h" />
+    <ClInclude Include="src\models\tree.h" />
+    <ClInclude Include="src\models\triangle.h" />
+    <ClInclude Include="src\rendering\DrawableObject.h" />
+    <ClInclude Include="src\rendering\Model.h" />
+    <ClInclude Include="src\rendering\ShaderProgram.h" />
+    <ClInclude Include="src\scenes\BallsScene.h" />
+    <ClInclude Include="src\scenes\ClockScene.h" />
+    <ClInclude Include="src\scenes\ForestScene.h" />
+    <ClInclude Include="src\scenes\LoginScene.h" />
+    <ClInclude Include="src\scenes\Scene.h" />
+    <ClInclude Include="src\scenes\SolarScene.h" />
+    <ClInclude Include="src\scenes\SphereScene.h" />
+    <ClInclude Include="src\scenes\TriangleScene.h" />
+    <ClInclude Include="src\transform\Rotate.h" />
+    <ClInclude Include="src\transform\Scale.h" />
+    <ClInclude Include="src\transform\Transformation.h" />
+    <ClInclude Include="src\transform\TransformComposite.h" />
+    <ClInclude Include="src\transform\Translate.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\ambient.frag" />
     <None Include="Shaders\ambient.vert" />
+    <None Include="Shaders\basic.frag" />
+    <None Include="Shaders\basic.vert" />
+    <None Include="Shaders\basic2.frag" />
+    <None Include="Shaders\basic2.vert" />
     <None Include="Shaders\BlinnPhong.frag" />
     <None Include="Shaders\BlinnPhong.vert" />
     <None Include="Shaders\bushShader.frag" />
     <None Include="Shaders\bushShader.vert" />
     <None Include="Shaders\clockShader.frag" />
     <None Include="Shaders\clockShader.vert" />
-    <None Include="color.frag" />
-    <None Include="color.vert" />
-    <None Include="Shaders\basic.frag" />
-    <None Include="Shaders\basic.vert" />
-    <None Include="Shaders\basic2.frag" />
     <None Include="Shaders\color.frag" />
     <None Include="Shaders\color.vert" />
     <None Include="Shaders\Lambert.frag" />
     <None Include="Shaders\Lambert.vert" />
     <None Include="Shaders\phongLight.frag" />
     <None Include="Shaders\phongLight.vert" />
+    <None Include="Shaders\phongLightwrong.frag" />
+    <None Include="Shaders\phongLightwrong.vert" />
     <None Include="Shaders\SpaceObject.frag" />
     <None Include="Shaders\SpaceObject.vert" />
     <None Include="Shaders\SunAmbient.frag" />
     <None Include="Shaders\SunAmbient.vert" />
     <None Include="Shaders\treeShader.frag" />
     <None Include="Shaders\treeShader.vert" />
+    <None Include="Shaders\utlumBushShader.frag" />
+    <None Include="Shaders\utlumBushShader.vert" />
     <None Include="Shaders\utlumShader.frag" />
     <None Include="Shaders\utlumShader.vert" />
+    <None Include="Shaders\utlumTreeShader.frag" />
+    <None Include="Shaders\utlumTreeShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

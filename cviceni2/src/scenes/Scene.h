@@ -10,15 +10,15 @@
 
 #pragma once
 #include <vector>
-#include "DrawableObject.h"
-#include "Model.h"
-#include "ShaderProgram.h"
-#include "TransformComposite.h"
-#include "Translate.h"
-#include "Rotate.h"
-#include "Scale.h"
-#include "Camera.h"
-#include "Light.h"
+#include "rendering/DrawableObject.h"
+#include "rendering/Model.h"
+#include "rendering/ShaderProgram.h"
+#include "transform/TransformComposite.h"
+#include "transform/Translate.h"
+#include "transform/Rotate.h"
+#include "transform/Scale.h"
+#include "camera/Camera.h"
+#include "lighting/Light.h"
 
 class Scene {
 private:

@@ -12,9 +12,9 @@
 #include <glad/gl.h>
 #include "glm-master/glm/glm.hpp"
 #include <string>
-#include "ICameraObserver.h"
-#include "ILightObserver.h"
-#include "Light.h"
+#include "camera/ICameraObserver.h"
+#include "lighting/ILightObserver.h"
+#include "lighting/Light.h"
 
 class ShaderProgram :public ICameraObserver, public ILightObserver {
 

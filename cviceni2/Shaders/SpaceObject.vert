@@ -15,9 +15,8 @@ out vec3 vertexColor;
 
 void main(void){
     
-    worldPos = vec3(modelMatrix * vec4(vp,1.0));  
+    worldPos = vec3(modelMatrix * vec4(vp,1.0));
     worldNorm = transpose(inverse(mat3(modelMatrix))) * vn;
-
 
     vertexColor = inColor;
 

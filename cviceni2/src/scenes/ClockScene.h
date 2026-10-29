@@ -1,6 +1,6 @@
 #pragma once
-#include "Scene.h"
-#include "clock.h"
+#include "scenes/Scene.h"
+#include "models/clock.h"
 #include <ctime>
 #include <numbers>
 
