@@ -6,12 +6,14 @@
 #include "scenes/SolarScene.h"
 #include "scenes/ClockScene.h"
 #include "scenes/BallsScene.h"
+#include  "scenes/TextureScene.h"
 
 int main()
 {
     int width = 1920, height = 1080;
     Application* app = new Application(width,height,"ZPG");
     app->initialization();
+	app->addScene(new TextureScene(width, height));
     app->addScene(new ForestScene(width, height));
     app->addScene(new BallsScene(width, height));
 	app->addScene(new SolarScene(width, height));
