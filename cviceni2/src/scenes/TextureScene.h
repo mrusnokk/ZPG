@@ -10,10 +10,14 @@ public:
 
 		this->light = new Light(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
 
-		Model* plainModel = new Model(tplain,sizeof(tplain),8);
+		Model* plainModel = new Model(tplain,sizeof(tplain),6,8);
 		ShaderProgram* plainShader = new ShaderProgram("shaders/TextureShader.vert", "shaders/TextureShader.frag");
 		Texture* plainTexture = new Texture("src/textures/grass.jpg");
 		DrawableObject* plain = new DrawableObject(plainModel, plainShader, plainTexture);
+
+		TransformComposite* tc = new TransformComposite();
+		tc->addTransformation(new Translate(0.0f, 0.0f, 0.0f));
+		plain->setTransformation(tc);
 
 		this->addModel(plainModel);
 		this->addShader(plainShader);
