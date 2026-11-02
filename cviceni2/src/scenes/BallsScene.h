@@ -11,12 +11,14 @@ public:
 		Model* ball = new Model(sphere, sizeof(sphere), 17280);
 		Model* loginModel = new Model(login_model, sizeof(login_model), 6996);
 
+
 		ShaderProgram* basic = new ShaderProgram("Shaders/basic.vert", "Shaders/basic.frag");
-		ShaderProgram* b1Shader = new ShaderProgram("Shaders/phongLight.vert", "Shaders/phongLight.frag");
+		ShaderProgram* b1Shader = new ShaderProgram("Shaders/TextureShader.vert", "Shaders/TextureShader.frag");
 		ShaderProgram* b2Shader = new ShaderProgram("Shaders/phongLight.vert", "Shaders/phongLight.frag");
 		ShaderProgram* b3Shader = new ShaderProgram("Shaders/phongLight.vert", "Shaders/phongLight.frag");
 		ShaderProgram* b4Shader = new ShaderProgram("Shaders/phongLight.vert", "Shaders/phongLight.frag");
 
+		Texture* ballTexture = new Texture("src/textures/grass.jpg");
 
 		this->addModel(ball);
 		this->addModel(loginModel);
@@ -27,10 +29,10 @@ public:
 		this->addShader(b4Shader);
 
 		DrawableObject* loginObj = new DrawableObject(loginModel, basic);
-		DrawableObject* ballObj1 = new DrawableObject(ball, b1Shader);
-		DrawableObject* ballObj2 = new DrawableObject(ball, b2Shader);
-		DrawableObject* ballObj3 = new DrawableObject(ball, b3Shader);
-		DrawableObject* ballObj4 = new DrawableObject(ball, b4Shader);
+		DrawableObject* ballObj1 = new DrawableObject(ball, b1Shader, ballTexture);
+		DrawableObject* ballObj2 = new DrawableObject(ball, b2Shader, ballTexture);
+		DrawableObject* ballObj3 = new DrawableObject(ball, b3Shader, ballTexture);
+		DrawableObject* ballObj4 = new DrawableObject(ball, b4Shader, ballTexture);
 
 		TransformComposite* composite1 = new TransformComposite();
 		TransformComposite* composite2 = new TransformComposite();
