@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 
+
 ShaderProgram::ShaderProgram(const char* vertexFile, const char* fragmentFile) {
 	GLuint vertexShader = createShaderFromFile(GL_VERTEX_SHADER, vertexFile);
 	GLuint fragmentShader = createShaderFromFile(GL_FRAGMENT_SHADER, fragmentFile);

@@ -13,17 +13,20 @@
 #include "rendering/ShaderProgram.h"
 #include "transform/Transformation.h"
 #include "camera/Camera.h"
+#include "rendering/Texture.h"
 
 class DrawableObject {
 	Model* model;
 	ShaderProgram* shader;
+	Texture* texture;
 	Transformation* transform;
 
 public:
-	DrawableObject(Model* m, ShaderProgram* s);
+	DrawableObject(Model* m, ShaderProgram* s, Texture* t = nullptr);
 	~DrawableObject() {
 		delete transform;
 	}
+	void setTexture(Texture* tex);
 	void setTransformation(Transformation* t);
 	void draw();
 };

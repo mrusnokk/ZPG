@@ -153,6 +153,7 @@
     <ClCompile Include="src\cviceni2.cpp" />
     <ClCompile Include="src\rendering\DrawableObject.cpp" />
     <ClCompile Include="src\rendering\ShaderProgram.cpp" />
+    <ClCompile Include="src\rendering\Texture.cpp" />
     <ClCompile Include="src\scenes\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -175,11 +176,13 @@
     <ClInclude Include="src\models\sun.h" />
     <ClInclude Include="src\models\suzi_flat.h" />
     <ClInclude Include="src\models\suzi_smooth.h" />
+    <ClInclude Include="src\models\tplain.h" />
     <ClInclude Include="src\models\tree.h" />
     <ClInclude Include="src\models\triangle.h" />
     <ClInclude Include="src\rendering\DrawableObject.h" />
     <ClInclude Include="src\rendering\Model.h" />
     <ClInclude Include="src\rendering\ShaderProgram.h" />
+    <ClInclude Include="src\rendering\Texture.h" />
     <ClInclude Include="src\scenes\BallsScene.h" />
     <ClInclude Include="src\scenes\ClockScene.h" />
     <ClInclude Include="src\scenes\ForestScene.h" />
@@ -187,6 +190,7 @@
     <ClInclude Include="src\scenes\Scene.h" />
     <ClInclude Include="src\scenes\SolarScene.h" />
     <ClInclude Include="src\scenes\SphereScene.h" />
+    <ClInclude Include="src\scenes\TextureScene.h" />
     <ClInclude Include="src\scenes\TriangleScene.h" />
     <ClInclude Include="src\transform\Rotate.h" />
     <ClInclude Include="src\transform\Scale.h" />
@@ -219,6 +223,8 @@
     <None Include="Shaders\SpaceObject.vert" />
     <None Include="Shaders\SunAmbient.frag" />
     <None Include="Shaders\SunAmbient.vert" />
+    <None Include="Shaders\TextureShader.frag" />
+    <None Include="Shaders\TextureShader.vert" />
     <None Include="Shaders\treeShader.frag" />
     <None Include="Shaders\treeShader.vert" />
     <None Include="Shaders\utlumBushShader.frag" />
