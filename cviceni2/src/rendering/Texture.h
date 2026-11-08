@@ -11,7 +11,6 @@ public:
     ~Texture();
 
     void bind(GLuint unit = 0) const;
-    void unbind() const;
 
     GLuint getID() const { return textureID; }
 };

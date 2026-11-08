@@ -246,6 +246,14 @@
     <None Include="Shaders\utlumTreeShader.vert" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="src\textures\blinphong.png" />
+    <Image Include="src\textures\cubemap\negx.jpg" />
+    <Image Include="src\textures\cubemap\negy.jpg" />
+    <Image Include="src\textures\cubemap\negz.jpg" />
+    <Image Include="src\textures\cubemap\posx.jpg" />
+    <Image Include="src\textures\cubemap\posy.jpg" />
+    <Image Include="src\textures\cubemap\posz.jpg" />
+    <Image Include="src\textures\door.png" />
     <Image Include="src\textures\grass.jpg" />
     <Image Include="src\textures\T_EB408.png" />
   </ItemGroup>

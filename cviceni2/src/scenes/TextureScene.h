@@ -2,6 +2,7 @@
 #include "scenes/Scene.h"
 #include "models/tplain.h"
 #include "models/rus0130.h"
+#include "models/shrek.h"
 class TextureScene : public Scene {
 public:
 	TextureScene(int w, int h) {
@@ -21,17 +22,33 @@ public:
 		this->setSkybox(new Skybox(faces));
 
 		Model* plainModel = new Model(tplain,sizeof(tplain),6,8);
-		ShaderProgram* plainShader = new ShaderProgram("shaders/TextureShader.vert", "shaders/TextureShader.frag");
+		Model* shrekModel = new Model(ShrekModel, sizeof(ShrekModel), ShrekVertexCount, 8);
+
+		ShaderProgram* tShader = new ShaderProgram("shaders/TextureShader.vert", "shaders/TextureShader.frag");
+
 		Texture* plainTexture = new Texture("src/textures/grass.jpg");
-		DrawableObject* plain = new DrawableObject(plainModel, plainShader, plainTexture);
+		Texture* shrekTexture = new Texture("src/textures/shrek.png");
+
+		DrawableObject* plain = new DrawableObject(plainModel, tShader, plainTexture);
+		DrawableObject* shrekObject = new DrawableObject(shrekModel, tShader, shrekTexture);
 
 		TransformComposite* tc = new TransformComposite();
 		tc->addTransformation(new Translate(0.0f, 0.0f, 0.0f));
+
+		TransformComposite* sTc = new TransformComposite();
+		sTc->addTransformation(new Translate(0.0f, 0.0f, 0.0f));
+		sTc->addTransformation(new Rotate(90.0f, 1.0f, 0.0f, 0.0f));
+
 		plain->setTransformation(tc);
+		shrekObject->setTransformation(sTc);
 
 		this->addModel(plainModel);
-		this->addShader(plainShader);
+		this->addModel(shrekModel);
+		
+		this->addShader(tShader);
+
 		this->addObject(plain);
+		this->addObject(shrekObject);
 
 	}	
 };
