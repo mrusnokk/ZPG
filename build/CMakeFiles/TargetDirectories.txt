@@ -1,0 +1,3 @@
+/Users/mrusnokk/School/ZPG/zpg/build/CMakeFiles/zpg.dir
+/Users/mrusnokk/School/ZPG/zpg/build/CMakeFiles/edit_cache.dir
+/Users/mrusnokk/School/ZPG/zpg/build/CMakeFiles/rebuild_cache.dir

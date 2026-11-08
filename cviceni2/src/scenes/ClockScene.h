@@ -29,7 +29,11 @@ public:
 	void update() override {
 		std::time_t t = std::time(nullptr);
 		std::tm lt;
+#if defined(_WIN32) || defined(_WIN64)
 		localtime_s(&lt, &t);
+#else
+		localtime_r(&t, &lt);
+#endif
 
 		const float TWO_PI = std::numbers::pi * 2;
 		float seconds = static_cast<float>(lt.tm_sec);

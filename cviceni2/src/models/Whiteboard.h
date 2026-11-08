@@ -1,7 +1,7 @@
 #pragma once
 
-const int SM_WhiteboardVertexCount = 702;
-const float SM_WhiteboardModel[] = {
+const int WhiteboardVertexCount = 702;
+const float WhiteboardModel[] = {
     0.018793f, 2.243182f, 1.133129f, 0.985759f, 0.000003f, -0.168163f, 0.000513f, 0.567576f,
     0.018794f, 0.980853f, 1.133091f, 0.979689f, 0.151030f, -0.131905f, 0.000526f, 0.000512f,
     0.018792f, 0.980886f, -1.090655f, 0.991071f, 0.133338f, 0.000002f, 0.999478f, 0.000520f,

@@ -11,6 +11,7 @@
 #pragma once
 
 #include <glad/gl.h>
+#include <cstddef>
 
 class Model {
 private:

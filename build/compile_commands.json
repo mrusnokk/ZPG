@@ -1,0 +1,56 @@
+[
+{
+  "directory": "/Users/mrusnokk/School/ZPG/zpg/build",
+  "command": "/usr/bin/c++  -I/Users/mrusnokk/School/ZPG/zpg/cviceni2/src -I/Users/mrusnokk/School/ZPG/zpg/cviceni2 -I/Users/mrusnokk/School/ZPG/zpg/lib -I/Users/mrusnokk/School/ZPG/zpg/lib/glm-master -isystem /opt/homebrew/include -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -g -std=gnu++20 -arch arm64 -o CMakeFiles/zpg.dir/cviceni2/src/camera/Camera.cpp.o -c /Users/mrusnokk/School/ZPG/zpg/cviceni2/src/camera/Camera.cpp",
+  "file": "/Users/mrusnokk/School/ZPG/zpg/cviceni2/src/camera/Camera.cpp",
+  "output": "CMakeFiles/zpg.dir/cviceni2/src/camera/Camera.cpp.o"
+},
+{
+  "directory": "/Users/mrusnokk/School/ZPG/zpg/build",
+  "command": "/usr/bin/c++  -I/Users/mrusnokk/School/ZPG/zpg/cviceni2/src -I/Users/mrusnokk/School/ZPG/zpg/cviceni2 -I/Users/mrusnokk/School/ZPG/zpg/lib -I/Users/mrusnokk/School/ZPG/zpg/lib/glm-master -isystem /opt/homebrew/include -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -g -std=gnu++20 -arch arm64 -o CMakeFiles/zpg.dir/cviceni2/src/core/Application.cpp.o -c /Users/mrusnokk/School/ZPG/zpg/cviceni2/src/core/Application.cpp",
+  "file": "/Users/mrusnokk/School/ZPG/zpg/cviceni2/src/core/Application.cpp",
+  "output": "CMakeFiles/zpg.dir/cviceni2/src/core/Application.cpp.o"
+},
+{
+  "directory": "/Users/mrusnokk/School/ZPG/zpg/build",
+  "command": "/usr/bin/c++  -I/Users/mrusnokk/School/ZPG/zpg/cviceni2/src -I/Users/mrusnokk/School/ZPG/zpg/cviceni2 -I/Users/mrusnokk/School/ZPG/zpg/lib -I/Users/mrusnokk/School/ZPG/zpg/lib/glm-master -isystem /opt/homebrew/include -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -g -std=gnu++20 -arch arm64 -o CMakeFiles/zpg.dir/cviceni2/src/core/Controller.cpp.o -c /Users/mrusnokk/School/ZPG/zpg/cviceni2/src/core/Controller.cpp",
+  "file": "/Users/mrusnokk/School/ZPG/zpg/cviceni2/src/core/Controller.cpp",
+  "output": "CMakeFiles/zpg.dir/cviceni2/src/core/Controller.cpp.o"
+},
+{
+  "directory": "/Users/mrusnokk/School/ZPG/zpg/build",
+  "command": "/usr/bin/c++  -I/Users/mrusnokk/School/ZPG/zpg/cviceni2/src -I/Users/mrusnokk/School/ZPG/zpg/cviceni2 -I/Users/mrusnokk/School/ZPG/zpg/lib -I/Users/mrusnokk/School/ZPG/zpg/lib/glm-master -isystem /opt/homebrew/include -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -g -std=gnu++20 -arch arm64 -o CMakeFiles/zpg.dir/cviceni2/src/core/gl.cpp.o -c /Users/mrusnokk/School/ZPG/zpg/cviceni2/src/core/gl.cpp",
+  "file": "/Users/mrusnokk/School/ZPG/zpg/cviceni2/src/core/gl.cpp",
+  "output": "CMakeFiles/zpg.dir/cviceni2/src/core/gl.cpp.o"
+},
+{
+  "directory": "/Users/mrusnokk/School/ZPG/zpg/build",
+  "command": "/usr/bin/c++  -I/Users/mrusnokk/School/ZPG/zpg/cviceni2/src -I/Users/mrusnokk/School/ZPG/zpg/cviceni2 -I/Users/mrusnokk/School/ZPG/zpg/lib -I/Users/mrusnokk/School/ZPG/zpg/lib/glm-master -isystem /opt/homebrew/include -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -g -std=gnu++20 -arch arm64 -o CMakeFiles/zpg.dir/cviceni2/src/cviceni2.cpp.o -c /Users/mrusnokk/School/ZPG/zpg/cviceni2/src/cviceni2.cpp",
+  "file": "/Users/mrusnokk/School/ZPG/zpg/cviceni2/src/cviceni2.cpp",
+  "output": "CMakeFiles/zpg.dir/cviceni2/src/cviceni2.cpp.o"
+},
+{
+  "directory": "/Users/mrusnokk/School/ZPG/zpg/build",
+  "command": "/usr/bin/c++  -I/Users/mrusnokk/School/ZPG/zpg/cviceni2/src -I/Users/mrusnokk/School/ZPG/zpg/cviceni2 -I/Users/mrusnokk/School/ZPG/zpg/lib -I/Users/mrusnokk/School/ZPG/zpg/lib/glm-master -isystem /opt/homebrew/include -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -g -std=gnu++20 -arch arm64 -o CMakeFiles/zpg.dir/cviceni2/src/rendering/DrawableObject.cpp.o -c /Users/mrusnokk/School/ZPG/zpg/cviceni2/src/rendering/DrawableObject.cpp",
+  "file": "/Users/mrusnokk/School/ZPG/zpg/cviceni2/src/rendering/DrawableObject.cpp",
+  "output": "CMakeFiles/zpg.dir/cviceni2/src/rendering/DrawableObject.cpp.o"
+},
+{
+  "directory": "/Users/mrusnokk/School/ZPG/zpg/build",
+  "command": "/usr/bin/c++  -I/Users/mrusnokk/School/ZPG/zpg/cviceni2/src -I/Users/mrusnokk/School/ZPG/zpg/cviceni2 -I/Users/mrusnokk/School/ZPG/zpg/lib -I/Users/mrusnokk/School/ZPG/zpg/lib/glm-master -isystem /opt/homebrew/include -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -g -std=gnu++20 -arch arm64 -o CMakeFiles/zpg.dir/cviceni2/src/rendering/ShaderProgram.cpp.o -c /Users/mrusnokk/School/ZPG/zpg/cviceni2/src/rendering/ShaderProgram.cpp",
+  "file": "/Users/mrusnokk/School/ZPG/zpg/cviceni2/src/rendering/ShaderProgram.cpp",
+  "output": "CMakeFiles/zpg.dir/cviceni2/src/rendering/ShaderProgram.cpp.o"
+},
+{
+  "directory": "/Users/mrusnokk/School/ZPG/zpg/build",
+  "command": "/usr/bin/c++  -I/Users/mrusnokk/School/ZPG/zpg/cviceni2/src -I/Users/mrusnokk/School/ZPG/zpg/cviceni2 -I/Users/mrusnokk/School/ZPG/zpg/lib -I/Users/mrusnokk/School/ZPG/zpg/lib/glm-master -isystem /opt/homebrew/include -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -g -std=gnu++20 -arch arm64 -o CMakeFiles/zpg.dir/cviceni2/src/rendering/Texture.cpp.o -c /Users/mrusnokk/School/ZPG/zpg/cviceni2/src/rendering/Texture.cpp",
+  "file": "/Users/mrusnokk/School/ZPG/zpg/cviceni2/src/rendering/Texture.cpp",
+  "output": "CMakeFiles/zpg.dir/cviceni2/src/rendering/Texture.cpp.o"
+},
+{
+  "directory": "/Users/mrusnokk/School/ZPG/zpg/build",
+  "command": "/usr/bin/c++  -I/Users/mrusnokk/School/ZPG/zpg/cviceni2/src -I/Users/mrusnokk/School/ZPG/zpg/cviceni2 -I/Users/mrusnokk/School/ZPG/zpg/lib -I/Users/mrusnokk/School/ZPG/zpg/lib/glm-master -isystem /opt/homebrew/include -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -g -std=gnu++20 -arch arm64 -o CMakeFiles/zpg.dir/cviceni2/src/scenes/Scene.cpp.o -c /Users/mrusnokk/School/ZPG/zpg/cviceni2/src/scenes/Scene.cpp",
+  "file": "/Users/mrusnokk/School/ZPG/zpg/cviceni2/src/scenes/Scene.cpp",
+  "output": "CMakeFiles/zpg.dir/cviceni2/src/scenes/Scene.cpp.o"
+}
+]
