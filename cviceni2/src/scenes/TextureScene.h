@@ -10,6 +10,16 @@ public:
 
 		this->light = new Light(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
 
+		std::vector<std::string> faces = {
+			"src/textures/cubemap/posx.jpg",
+			"src/textures/cubemap/negx.jpg",
+			"src/textures/cubemap/posy.jpg",
+			"src/textures/cubemap/negy.jpg",
+			"src/textures/cubemap/posz.jpg",
+			"src/textures/cubemap/negz.jpg"
+		};
+		this->setSkybox(new Skybox(faces));
+
 		Model* plainModel = new Model(tplain,sizeof(tplain),6,8);
 		ShaderProgram* plainShader = new ShaderProgram("shaders/TextureShader.vert", "shaders/TextureShader.frag");
 		Texture* plainTexture = new Texture("src/textures/grass.jpg");

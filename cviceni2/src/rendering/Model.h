@@ -28,7 +28,11 @@ public:
 		glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 
 		int stride = floatsPerVertex * sizeof(float);
-		if (floatsPerVertex == 6) {
+		if (floatsPerVertex == 3) {
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+			glEnableVertexAttribArray(0);
+		}
+		else if (floatsPerVertex == 6) {
 
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 			glEnableVertexAttribArray(0);

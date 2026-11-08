@@ -7,17 +7,19 @@
 #include "scenes/ClockScene.h"
 #include "scenes/BallsScene.h"
 #include  "scenes/TextureScene.h"
+#include "scenes/Eb408Scene.h"
 
 int main()
 {
     int width = 1920, height = 1080;
     Application* app = new Application(width,height,"ZPG");
     app->initialization();
-	app->addScene(new TextureScene(width, height));
-    app->addScene(new ForestScene(width, height));
-    app->addScene(new BallsScene(width, height));
-	app->addScene(new SolarScene(width, height));
-    app->addScene(new ClockScene());
+    app->addScene(new Eb408Scene(width, height));
+	//app->addScene(new TextureScene(width, height));
+ //   app->addScene(new ForestScene(width, height));
+ //   app->addScene(new BallsScene(width, height));
+	//app->addScene(new SolarScene(width, height));
+ //   app->addScene(new ClockScene());
     app->run();
 
     delete app;

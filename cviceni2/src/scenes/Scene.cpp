@@ -17,6 +17,7 @@ Scene::~Scene() {
 	}
 	delete cam;
 	delete light;
+	delete skybox;
 }
 
 void Scene::addObject(DrawableObject* object) 
@@ -39,10 +40,21 @@ void Scene::addShader(ShaderProgram* shader)
 }
 
 void Scene::draw() {
+	if (skybox != nullptr) {
+		skybox->draw();
+		glClear(GL_DEPTH_BUFFER_BIT);
+	}
 	for (DrawableObject* obj : objects) {
 		obj->draw();
 	}
 }
 Camera* Scene::getCam() {
 	return this->cam;
+}
+
+void Scene::setSkybox(Skybox* s) {
+	this->skybox = s;
+	if (this->cam != nullptr) {
+		this->cam->obs_register(s->getShader());
+	}
 }

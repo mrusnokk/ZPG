@@ -41,6 +41,7 @@
       <Filter>
       </Filter>
     </ClCompile>
+    <ClCompile Include="src\rendering\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\camera\Camera.h">
@@ -191,6 +192,18 @@
       <Filter>
       </Filter>
     </ClInclude>
+    <ClInclude Include="src\models\skycube.h" />
+    <ClInclude Include="src\models\tplain.h" />
+    <ClInclude Include="src\rendering\Texture.h" />
+    <ClInclude Include="src\scenes\TextureScene.h" />
+    <ClInclude Include="src\textures\skybox.h" />
+    <ClInclude Include="src\rendering\Skybox.h" />
+    <ClInclude Include="src\scenes\Eb408Scene.h" />
+    <ClInclude Include="src\models\door.h" />
+    <ClInclude Include="src\models\eb408.h" />
+    <ClInclude Include="src\models\fiona.h" />
+    <ClInclude Include="src\models\shrek.h" />
+    <ClInclude Include="src\models\Whiteboard.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\ambient.frag">
@@ -303,5 +316,17 @@
     <None Include="Shaders\utlumBushShader.vert" />
     <None Include="Shaders\utlumTreeShader.frag" />
     <None Include="Shaders\utlumTreeShader.vert" />
+    <None Include="Shaders\TextureShader.frag" />
+    <None Include="Shaders\TextureShader.vert" />
+    <None Include="Shaders\Skybox.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\Skybox.frag">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="src\textures\grass.jpg" />
+    <Image Include="src\textures\T_EB408.png" />
   </ItemGroup>
 </Project>

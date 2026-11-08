@@ -19,6 +19,7 @@
 #include "transform/Scale.h"
 #include "camera/Camera.h"
 #include "lighting/Light.h"
+#include "rendering/Skybox.h"
 
 class Scene {
 private:
@@ -28,6 +29,7 @@ private:
 protected:
 	Camera* cam = nullptr;
 	Light* light = nullptr;
+	Skybox* skybox = nullptr;
 
 public:
 	Scene();
@@ -36,6 +38,7 @@ public:
 	void addModel(Model* model);
 	void addShader(ShaderProgram* shader);
 	void setLight(Light* light) { this->light = light; }	
+	void setSkybox(Skybox* s);
 	virtual void update() {}
 	virtual void draw();
 	Camera* getCam();
