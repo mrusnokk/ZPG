@@ -13,6 +13,9 @@ void Controller::processInput(GLFWwindow* window, Camera* camera) {
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera->toRight();
 
+    if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
+        
+
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
         double mouseX, mouseY;
         glfwGetCursorPos(window, &mouseX, &mouseY);
@@ -67,4 +70,5 @@ void Controller::processInput(GLFWwindow* window, Camera* camera) {
         printf("unProject [%f,%f,%f]\n", pos.x, pos.y, pos.z);
 
     }
+
 }

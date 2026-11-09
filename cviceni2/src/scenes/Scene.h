@@ -42,4 +42,5 @@ public:
 	virtual void update() {}
 	virtual void draw();
 	Camera* getCam();
+	void addObject();
 };

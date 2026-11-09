@@ -6,6 +6,7 @@
 #pragma once
 #include <GLFW/glfw3.h>
 #include "camera/Camera.h"
+#include "scenes/Scene.h"
 
 class Controller {
 private:

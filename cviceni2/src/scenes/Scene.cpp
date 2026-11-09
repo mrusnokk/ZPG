@@ -60,3 +60,6 @@ void Scene::setSkybox(Skybox* s) {
 		this->cam->obs_register(s->getShader());
 	}
 }
+void Scene::addObject() {
+
+}
