@@ -11,7 +11,7 @@ class Eb408Scene : public Scene
 public:
 	Eb408Scene(int w, int h)
 	{
-		this->cam = new Camera(glm::vec3(0.0f, 1.0f, 1.0f));
+		this->cam = new Camera(glm::vec3(0.0f, 1.0f, 1.0f),w,h);
 		this->cam->setProjection(60.0f, w / static_cast<float>(h), 0.1f, 100.0f);
 
 		this->light = new Light(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
@@ -39,9 +39,9 @@ public:
 		Texture* tableTexture = new Texture("src/textures/table.png");
 		Texture* chairTexure = new Texture("src/textures/chair.png");
 
-		DrawableObject *ebObject = new DrawableObject(eb408, ebShader, ebTexture);
-		DrawableObject *doorObject = new DrawableObject(ebDoor, ebShader, doorTexture);
-		DrawableObject *wBoardObject = new DrawableObject(ebWboard, ebShader, whiteBoardTexture);
+		DrawableObject *ebObject = new DrawableObject(eb408, ebShader, ebTexture,100);
+		DrawableObject *doorObject = new DrawableObject(ebDoor, ebShader, doorTexture,101);
+		DrawableObject *wBoardObject = new DrawableObject(ebWboard, ebShader, whiteBoardTexture,102);
 
 		TransformComposite *ebTc = new TransformComposite();
 		TransformComposite *doorTc = new TransformComposite();
@@ -70,17 +70,17 @@ public:
 		this->addObject(doorObject);
 		this->addObject(wBoardObject);
 
-
+		int obIndex = 1;
 		for (int i = 1; i < 4; i++) {
 			for (int j = 1; j < 4; j++) {
-				DrawableObject* t = new DrawableObject(ebTable, ebShader, tableTexture);
+				DrawableObject* t = new DrawableObject(ebTable, ebShader, tableTexture, obIndex++);
 				TransformComposite* tTc = new TransformComposite();
 				tTc->addTransformation(new Rotate(90.0f, 0.0f, 1.0f, 0.0));
 				tTc->addTransformation(new Translate((-2.0f * i) + 0.7f, 0.0f, (1.7f * j) - 2.9f));
 				t->setTransformation(tTc);
 				this->addObject(t);
 
-				DrawableObject* c1 = new DrawableObject(ebChair, ebShader, chairTexure);
+				DrawableObject* c1 = new DrawableObject(ebChair, ebShader, chairTexure,obIndex++);
 				TransformComposite* cTc1 = new TransformComposite();
 				cTc1->addTransformation(new Rotate(90.0f, 0.0f, 1.0f, 0.0));
 				cTc1->addTransformation(new Translate((-2.0f * i) + 0.7f - 0.4f, 0.0f, (1.7f * j) - 2.9f + 0.5f));
@@ -88,7 +88,7 @@ public:
 				c1->setTransformation(cTc1);
 				this->addObject(c1);
 
-				DrawableObject* c2 = new DrawableObject(ebChair, ebShader, chairTexure);
+				DrawableObject* c2 = new DrawableObject(ebChair, ebShader, chairTexure,obIndex++);
 				TransformComposite* cTc2 = new TransformComposite();
 				cTc2->addTransformation(new Rotate(90.0f, 0.0f, 1.0f, 0.0));
 				cTc2->addTransformation(new Translate((-2.0f * i) + 0.7f + 0.4f, 0.0f, (1.7f * j) - 2.9f + 0.5f));

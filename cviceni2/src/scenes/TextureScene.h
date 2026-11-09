@@ -6,7 +6,7 @@
 class TextureScene : public Scene {
 public:
 	TextureScene(int w, int h) {
-		this->cam = new Camera(glm::vec3(0.0f, 1.0f, 1.0f));
+		this->cam = new Camera(glm::vec3(0.0f, 1.0f, 1.0f),w,h);
 		this->cam->setProjection(60.0f, w / static_cast<float>(h), 0.1f, 100.0f);
 
 		this->light = new Light(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
@@ -29,8 +29,8 @@ public:
 		Texture* plainTexture = new Texture("src/textures/grass.jpg");
 		Texture* shrekTexture = new Texture("src/textures/shrek.png");
 
-		DrawableObject* plain = new DrawableObject(plainModel, tShader, plainTexture);
-		DrawableObject* shrekObject = new DrawableObject(shrekModel, tShader, shrekTexture);
+		DrawableObject* plain = new DrawableObject(plainModel, tShader, plainTexture,1);
+		DrawableObject* shrekObject = new DrawableObject(shrekModel, tShader, shrekTexture,2);
 
 		TransformComposite* tc = new TransformComposite();
 		tc->addTransformation(new Translate(0.0f, 0.0f, 0.0f));

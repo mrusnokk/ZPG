@@ -16,17 +16,19 @@
 #include "rendering/Texture.h"
 
 class DrawableObject {
+	int id;
 	Model* model;
 	ShaderProgram* shader;
 	Texture* texture;
 	Transformation* transform;
-
+	
 public:
-	DrawableObject(Model* m, ShaderProgram* s, Texture* t = nullptr);
+	DrawableObject(Model* m, ShaderProgram* s, Texture* t = nullptr,int id = NULL);
 	~DrawableObject() {
 		delete transform;
 	}
 	void setTexture(Texture* tex);
 	void setTransformation(Transformation* t);
 	void draw();
+	int getId() { return id; }
 };

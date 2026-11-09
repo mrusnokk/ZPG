@@ -25,11 +25,16 @@ private:
 
 	float alpha;
 	float fi;
-	float speed = 0.0025f;
+	float speed = 0.025f;
 	float sensitivity = 0.1f;
+
+	int width;
+	int height;
 
 public:
 	Camera(glm::vec3 eye = glm::vec3(0.0f, 2.0f, 5.0f),
+			int width = 1920,
+			int height = 1080,
 		   float alpha = 90.0f,
 		   float fi = -90.0f);
 	void obs_register(ICameraObserver *obs);
@@ -45,7 +50,8 @@ public:
 	void toRight();
 	void toLeft();
 	void processMouseMovement(float x, float y);
-
+	glm::vec2 getResolution();
+	void setResolution(int width, int height);
 	glm::vec3 getPosition();
 	glm::mat4 getViewMatrix();
 	glm::mat4 getProjectionMatrix();

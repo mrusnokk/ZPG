@@ -47,6 +47,8 @@ void Application::initialization() {
 	std::cout << "Vendor: " << glGetString(GL_VENDOR) << std::endl;
 	std::cout << "Renderer: " << glGetString(GL_RENDERER) << std::endl;
 
+	glEnable(GL_STENCIL_TEST);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 	glEnable(GL_DEPTH_TEST);
 	glfwSetWindowUserPointer(window, this);
 	glfwSetFramebufferSizeCallback(window, frameBufferSizeCallback);
@@ -65,8 +67,11 @@ void Application::onResize(int w, int h) {
 	if (w == 0 || h == 0) return;
 	glViewport(0, 0, w, h);
 	float aspect = w / static_cast<float>(h);
-	for (Scene* s : scenes)
+	for (Scene* s : scenes) {
 		s->getCam()->setAspectRatio(aspect);
+		s->getCam()->setResolution(w,h);
+	}
+		
 }
 
 void Application::run() {
@@ -81,7 +86,7 @@ void Application::run() {
 
 		//glClearColor(130/255.0f, 200 / 255.0f, 229 / 255.0f, 1.0f);
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS && scenes.size() > 0) activeSceneIndex = 0;
 		if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS && scenes.size() > 1) activeSceneIndex = 1;
@@ -90,9 +95,9 @@ void Application::run() {
 
 		
 		if (!scenes.empty()) {
-			controller->processInput(window, scenes[activeSceneIndex]->getCam());
 			scenes[activeSceneIndex]->draw();
 			scenes[activeSceneIndex]->update();
+			controller->processInput(window, scenes[activeSceneIndex]->getCam());
 		}
 		
 

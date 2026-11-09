@@ -1,10 +1,12 @@
 #include "camera/Camera.h"
 
-Camera::Camera(glm::vec3 eye, float alpha, float fi) {
+Camera::Camera(glm::vec3 eye, int width, int height,float alpha, float fi) {
 	this->eye = eye;
 	this->up = glm::vec3(0.0f, 1.0f, 0.0f);
 	this->alpha = alpha;
 	this->fi = fi;
+	this->width = width;
+	this->height = height;
 
 	processMouseMovement(0.0f, 0.0f);
     this->projectionMatrix = glm::mat4(1.0f);
@@ -75,6 +77,15 @@ void Camera::processMouseMovement(float x, float y) {
 	newTarget.z = sin(glm::radians(alpha)) * sin(glm::radians(fi));
 	this->center = glm::normalize(newTarget);
 	updateViewMatrix();
+}
+
+void Camera::setResolution(int width, int height) {
+	this->height = height;
+	this->width = width;
+}
+
+glm::vec2 Camera::getResolution() {
+	return glm::vec2(static_cast<float>(width), static_cast<float>(height));
 }
 
 glm::mat4 Camera::getViewMatrix() {

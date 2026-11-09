@@ -1,10 +1,11 @@
 #include "rendering/DrawableObject.h"
 #include <iostream>
-DrawableObject::DrawableObject(Model* m, ShaderProgram* s, Texture* t) {
+DrawableObject::DrawableObject(Model* m, ShaderProgram* s, Texture* t,int id) {
 	this->model = m;
 	this->shader = s;
 	this->texture = t;
 	transform = nullptr;
+	this->id = id;
 }
 
 void DrawableObject::setTransformation(Transformation* t) {

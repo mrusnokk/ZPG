@@ -40,11 +40,13 @@ void Scene::addShader(ShaderProgram* shader)
 }
 
 void Scene::draw() {
+	
 	if (skybox != nullptr) {
 		skybox->draw();
 		glClear(GL_DEPTH_BUFFER_BIT);
 	}
 	for (DrawableObject* obj : objects) {
+		glStencilFunc(GL_ALWAYS, obj->getId(), 0xFF);
 		obj->draw();
 	}
 }
