@@ -97,7 +97,7 @@ void Application::run() {
 		if (!scenes.empty()) {
 			scenes[activeSceneIndex]->draw();
 			scenes[activeSceneIndex]->update();
-			controller->processInput(window, scenes[activeSceneIndex]->getCam());
+			controller->processInput(window, scenes[activeSceneIndex]);
 		}
 		
 

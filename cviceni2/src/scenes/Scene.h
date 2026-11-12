@@ -35,6 +35,8 @@ public:
 	Scene();
 	~Scene();
 	void addObject(DrawableObject* object);
+	bool removeObject(int id);
+	DrawableObject* getObject(int id);
 	void addModel(Model* model);
 	void addShader(ShaderProgram* shader);
 	void setLight(Light* light) { this->light = light; }	

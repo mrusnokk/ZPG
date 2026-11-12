@@ -24,6 +24,29 @@ void Scene::addObject(DrawableObject* object)
 { 
 	objects.push_back(object);
 }
+
+bool Scene::removeObject(int id)
+{
+	for (auto it = objects.begin(); it != objects.end(); ++it) {
+		if ((*it)->getId() == id) {
+			delete *it;
+			objects.erase(it);
+			return true;
+		}
+	}
+	return false;
+}
+
+DrawableObject* Scene::getObject(int id)
+{
+	for (DrawableObject* obj : objects) {
+		if (obj->getId() == id) {
+			return obj;
+		}
+	}
+	return nullptr;
+}
+
 void Scene::addModel(Model* model)
 {
 	models.push_back(model);

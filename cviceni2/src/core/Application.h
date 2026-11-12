@@ -24,15 +24,16 @@ private:
 	std::string title;
 	std::vector<Scene*> scenes;
 	int activeSceneIndex;
-	Controller* controller = nullptr;
-	static void frameBufferSizeCallback(GLFWwindow* window, int w, int h);
-	void onResize(int w, int h);
+	Controller* controller;
+
+	static void frameBufferSizeCallback(GLFWwindow* window, int width, int height);
+	void onResize(int width, int height);
 
 public:
 	Application(int width, int height, const std::string& title);
 	~Application();
 
 	void initialization();
-	void addScene(Scene* scene);
 	void run();
+	void addScene(Scene* scene);
 };

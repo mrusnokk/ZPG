@@ -18,7 +18,11 @@ public:
         children.push_back(t);
     }
 
-    ~TransformComposite() override = default;
+    ~TransformComposite() override {
+        for (Transformation* t : children) {
+            delete t;
+        }
+    }
     glm::mat4 getMatrix() override {
         glm::mat4 result = glm::mat4(1.0f);
         for (Transformation* t : children) {

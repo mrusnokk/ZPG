@@ -201,6 +201,7 @@
     <ClInclude Include="src\scenes\TextureScene.h" />
     <ClInclude Include="src\scenes\TriangleScene.h" />
     <ClInclude Include="src\textures\skybox.h" />
+    <ClInclude Include="src\transform\LineMovement.h" />
     <ClInclude Include="src\transform\Rotate.h" />
     <ClInclude Include="src\transform\Scale.h" />
     <ClInclude Include="src\transform\Transformation.h" />
