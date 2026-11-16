@@ -14,7 +14,7 @@ public:
 		this->cam = new Camera(glm::vec3(0.0f, 1.0f, 1.0f),w,h);
 		this->cam->setProjection(60.0f, w / static_cast<float>(h), 0.1f, 100.0f);
 
-		this->light = new Light(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
+		//this->light = new Light(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
 
 		std::vector<std::string> faces = {
 			"src/textures/cubemap/posx.jpg",

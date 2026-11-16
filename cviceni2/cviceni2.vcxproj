@@ -154,6 +154,7 @@
     <ClCompile Include="src\rendering\DrawableObject.cpp" />
     <ClCompile Include="src\rendering\ShaderProgram.cpp" />
     <ClCompile Include="src\rendering\Texture.cpp" />
+    <ClCompile Include="src\scenes\ForestNightScene.h" />
     <ClCompile Include="src\scenes\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -225,6 +226,8 @@
     <None Include="Shaders\color.vert" />
     <None Include="Shaders\Lambert.frag" />
     <None Include="Shaders\Lambert.vert" />
+    <None Include="Shaders\multiLight.frag" />
+    <None Include="Shaders\multiLight.vert" />
     <None Include="Shaders\phongLight.frag" />
     <None Include="Shaders\phongLight.vert" />
     <None Include="Shaders\phongLightwrong.frag" />

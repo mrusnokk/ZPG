@@ -26,12 +26,13 @@ public:
 	void setUniform(const char* name, float value);
 	void setUniform(const char* name, int value);
 	void setUniform(const char* name, float x, float y, float z);
+	void setUniform(const char* name, float x, float y, float z, float a);
 	bool hasUniform(const char* name) const;
 	GLuint getId() { return id; }
 	void setMatrix(const char* name, glm::mat4 matrix);
 	void onCameraChange(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& cameraPosition) override;
-	void onLightChange(const Light& light) override;
-	private:
-		GLuint createShaderFromFile(GLenum shaderType, const char* shaderFile);
-		GLuint id;
+	void onLightChange(const Light& lights) override;
+private:
+	GLuint createShaderFromFile(GLenum shaderType, const char* shaderFile);
+	GLuint id;
 };

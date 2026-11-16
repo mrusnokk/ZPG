@@ -31,8 +31,8 @@ public:
         this->cam = new Camera(glm::vec3(0.0f, 1.0f, 5.0f));
         this->cam->setProjection(60.0f, w / static_cast<float>(h), 0.1f, 100.0f);
 
-		this->light = new Light(glm::vec3(0.8f, 0.8f, 0.0f), glm::vec3(195/255.0f, 223/255.0f, 224/255.0f), 1.0f);
-
+        //this->addLight(new Light(glm::vec3(0.8f, 0.8f, 0.0f), glm::vec3(195 / 255.0f, 223 / 255.0f, 224 / 255.0f), 1.0f));
+        //this->addLight(new Light(glm::vec3(0.8f, 0.8f, 0.0f), glm::vec3(195 / 255.0f, 223 / 255.0f, 224 / 255.0f), 1.0f));
 
         ShaderProgram* shader = new ShaderProgram("Shaders/basic.vert", "Shaders/basic.frag");
         ShaderProgram* shaderSun = new ShaderProgram("Shaders/basic.vert", "Shaders/basic2.frag");

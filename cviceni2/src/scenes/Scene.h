@@ -28,7 +28,7 @@ private:
 	std::vector<ShaderProgram*> shaders;
 protected:
 	Camera* cam = nullptr;
-	Light* light = nullptr;
+	std::vector<Light*> lights;
 	Skybox* skybox = nullptr;
 
 public:
@@ -39,7 +39,7 @@ public:
 	DrawableObject* getObject(int id);
 	void addModel(Model* model);
 	void addShader(ShaderProgram* shader);
-	void setLight(Light* light) { this->light = light; }	
+	void addLight(Light* light) { this->lights.push_back(light); }
 	void setSkybox(Skybox* s);
 	virtual void update() {}
 	virtual void draw();

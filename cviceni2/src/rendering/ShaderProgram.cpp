@@ -94,6 +94,15 @@ void ShaderProgram::setUniform(const char* name, float x, float y, float z) {
 		glUniform3f(location, x, y, z);
 	}
 }
+void ShaderProgram::setUniform(const char* name, float x, float y, float z, float a) {
+	GLint location = glGetUniformLocation(id, name);
+	if (location == -1) {
+		std::cerr << "Uniform variable '" << name << "' does not exist or is not used in shader!" << std::endl;
+	}
+	else {
+		glUniform4f(location, x, y, z,a);
+	}
+}
 bool ShaderProgram::hasUniform(const char* name)const{
 	return glGetUniformLocation(id, name) != -1;
 }
@@ -116,10 +125,14 @@ void ShaderProgram::onCameraChange(const glm::mat4& view, const glm::mat4& proje
 }
 void ShaderProgram::onLightChange(const Light& light) {
 	this->use();
-	if (hasUniform("lightPosition"))
-		this->setUniform("lightPosition", light.getPosition().x, light.getPosition().y, light.getPosition().z);
-	if (hasUniform("lightColor"))
-		this->setUniform("lightColor", light.getColor().x, light.getColor().y, light.getColor().z);
-	if (hasUniform("lightIntensity"))
-		this->setUniform("lightIntensity", light.getIntensity());
+	int i = light.getIndex();
+
+	std::string posName = "lights[" + std::to_string(i) + "].position";
+	std::string diffName = "lights[" + std::to_string(i) + "].diffuse";
+
+	glm::vec3 pos = light.getPosition();
+	glm::vec3 diff = light.getDiffuse();
+
+	this->setUniform(posName.c_str(), pos.x, pos.y, pos.z, 1.0f);
+	this->setUniform(diffName.c_str(), diff.r, diff.g, diff.b, 1.0f);
 }

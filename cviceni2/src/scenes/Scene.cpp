@@ -15,8 +15,10 @@ Scene::~Scene() {
 	{ 
 		delete shader;
 	}
+	for(auto l : this->lights) {
+		delete l;
+	}
 	delete cam;
-	delete light;
 	delete skybox;
 }
 
@@ -57,8 +59,10 @@ void Scene::addShader(ShaderProgram* shader)
 	if (this->cam != nullptr) {
 		this->cam->obs_register(shader);
 	}
-	if(this->light != nullptr) {
-		this->light->registerObserver(shader);
+	if(!this->lights.empty()) {
+		for(auto l : this->lights) {
+			l->registerObserver(shader);
+		}
 	}
 }
 
