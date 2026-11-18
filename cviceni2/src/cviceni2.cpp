@@ -16,7 +16,7 @@ int main()
     Application* app = new Application(width,height,"ZPG");
     app->initialization();
 	app->addScene(new ForestNightScene(width, height));
- //   app->addScene(new Eb408Scene(width, height));
+    app->addScene(new Eb408Scene(width, height));
 	//app->addScene(new TextureScene(width, height));
  //  app->addScene(new ForestScene(width, height));
  //   app->addScene(new BallsScene(width, height));

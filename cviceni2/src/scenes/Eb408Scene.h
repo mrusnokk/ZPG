@@ -5,16 +5,38 @@
 #include "models/Whiteboard.h"
 #include "models/chair.h"
 #include "models/table.h"
+#include "models/rus0130.h"
+#include <cstdlib>
+#include <ctime>
 
 class Eb408Scene : public Scene
 {
 public:
-	Eb408Scene(int w, int h)
-	{
+	Eb408Scene(int w, int h, int lightCount = 12)
+	{	
 		this->cam = new Camera(glm::vec3(0.0f, 1.0f, 1.0f),w,h);
 		this->cam->setProjection(60.0f, w / static_cast<float>(h), 0.1f, 100.0f);
 
-		//this->light = new Light(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
+		srand(static_cast<unsigned int>(time(nullptr)));
+		
+		for (int i = 0; i < lightCount; i++) {
+			glm::vec3 col;
+			if (i % 3 == 0) {
+				col = glm::vec3(1.0f, 0.0f, 0.0f);
+			}
+			else if (i % 3 == 1) {
+				col = glm::vec3(0.0f, 1.0f, 0.0f);
+			}
+			else {
+				col = glm::vec3(0.0f, 0.0f, 1.0f);
+			}
+
+			float rX = ((rand() % 600) - 300) / 100.0f;
+			float rY = ((rand() % 180) + 70) / 100.0f;
+			float rZ = ((rand() % 650) + 50) / 100.0f;
+
+			this->addLight(new Light(i, glm::vec3(rX, rY, rZ), col, 5.0f));
+		}
 
 		std::vector<std::string> faces = {
 			"src/textures/cubemap/posx.jpg",
@@ -30,8 +52,10 @@ public:
 		Model *ebWboard = new Model(WhiteboardModel, sizeof(WhiteboardModel), WhiteboardVertexCount, 8);
 		Model* ebTable = new Model(TableModel, sizeof(TableModel), TableVertexCount, 8);
 		Model* ebChair = new Model(ChairModel, sizeof(ChairModel), ChairVertexCount, 8);
+		Model* login = new Model(login_model, sizeof(login_model), 6996);
 
-		ShaderProgram *ebShader = new ShaderProgram("Shaders/TextureShader.vert", "Shaders/TextureShader.frag");
+		ShaderProgram *ebShader = new ShaderProgram("Shaders/multiLightTexture.vert", "Shaders/multiLightTexture.frag");
+		ShaderProgram* basic = new ShaderProgram("Shaders/basic.vert","Shaders/basic.frag");
 
 		Texture *ebTexture = new Texture("src/textures/T_EB408.png");
 		Texture *doorTexture = new Texture("src/textures/door.png");
@@ -42,18 +66,28 @@ public:
 		DrawableObject *ebObject = new DrawableObject(eb408, ebShader, ebTexture,100);
 		DrawableObject *doorObject = new DrawableObject(ebDoor, ebShader, doorTexture,101);
 		DrawableObject *wBoardObject = new DrawableObject(ebWboard, ebShader, whiteBoardTexture,102);
+		DrawableObject* rusLogin = new DrawableObject(login, basic);
 
 		TransformComposite *ebTc = new TransformComposite();
 		TransformComposite *doorTc = new TransformComposite();
 		TransformComposite *boardTc = new TransformComposite();
-		
+		TransformComposite* loginTc = new TransformComposite();
+
 		this->addModel(eb408);
 		this->addModel(ebDoor);
 		this->addModel(ebWboard);
 		this->addModel(ebTable);
 		this->addModel(ebChair);
+		this->addModel(login);
 
 		this->addShader(ebShader);
+		this->addShader(basic);
+
+		this->addTexture(ebTexture);
+		this->addTexture(doorTexture);
+		this->addTexture(whiteBoardTexture);
+		this->addTexture(tableTexture);
+		this->addTexture(chairTexure);
 
 		ebTc->addTransformation(new Translate(0.0f, 0.0f, 0.0f));
 
@@ -62,13 +96,18 @@ public:
 
 		boardTc->addTransformation(new Translate(-3.8f, 0.5f, 3.0f));
 
+		loginTc->addTransformation(new Translate (3.0f,2.0f,4.0f));
+		loginTc->addTransformation(new Rotate(270.0f, 0.0f, 1.0f, 0.0f));
+
 		ebObject->setTransformation(ebTc);
 		doorObject->setTransformation(doorTc);
 		wBoardObject->setTransformation(boardTc);
+		rusLogin->setTransformation(loginTc);
 
 		this->addObject(ebObject);
 		this->addObject(doorObject);
 		this->addObject(wBoardObject);
+		this->addObject(rusLogin);
 
 		int obIndex = 1;
 		for (int i = 1; i < 4; i++) {

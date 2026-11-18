@@ -1,15 +1,31 @@
 #include "rendering/DrawableObject.h"
 #include <iostream>
-DrawableObject::DrawableObject(Model* m, ShaderProgram* s, Texture* t,int id) {
+
+DrawableObject::DrawableObject(Model* m, ShaderProgram* s, Texture* t, int id) {
 	this->model = m;
 	this->shader = s;
 	this->texture = t;
-	transform = nullptr;
+	this->transform = nullptr;
 	this->id = id;
 }
 
+DrawableObject::~DrawableObject() {
+	if (this->transform != nullptr) {
+		this->transform->release();
+		this->transform = nullptr;
+	}
+}
+
 void DrawableObject::setTransformation(Transformation* t) {
-	this->transform = t;
+	if (this->transform != t) {
+		if (this->transform != nullptr) {
+			this->transform->release();
+		}
+		this->transform = t;
+		if (this->transform != nullptr) {
+			this->transform->addRef();
+		}
+	}
 }
 
 void DrawableObject::setTexture(Texture* tex) {

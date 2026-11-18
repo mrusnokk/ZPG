@@ -226,8 +226,14 @@
     <None Include="Shaders\color.vert" />
     <None Include="Shaders\Lambert.frag" />
     <None Include="Shaders\Lambert.vert" />
+    <None Include="Shaders\lightBlue.frag" />
+    <None Include="Shaders\lightGreen.frag" />
+    <None Include="Shaders\lightRed.frag" />
+    <None Include="Shaders\lightYellow.frag" />
     <None Include="Shaders\multiLight.frag" />
     <None Include="Shaders\multiLight.vert" />
+    <None Include="Shaders\multiLightTexture.frag" />
+    <None Include="Shaders\multiLightTexture.vert" />
     <None Include="Shaders\phongLight.frag" />
     <None Include="Shaders\phongLight.vert" />
     <None Include="Shaders\phongLightwrong.frag" />

@@ -8,7 +8,19 @@
 #include "glm-master/glm/glm.hpp"
 
 class Transformation {
+private:
+	int refCount = 0;
 public:
 	virtual glm::mat4 getMatrix() = 0;
 	virtual ~Transformation() = default;
+
+	void addRef() {
+		++refCount;
+	}
+
+	void release() {
+		if (--refCount <= 0) {
+			delete this;
+		}
+	}
 };

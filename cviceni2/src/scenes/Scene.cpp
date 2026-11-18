@@ -15,8 +15,12 @@ Scene::~Scene() {
 	{ 
 		delete shader;
 	}
-	for(auto l : this->lights) {
+	for (auto l : this->lights) {
 		delete l;
+	}
+	for (Texture* texture : textures)
+	{
+		delete texture;
 	}
 	delete cam;
 	delete skybox;
@@ -53,21 +57,44 @@ void Scene::addModel(Model* model)
 {
 	models.push_back(model);
 }
+
 void Scene::addShader(ShaderProgram* shader) 
 { 
 	shaders.push_back(shader);
 	if (this->cam != nullptr) {
 		this->cam->obs_register(shader);
 	}
-	if(!this->lights.empty()) {
-		for(auto l : this->lights) {
+	if (!this->lights.empty()) {
+		for (auto l : this->lights) {
 			l->registerObserver(shader);
+		}
+		if (shader->hasUniform("numberOfLights")) {
+			shader->use();
+			shader->setUniform("numberOfLights", static_cast<int>(this->lights.size()));
 		}
 	}
 }
 
+void Scene::addLight(Light* light) {
+	this->lights.push_back(light);
+	for (ShaderProgram* shader : shaders) {
+		light->registerObserver(shader);
+		if (shader->hasUniform("numberOfLights")) {
+			shader->use();
+			shader->setUniform("numberOfLights", static_cast<int>(this->lights.size()));
+		}
+	}
+}
+
+void Scene::addTexture(Texture* texture) {
+	if (texture == nullptr) return;
+	for (Texture* t : textures) {
+		if (t == texture) return;
+	}
+	textures.push_back(texture);
+}
+
 void Scene::draw() {
-	
 	if (skybox != nullptr) {
 		skybox->draw();
 		glClear(GL_DEPTH_BUFFER_BIT);
@@ -77,6 +104,7 @@ void Scene::draw() {
 		obj->draw();
 	}
 }
+
 Camera* Scene::getCam() {
 	return this->cam;
 }
@@ -87,6 +115,7 @@ void Scene::setSkybox(Skybox* s) {
 		this->cam->obs_register(s->getShader());
 	}
 }
+
 void Scene::addObject() {
 
 }

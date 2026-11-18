@@ -68,10 +68,11 @@ void Application::onResize(int w, int h) {
 	glViewport(0, 0, w, h);
 	float aspect = w / static_cast<float>(h);
 	for (Scene* s : scenes) {
-		s->getCam()->setAspectRatio(aspect);
-		s->getCam()->setResolution(w,h);
+		if (s->getCam() != nullptr) {
+			s->getCam()->setAspectRatio(aspect);
+			s->getCam()->setResolution(w, h);
+		}
 	}
-		
 }
 
 void Application::run() {

@@ -1,4 +1,5 @@
 #include "rendering/ShaderProgram.h"
+#include "camera/Camera.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -116,12 +117,16 @@ void ShaderProgram::setMatrix(const char* name, glm::mat4 matrix) {
 		std::cerr << "Warning! : variable '" << name << "' does not exist or is not used in shader!" << std::endl;
 	}
 }
-void ShaderProgram::onCameraChange(const glm::mat4& view, const glm::mat4& projection,const glm::vec3& cameraPosition) {
+void ShaderProgram::onCameraChange(Camera* camera) {
 	this->use();
-	this->setMatrix("viewMatrix", view);
-	this->setMatrix("projectionMatrix", projection);
-	if (hasUniform("cameraPosition"))
-		this->setUniform("cameraPosition", cameraPosition.x, cameraPosition.y, cameraPosition.z);
+	if (hasUniform("viewMatrix"))
+		this->setMatrix("viewMatrix", camera->getViewMatrix());
+	if (hasUniform("projectionMatrix"))
+		this->setMatrix("projectionMatrix", camera->getProjectionMatrix());
+	if (hasUniform("cameraPosition")) {
+		glm::vec3 pos = camera->getPosition();
+		this->setUniform("cameraPosition", pos.x, pos.y, pos.z);
+	}
 }
 void ShaderProgram::onLightChange(const Light& light) {
 	this->use();
@@ -133,6 +138,8 @@ void ShaderProgram::onLightChange(const Light& light) {
 	glm::vec3 pos = light.getPosition();
 	glm::vec3 diff = light.getDiffuse();
 
-	this->setUniform(posName.c_str(), pos.x, pos.y, pos.z, 1.0f);
-	this->setUniform(diffName.c_str(), diff.r, diff.g, diff.b, 1.0f);
+	if (hasUniform(posName.c_str()))
+		this->setUniform(posName.c_str(), pos.x, pos.y, pos.z, 1.0f);
+	if (hasUniform(diffName.c_str()))
+		this->setUniform(diffName.c_str(), diff.r, diff.g, diff.b, 1.0f);
 }

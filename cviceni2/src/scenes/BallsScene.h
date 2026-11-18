@@ -2,6 +2,7 @@
 #include "scenes/Scene.h"
 #include "models/sphere.h"
 #include "models/rus0130.h"
+
 class BallsScene : public Scene {
 public:
 	BallsScene(int w, int h) {
@@ -10,7 +11,6 @@ public:
 
 		Model* ball = new Model(sphere, sizeof(sphere), 17280);
 		Model* loginModel = new Model(login_model, sizeof(login_model), 6996);
-
 
 		ShaderProgram* basic = new ShaderProgram("Shaders/basic.vert", "Shaders/basic.frag");
 		ShaderProgram* b1Shader = new ShaderProgram("Shaders/TextureShader.vert", "Shaders/TextureShader.frag");
@@ -28,6 +28,8 @@ public:
 		this->addShader(b3Shader);
 		this->addShader(b4Shader);
 
+		this->addTexture(ballTexture);
+
 		DrawableObject* loginObj = new DrawableObject(loginModel, basic);
 		DrawableObject* ballObj1 = new DrawableObject(ball, b1Shader, ballTexture);
 		DrawableObject* ballObj2 = new DrawableObject(ball, b2Shader, ballTexture);
@@ -40,13 +42,9 @@ public:
 		TransformComposite* composite4 = new TransformComposite();
 
 		composite1->addTransformation(new Translate(-3.0f, 0.0f, 0.0f));
-		//composite1->addTransformation(new Scale(1.5f, 0.5f, 1.0f));
 		composite2->addTransformation(new Translate(3.0f, 0.0f, 0.0f));
-		//composite2->addTransformation(new Scale(1.5f, 0.5f, 1.0f));
 		composite3->addTransformation(new Translate(0.0f, 3.0f, 0.0f));
-		//composite3->addTransformation(new Scale(1.5f, 0.5f, 1.0f));
 		composite4->addTransformation(new Translate(0.0f, -3.0f, 0.0f));
-		//composite4->addTransformation(new Scale(1.5f, 0.5f, 1.0f));
 
 		ballObj1->setTransformation(composite1);
 		ballObj2->setTransformation(composite2);

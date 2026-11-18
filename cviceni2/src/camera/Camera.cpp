@@ -12,8 +12,12 @@ Camera::Camera(glm::vec3 eye, int width, int height,float alpha, float fi) {
     this->projectionMatrix = glm::mat4(1.0f);
 }
 void Camera::obs_register(ICameraObserver* obs) {
+	if (obs == nullptr) return;
+	for (auto* o : observers) {
+		if (o == obs) return;
+	}
 	observers.push_back(obs);
-	obs->onCameraChange(viewMatrix, projectionMatrix, eye);
+	obs->onCameraChange(this);
 }
 void Camera::obs_remove(ICameraObserver* obs) {
 	std::erase(observers, obs);
@@ -33,7 +37,7 @@ void Camera::setAspectRatio(float aspectRatio) {
 
 void Camera::notifyObservers() {
 	for (auto* obs : observers) {
-		obs->onCameraChange(viewMatrix, projectionMatrix, eye);
+		obs->onCameraChange(this);
 	}
 }
 

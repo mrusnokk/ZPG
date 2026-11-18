@@ -30,7 +30,7 @@ public:
 	bool hasUniform(const char* name) const;
 	GLuint getId() { return id; }
 	void setMatrix(const char* name, glm::mat4 matrix);
-	void onCameraChange(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& cameraPosition) override;
+	void onCameraChange(Camera* camera) override;
 	void onLightChange(const Light& lights) override;
 private:
 	GLuint createShaderFromFile(GLenum shaderType, const char* shaderFile);

@@ -1,9 +1,10 @@
 #pragma once
-#include <glm/glm.hpp>
+
+class Camera;
 
 class ICameraObserver {
 public:
     virtual ~ICameraObserver() = default;
 
-    virtual void onCameraChange(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& cameraPosition) = 0;
+    virtual void onCameraChange(Camera* camera) = 0;
 };

@@ -23,10 +23,8 @@ class DrawableObject {
 	Transformation* transform;
 	
 public:
-	DrawableObject(Model* m, ShaderProgram* s, Texture* t = nullptr,int id = NULL);
-	~DrawableObject() {
-		delete transform;
-	}
+	DrawableObject(Model* m, ShaderProgram* s, Texture* t = nullptr, int id = 0);
+	~DrawableObject();
 	void setTexture(Texture* tex);
 	void setTransformation(Transformation* t);
 	void draw();

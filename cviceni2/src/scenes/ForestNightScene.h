@@ -24,7 +24,7 @@ private:
     ShaderProgram* clockShader;
     ShaderProgram* tShader;
     ShaderProgram* bShader;
-    Translate* fireflyMove = new Translate(0.8f, 0.8f, 0.0f);
+    Translate* fireflyMoves[4];
     float speed = 0.5f;
 
 public:
@@ -32,14 +32,24 @@ public:
         this->cam = new Camera(glm::vec3(0.0f, 1.0f, 5.0f));
         this->cam->setProjection(60.0f, w / static_cast<float>(h), 0.1f, 100.0f);
 
-        // Vytvoření světel ve scéně (index 0 a index 1)
-        this->addLight(new Light(0, glm::vec3(0.8f, 0.8f, 0.0f), glm::vec3(255 / 255.0f, 0 / 255.0f, 0 / 255.0f), 1.0f));
-        this->addLight(new Light(1, glm::vec3(4.0f, 2.0f, 1.0f), glm::vec3(195 / 255.0f, 223 / 255.0f, 224 / 255.0f), 1.0f));
+        this->addLight(new Light(0, glm::vec3(0.0f), glm::vec3(1.0f, 0.2f, 0.2f), 1.0f));
+        this->addLight(new Light(1, glm::vec3(0.0f), glm::vec3(0.2f, 1.0f, 0.3f), 1.0f));
+        this->addLight(new Light(2, glm::vec3(0.0f), glm::vec3(0.2f, 0.7f, 1.0f), 1.0f));
+        this->addLight(new Light(3, glm::vec3(0.0f), glm::vec3(1.0f, 0.9f, 0.2f), 1.0f));
 
         ShaderProgram* shader = new ShaderProgram("Shaders/basic.vert", "Shaders/basic.frag");
-        ShaderProgram* shaderSun = new ShaderProgram("Shaders/basic.vert", "Shaders/basic2.frag");
-        tShader = new ShaderProgram("Shaders/utlumTreeShader.vert", "Shaders/utlumTreeShader.frag");
-        bShader = new ShaderProgram("Shaders/utlumBushShader.vert", "Shaders/utlumBushShader.frag");
+        ShaderProgram* fireflyShaders[4] = {
+            new ShaderProgram("Shaders/basic.vert", "Shaders/lightRed.frag"),
+            new ShaderProgram("Shaders/basic.vert", "Shaders/lightGreen.frag"),
+            new ShaderProgram("Shaders/basic.vert", "Shaders/lightBlue.frag"),
+            new ShaderProgram("Shaders/basic.vert", "Shaders/lightYellow.frag")
+        };
+        tShader = new ShaderProgram("Shaders/multiLight.vert", "Shaders/multiLight.frag");
+        tShader->use();
+        tShader->setUniform("objectColor", 0.0f, 0.0f, 0.0f);
+        bShader = new ShaderProgram("Shaders/multiLight.vert", "Shaders/multiLight.frag");
+        bShader->use();
+        bShader->setUniform("objectColor", 92 / 255.0f, 169 / 255.0f, 4 / 255.0f);
         clockShader = new ShaderProgram("Shaders/clockShader.vert", "Shaders/clockShader.frag");
 
         Model* treeModel = new Model(tree, sizeof(tree), 92814);
@@ -50,7 +60,9 @@ public:
         Model* clModel = new Model(clockModel, sizeof(clockModel), 44826, 9);
 
         this->addShader(shader);
-        this->addShader(shaderSun);
+        for (int i = 0; i < 4; i++) {
+            this->addShader(fireflyShaders[i]);
+        }
         this->addShader(tShader);
         this->addShader(bShader);
         this->addShader(clockShader);
@@ -64,7 +76,6 @@ public:
 
         srand(static_cast<unsigned int>(time(nullptr)));
 
-        // Generování stromů
         for (int i = 0; i < 100; i++) {
             DrawableObject* t = new DrawableObject(treeModel, tShader);
 
@@ -82,7 +93,6 @@ public:
             this->addObject(t);
         }
 
-        // Generování keřů
         for (int i = 0; i < 100; i++) {
             DrawableObject* b = new DrawableObject(bushModel, bShader);
 
@@ -100,15 +110,16 @@ public:
             this->addObject(b);
         }
 
-        // Světluška
-        DrawableObject* firefly = new DrawableObject(sunModel, shaderSun);
-        TransformComposite* fireflyTc = new TransformComposite();
-        fireflyTc->addTransformation(fireflyMove);
-        fireflyTc->addTransformation(new Scale(0.008f, 0.008f, 0.008f));
-        firefly->setTransformation(fireflyTc);
-        this->addObject(firefly);
+        for (int i = 0; i < 4; i++) {
+            fireflyMoves[i] = new Translate(0.0f, 0.0f, 0.0f);
+            DrawableObject* firefly = new DrawableObject(sunModel, fireflyShaders[i]);
+            TransformComposite* fireflyTc = new TransformComposite();
+            fireflyTc->addTransformation(fireflyMoves[i]);
+            fireflyTc->addTransformation(new Scale(0.03f, 0.03f, 0.03f));
+            firefly->setTransformation(fireflyTc);
+            this->addObject(firefly);
+        }
 
-        // Podpis
         DrawableObject* mySignature = new DrawableObject(login, shader);
         TransformComposite* loginTc = new TransformComposite();
         loginTc->addTransformation(new Translate(-0.8f, 0.8f, -1.0f));
@@ -116,7 +127,6 @@ public:
         mySignature->setTransformation(loginTc);
         this->addObject(mySignature);
 
-        // Země
         DrawableObject* ground = new DrawableObject(plainModel, bShader);
         TransformComposite* groundTc = new TransformComposite();
         groundTc->addTransformation(new Translate(0.0f, -0.8f, 0.0f));
@@ -124,7 +134,6 @@ public:
         ground->setTransformation(groundTc);
         this->addObject(ground);
 
-        // Hodiny 1
         DrawableObject* clock = new DrawableObject(clModel, clockShader);
         TransformComposite* clockTc = new TransformComposite();
         clockTc->addTransformation(new Rotate(180.0f, 0.0f, 1.0f, 0.0f));
@@ -133,7 +142,6 @@ public:
         clock->setTransformation(clockTc);
         this->addObject(clock);
 
-        // Hodiny 2
         DrawableObject* clock2 = new DrawableObject(clModel, clockShader);
         TransformComposite* clockTc2 = new TransformComposite();
         clockTc2->addTransformation(new Translate(0.0f, 3.0f, 6.0f));
@@ -158,18 +166,37 @@ public:
 
         float currentTime = glfwGetTime();
 
-        float fX = sin(currentTime * speed) * 3.0f;
-        float fY = sin(currentTime * speed * 2.0f) * 0.5f;
-        float fZ = cos(currentTime * speed) * 3.0f;
+        glm::vec3 fireflyPos[4];
+        fireflyPos[0] = glm::vec3(
+            sin(currentTime * speed * 0.9f) * 3.2f,
+            -0.2f + sin(currentTime * speed * 1.8f) * 0.4f,
+            cos(currentTime * speed * 0.9f) * 3.2f
+        );
 
-        fireflyMove->setPosition(fX, fY, fZ);
+        fireflyPos[1] = glm::vec3(
+            cos(currentTime * speed * 0.7f + 1.5f) * 2.8f,
+            0.0f + cos(currentTime * speed * 1.3f) * 0.5f,
+            sin(currentTime * speed * 1.4f) * 3.0f
+        );
 
-        // OPRAVA: Použití přesného jména proměnné z pole světel (lights[0].position) a odeslání vec4 (..., 1.0f)
-        tShader->use();
-        tShader->setUniform("lights[0].position", fX, fY, fZ, 1.0f);
+        fireflyPos[2] = glm::vec3(
+            sin(currentTime * speed * 1.1f + 3.0f) * 4.0f,
+            -0.1f + sin(currentTime * speed * 0.8f) * 0.6f,
+            cos(currentTime * speed * 0.6f + 2.0f) * 3.5f
+        );
 
-        bShader->use();
-        bShader->setUniform("lights[0].position", fX, fY, fZ, 1.0f);
+        fireflyPos[3] = glm::vec3(
+            cos(-currentTime * speed * 0.8f + 4.5f) * 3.2f,
+            0.1f + sin(currentTime * speed * 1.5f) * 0.4f,
+            sin(-currentTime * speed * 0.8f + 4.5f) * 3.2f
+        );
+
+        for (int i = 0; i < 4; i++) {
+            fireflyMoves[i]->setPosition(fireflyPos[i].x, fireflyPos[i].y, fireflyPos[i].z);
+            if (i < static_cast<int>(lights.size())) {
+                lights[i]->setPosition(fireflyPos[i]);
+            }
+        }
 
         clockShader->use();
         clockShader->setUniform("secondAngle", -(seconds / 60.0f * TWO_PI));
