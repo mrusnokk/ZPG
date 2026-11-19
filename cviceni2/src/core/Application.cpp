@@ -7,13 +7,17 @@ Application::Application(int width, int height, const std::string& title)
 }
 
 Application::~Application() {
-	
+	delete this->controller;
+	this->controller = nullptr;
+
 	for (Scene* s : scenes) {
 		delete s;
 	}
-	delete this->controller;
+	scenes.clear();
+
 	if (window) {
 		glfwDestroyWindow(window);
+		window = nullptr;
 	}
 	glfwTerminate();
 }

@@ -28,6 +28,7 @@ private:
 
     bool xKeyPressed = false;
     bool qKeyPressed = false;
+    bool fKeyPressed = false;
     bool leftMousePressed = false;
 
     int modeIndex = 0;

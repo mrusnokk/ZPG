@@ -15,12 +15,24 @@ Scene::~Scene() {
 	{ 
 		delete shader;
 	}
+	bool flashlightInLights = false;
 	for (auto l : this->lights) {
+		if (l == flashlight) flashlightInLights = true;
 		delete l;
 	}
+	if (!flashlightInLights && flashlight != nullptr) {
+		delete flashlight;
+	}
+	lights.clear();
+	flashlight = nullptr;
+
 	for (Texture* texture : textures)
 	{
 		delete texture;
+	}
+	for (Material* material : materials)
+	{
+		delete material;
 	}
 	delete cam;
 	delete skybox;
@@ -94,6 +106,14 @@ void Scene::addTexture(Texture* texture) {
 	textures.push_back(texture);
 }
 
+void Scene::addMaterial(Material* material) {
+	if (material == nullptr) return;
+	for (Material* m : materials) {
+		if (m == material) return;
+	}
+	materials.push_back(material);
+}
+
 void Scene::draw() {
 	if (skybox != nullptr) {
 		skybox->draw();
@@ -116,6 +136,32 @@ void Scene::setSkybox(Skybox* s) {
 	}
 }
 
-void Scene::addObject() {
+Flashlight* Scene::getOrCreateFlashlight() {
+	if (this->flashlight == nullptr && this->cam != nullptr) {
+		int idx = static_cast<int>(this->lights.size());
+		this->flashlight = new Flashlight(idx, this->cam, glm::vec3(1.0f, 1.0f, 0.9f), 3.0f, 12.0f, 18.0f);
+		this->addLight(this->flashlight);
+	}
+	return this->flashlight;
+}
 
+void Scene::toggleFlashlight() {
+	if (this->flashlight == nullptr) {
+		getOrCreateFlashlight();
+	}
+	else {
+		this->flashlight->toggle();
+	}
+}
+
+bool Scene::isFlashlightOn() const {
+	return this->flashlight != nullptr && this->flashlight->isEnabled();
+}
+
+Flashlight* Scene::getFlashlight() const {
+	return this->flashlight;
+}
+
+void Scene::setFlashlight(Flashlight* fl) {
+	this->flashlight = fl;
 }

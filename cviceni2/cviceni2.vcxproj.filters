@@ -69,6 +69,26 @@
       <Filter>
       </Filter>
     </ClInclude>
+    <ClInclude Include="src\lighting\LightType.h">
+      <Filter>
+      </Filter>
+    </ClInclude>
+    <ClInclude Include="src\lighting\PointLight.h">
+      <Filter>
+      </Filter>
+    </ClInclude>
+    <ClInclude Include="src\lighting\DirectionalLight.h">
+      <Filter>
+      </Filter>
+    </ClInclude>
+    <ClInclude Include="src\lighting\SpotLight.h">
+      <Filter>
+      </Filter>
+    </ClInclude>
+    <ClInclude Include="src\lighting\Flashlight.h">
+      <Filter>
+      </Filter>
+    </ClInclude>
     <ClInclude Include="src\lighting\Material.h">
       <Filter>
       </Filter>
@@ -346,5 +366,16 @@
     <Image Include="src\textures\cubemap\posx.jpg" />
     <Image Include="src\textures\cubemap\posy.jpg" />
     <Image Include="src\textures\cubemap\posz.jpg" />
+    <Image Include="src\textures\cubemap_night\posz.jpg" />
+    <Image Include="src\textures\cubemap_night\negx.jpg" />
+    <Image Include="src\textures\cubemap_night\negy.jpg" />
+    <Image Include="src\textures\cubemap_night\negz.jpg" />
+    <Image Include="src\textures\cubemap_night\posx.jpg" />
+    <Image Include="src\textures\cubemap_night\posy.jpg" />
+    <Image Include="src\textures\texture_zpg.jpeg" />
+    <Image Include="src\textures\table.png" />
+    <Image Include="src\textures\shrek.png" />
+    <Image Include="src\textures\smiley.png" />
+    <Image Include="src\textures\chair.png" />
   </ItemGroup>
 </Project>

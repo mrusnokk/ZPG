@@ -1,5 +1,6 @@
 #include "rendering/ShaderProgram.h"
 #include "camera/Camera.h"
+#include "lighting/Material.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -95,6 +96,9 @@ void ShaderProgram::setUniform(const char* name, float x, float y, float z) {
 		glUniform3f(location, x, y, z);
 	}
 }
+void ShaderProgram::setUniform(const char* name, const glm::vec3& value) {
+	this->setUniform(name, value.x, value.y, value.z);
+}
 void ShaderProgram::setUniform(const char* name, float x, float y, float z, float a) {
 	GLint location = glGetUniformLocation(id, name);
 	if (location == -1) {
@@ -132,14 +136,51 @@ void ShaderProgram::onLightChange(const Light& light) {
 	this->use();
 	int i = light.getIndex();
 
-	std::string posName = "lights[" + std::to_string(i) + "].position";
-	std::string diffName = "lights[" + std::to_string(i) + "].diffuse";
+	std::string base = "lights[" + std::to_string(i) + "].";
 
 	glm::vec3 pos = light.getPosition();
 	glm::vec3 diff = light.getDiffuse();
+	glm::vec3 dir = light.getDirection();
 
-	if (hasUniform(posName.c_str()))
-		this->setUniform(posName.c_str(), pos.x, pos.y, pos.z, 1.0f);
-	if (hasUniform(diffName.c_str()))
-		this->setUniform(diffName.c_str(), diff.r, diff.g, diff.b, 1.0f);
+	if (hasUniform((base + "position").c_str()))
+		this->setUniform((base + "position").c_str(), pos.x, pos.y, pos.z, 1.0f);
+	if (hasUniform((base + "diffuse").c_str()))
+		this->setUniform((base + "diffuse").c_str(), diff.r, diff.g, diff.b, 1.0f);
+	if (hasUniform((base + "direction").c_str()))
+		this->setUniform((base + "direction").c_str(), dir.x, dir.y, dir.z);
+	if (hasUniform((base + "type").c_str()))
+		this->setUniform((base + "type").c_str(), static_cast<int>(light.getType()));
+	if (hasUniform((base + "cutOff").c_str()))
+		this->setUniform((base + "cutOff").c_str(), light.getCutOff());
+	if (hasUniform((base + "outerCutOff").c_str()))
+		this->setUniform((base + "outerCutOff").c_str(), light.getOuterCutOff());
+	if (hasUniform((base + "constant").c_str()))
+		this->setUniform((base + "constant").c_str(), light.getConstant());
+	if (hasUniform((base + "linear").c_str()))
+		this->setUniform((base + "linear").c_str(), light.getLinear());
+	if (hasUniform((base + "quadratic").c_str()))
+		this->setUniform((base + "quadratic").c_str(), light.getQuadratic());
+}
+
+void ShaderProgram::setMaterial(const Material* material) {
+	if (material != nullptr) {
+		if (hasUniform("material.ambient"))
+			setUniform("material.ambient", material->getAmbient());
+		if (hasUniform("material.diffuse"))
+			setUniform("material.diffuse", material->getDiffuse());
+		if (hasUniform("material.specular"))
+			setUniform("material.specular", material->getSpecular());
+		if (hasUniform("material.shininess"))
+			setUniform("material.shininess", material->getShininess());
+	}
+	else {
+		if (hasUniform("material.ambient"))
+			setUniform("material.ambient", 0.1f, 0.1f, 0.1f);
+		if (hasUniform("material.diffuse"))
+			setUniform("material.diffuse", 1.0f, 1.0f, 1.0f);
+		if (hasUniform("material.specular"))
+			setUniform("material.specular", 1.0f, 1.0f, 1.0f);
+		if (hasUniform("material.shininess"))
+			setUniform("material.shininess", 32.0f);
+	}
 }

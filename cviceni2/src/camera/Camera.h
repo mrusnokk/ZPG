@@ -53,6 +53,8 @@ public:
 	glm::vec2 getResolution();
 	void setResolution(int width, int height);
 	glm::vec3 getPosition();
+	glm::vec3 getFront() const { return center; }
+	glm::vec3 getDirection() const { return center; }
 	glm::mat4 getViewMatrix();
 	glm::mat4 getProjectionMatrix();
 };

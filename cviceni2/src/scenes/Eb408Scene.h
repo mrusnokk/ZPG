@@ -35,8 +35,11 @@ public:
 			float rY = ((rand() % 180) + 70) / 100.0f;
 			float rZ = ((rand() % 650) + 50) / 100.0f;
 
-			this->addLight(new Light(i, glm::vec3(rX, rY, rZ), col, 5.0f));
+			this->addLight(new PointLight(i, glm::vec3(rX, rY, rZ), col, 5.0f));
 		}
+
+		this->addLight(new DirectionalLight(lightCount, glm::vec3(0.3f, -1.0f, -0.2f), glm::vec3(1.0f, 0.95f, 0.85f), 0.4f));
+		this->addLight(new SpotLight(lightCount + 1, glm::vec3(0.0f, 3.2f, 3.5f), glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), 6.0f, 25.0f, 35.0f));
 
 		std::vector<std::string> faces = {
 			"src/textures/cubemap/posx.jpg",
@@ -104,6 +107,15 @@ public:
 		wBoardObject->setTransformation(boardTc);
 		rusLogin->setTransformation(loginTc);
 
+		Material* boardMaterial = new Material(glm::vec3(0.15f), glm::vec3(0.9f), glm::vec3(0.9f), 64.0f);
+		Material* tableMaterial = new Material(glm::vec3(0.1f), glm::vec3(0.85f), glm::vec3(0.3f), 16.0f);
+		Material* chairMaterial = new Material(glm::vec3(0.05f), glm::vec3(0.5f), glm::vec3(0.7f), 10.0f);
+		this->addMaterial(boardMaterial);
+		this->addMaterial(tableMaterial);
+		this->addMaterial(chairMaterial);
+
+		wBoardObject->setMaterial(boardMaterial);
+
 		this->addObject(ebObject);
 		this->addObject(doorObject);
 		this->addObject(wBoardObject);
@@ -112,14 +124,14 @@ public:
 		int obIndex = 1;
 		for (int i = 1; i < 4; i++) {
 			for (int j = 1; j < 4; j++) {
-				DrawableObject* t = new DrawableObject(ebTable, ebShader, tableTexture, obIndex++);
+				DrawableObject* t = new DrawableObject(ebTable, ebShader, tableMaterial, tableTexture, obIndex++);
 				TransformComposite* tTc = new TransformComposite();
 				tTc->addTransformation(new Rotate(90.0f, 0.0f, 1.0f, 0.0));
 				tTc->addTransformation(new Translate((-2.0f * i) + 0.7f, 0.0f, (1.7f * j) - 2.9f));
 				t->setTransformation(tTc);
 				this->addObject(t);
 
-				DrawableObject* c1 = new DrawableObject(ebChair, ebShader, chairTexure,obIndex++);
+				DrawableObject* c1 = new DrawableObject(ebChair, ebShader, chairMaterial, chairTexure, obIndex++);
 				TransformComposite* cTc1 = new TransformComposite();
 				cTc1->addTransformation(new Rotate(90.0f, 0.0f, 1.0f, 0.0));
 				cTc1->addTransformation(new Translate((-2.0f * i) + 0.7f - 0.4f, 0.0f, (1.7f * j) - 2.9f + 0.5f));
@@ -127,7 +139,7 @@ public:
 				c1->setTransformation(cTc1);
 				this->addObject(c1);
 
-				DrawableObject* c2 = new DrawableObject(ebChair, ebShader, chairTexure,obIndex++);
+				DrawableObject* c2 = new DrawableObject(ebChair, ebShader, chairMaterial, chairTexure, obIndex++);
 				TransformComposite* cTc2 = new TransformComposite();
 				cTc2->addTransformation(new Rotate(90.0f, 0.0f, 1.0f, 0.0));
 				cTc2->addTransformation(new Translate((-2.0f * i) + 0.7f + 0.4f, 0.0f, (1.7f * j) - 2.9f + 0.5f));

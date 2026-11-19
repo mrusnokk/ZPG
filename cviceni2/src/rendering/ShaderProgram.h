@@ -16,6 +16,8 @@
 #include "lighting/ILightObserver.h"
 #include "lighting/Light.h"
 
+class Material;
+
 class ShaderProgram :public ICameraObserver, public ILightObserver {
 
 public:
@@ -26,10 +28,12 @@ public:
 	void setUniform(const char* name, float value);
 	void setUniform(const char* name, int value);
 	void setUniform(const char* name, float x, float y, float z);
+	void setUniform(const char* name, const glm::vec3& value);
 	void setUniform(const char* name, float x, float y, float z, float a);
 	bool hasUniform(const char* name) const;
 	GLuint getId() { return id; }
 	void setMatrix(const char* name, glm::mat4 matrix);
+	void setMaterial(const Material* material);
 	void onCameraChange(Camera* camera) override;
 	void onLightChange(const Light& lights) override;
 private:

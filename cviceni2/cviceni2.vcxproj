@@ -164,6 +164,11 @@
     <ClInclude Include="src\core\Controller.h" />
     <ClInclude Include="src\lighting\ILightObserver.h" />
     <ClInclude Include="src\lighting\Light.h" />
+    <ClInclude Include="src\lighting\LightType.h" />
+    <ClInclude Include="src\lighting\PointLight.h" />
+    <ClInclude Include="src\lighting\DirectionalLight.h" />
+    <ClInclude Include="src\lighting\SpotLight.h" />
+    <ClInclude Include="src\lighting\Flashlight.h" />
     <ClInclude Include="src\lighting\Material.h" />
     <ClInclude Include="src\models\bushes.h" />
     <ClInclude Include="src\models\clock.h" />
@@ -257,14 +262,25 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="src\textures\blinphong.png" />
+    <Image Include="src\textures\chair.png" />
     <Image Include="src\textures\cubemap\negx.jpg" />
     <Image Include="src\textures\cubemap\negy.jpg" />
     <Image Include="src\textures\cubemap\negz.jpg" />
     <Image Include="src\textures\cubemap\posx.jpg" />
     <Image Include="src\textures\cubemap\posy.jpg" />
     <Image Include="src\textures\cubemap\posz.jpg" />
+    <Image Include="src\textures\cubemap_night\negx.jpg" />
+    <Image Include="src\textures\cubemap_night\negy.jpg" />
+    <Image Include="src\textures\cubemap_night\negz.jpg" />
+    <Image Include="src\textures\cubemap_night\posx.jpg" />
+    <Image Include="src\textures\cubemap_night\posy.jpg" />
+    <Image Include="src\textures\cubemap_night\posz.jpg" />
     <Image Include="src\textures\door.png" />
     <Image Include="src\textures\grass.jpg" />
+    <Image Include="src\textures\shrek.png" />
+    <Image Include="src\textures\smiley.png" />
+    <Image Include="src\textures\table.png" />
+    <Image Include="src\textures\texture_zpg.jpeg" />
     <Image Include="src\textures\T_EB408.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

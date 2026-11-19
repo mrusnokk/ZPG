@@ -65,6 +65,17 @@ void Controller::processInput(GLFWwindow* window, Scene* scene) {
 
     processInput(window, camera);
 
+    if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) {
+        if (!fKeyPressed) {
+            fKeyPressed = true;
+            scene->toggleFlashlight();
+            printf("Baterka: %s\n", scene->isFlashlightOn() ? "ZAPNUTA" : "VYPNUTA");
+        }
+    }
+    else if (glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE) {
+        fKeyPressed = false;
+    }
+
     if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
         if (!qKeyPressed) {
             qKeyPressed = true;
@@ -146,6 +157,12 @@ void Controller::processInput(GLFWwindow* window, Scene* scene) {
             GLint x = (GLint)mouseX;
             GLint y = (GLint)mouseY;
             GLint newy = (GLint)camera->getResolution().y - y;
+
+            GLuint clickedStencil = 0;
+            glReadPixels(x, newy, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &clickedStencil);
+            if (clickedStencil > 0) {
+                scene->onObjectClick(static_cast<int>(clickedStencil));
+            }
 
             if (modes[modeIndex] == ControlMode::INFO) {
                 GLubyte color[4] = {};
