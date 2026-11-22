@@ -36,7 +36,6 @@ private:
     Translate* patrolMove;
     Rotate* patrolRot;
     PointLight* fireLight = nullptr;
-    SpotLight* campLamp = nullptr;
 
     float speed = 0.5f;
     int collectedGifts = 0;
@@ -57,17 +56,17 @@ public:
         };
         this->setSkybox(new Skybox(faces));
 
-        this->addLight(new DirectionalLight(0, glm::vec3(0.2f, -1.0f, -0.3f), glm::vec3(0.12f, 0.16f, 0.28f), 0.35f));
+        this->addLight(new DirectionalLight(0, glm::vec3(0.4f, -0.8f, -0.4f), glm::vec3(0.35f, 0.46f, 0.75f), 0.85f));
 
         this->getOrCreateFlashlight();
 
         fireLight = new PointLight(2, glm::vec3(0.0f, -0.4f, 2.5f), glm::vec3(1.0f, 0.55f, 0.15f), 3.2f);
         this->addLight(fireLight);
 
-        this->addLight(new PointLight(4, glm::vec3(0.0f), glm::vec3(0.3f, 1.0f, 0.2f), 1.2f));
-        this->addLight(new PointLight(5, glm::vec3(0.0f), glm::vec3(1.0f, 0.85f, 0.2f), 1.2f));
-        this->addLight(new PointLight(6, glm::vec3(0.0f), glm::vec3(0.2f, 0.7f, 1.0f), 1.2f));
-        this->addLight(new PointLight(7, glm::vec3(0.0f), glm::vec3(0.9f, 0.3f, 0.8f), 1.2f));
+        this->addLight(new PointLight(3, glm::vec3(0.0f), glm::vec3(0.3f, 1.0f, 0.2f), 1.2f));
+        this->addLight(new PointLight(4, glm::vec3(0.0f), glm::vec3(1.0f, 0.85f, 0.2f), 1.2f));
+        this->addLight(new PointLight(5, glm::vec3(0.0f), glm::vec3(0.2f, 0.7f, 1.0f), 1.2f));
+        this->addLight(new PointLight(6, glm::vec3(0.0f), glm::vec3(0.9f, 0.3f, 0.8f), 1.2f));
 
         ShaderProgram* shader = new ShaderProgram("Shaders/basic.vert", "Shaders/basic.frag");
         ShaderProgram* fireflyShaders[4] = {
@@ -264,10 +263,8 @@ public:
                 collectedGifts++;
                 printf(">>> DAREK SEBRAN! (Sebrano: %d / %d) <<<\n", collectedGifts, totalGifts);
                 if (collectedGifts >= totalGifts) {
-                    printf("\n*************************************************************\n");
                     printf("*** GRATULACE! Nasel jsi vsech 5 darku v temnem lese!   ***\n");
                     printf("*** Skvela prace, nocni les byl uspesne prozkouman!     ***\n");
-                    printf("*************************************************************\n\n");
                 }
             }
         }
@@ -329,7 +326,7 @@ public:
 
         for (int i = 0; i < 4; i++) {
             fireflyMoves[i]->setPosition(fireflyPos[i].x, fireflyPos[i].y, fireflyPos[i].z);
-            int lightIdx = 4 + i;
+            int lightIdx = 3 + i;
             if (lightIdx < static_cast<int>(lights.size())) {
                 lights[lightIdx]->setPosition(fireflyPos[i]);
             }
