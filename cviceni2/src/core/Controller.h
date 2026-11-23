@@ -17,6 +17,7 @@ class Texture;
 enum class ControlMode {
     INFO,
     INSERT_POINTS,
+    INSERT_CUBIC,
     DELETE_OBJECT
 };
 
@@ -32,10 +33,15 @@ private:
     bool leftMousePressed = false;
 
     int modeIndex = 0;
-    ControlMode modes[3] = { ControlMode::INFO, ControlMode::INSERT_POINTS, ControlMode::DELETE_OBJECT };
+    ControlMode modes[4] = { ControlMode::INFO, ControlMode::INSERT_POINTS, ControlMode::INSERT_CUBIC,ControlMode::DELETE_OBJECT };
 
-    bool hasPointA = false;
+    
     glm::vec3 pointA = glm::vec3(0.0f);
+	glm::vec3 pointB = glm::vec3(0.0f);
+	glm::vec3 pointC = glm::vec3(0.0f);
+    bool hasPointA = false;
+	bool hasPointB = false;
+	bool hasPointC = false;
 
     int nextSpawnedObjectId = 200;
 

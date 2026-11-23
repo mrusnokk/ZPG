@@ -9,6 +9,7 @@
 #include "transform/Rotate.h"
 #include "transform/Scale.h"
 #include "transform/LineMovement.h"
+#include "transform/CubicMovement.h"
 #include <cstdio>
 
 Controller::Controller() {}
@@ -79,13 +80,15 @@ void Controller::processInput(GLFWwindow* window, Scene* scene) {
     if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
         if (!qKeyPressed) {
             qKeyPressed = true;
-            modeIndex = (modeIndex + 1) % 3;
+            modeIndex = (modeIndex + 1) % 4;
             hasPointA = false;
 
             if (modes[modeIndex] == ControlMode::INFO)
                 printf("Mod: INFO\n");
             else if (modes[modeIndex] == ControlMode::INSERT_POINTS)
                 printf("Mod: VKLADANI\n");
+            else if (modes[modeIndex] == ControlMode::INSERT_CUBIC)
+                printf("Mod: VLOZENI Kubiky\n");
             else if (modes[modeIndex] == ControlMode::DELETE_OBJECT)
                 printf("Mod: MAZANI\n");
         }
@@ -234,6 +237,82 @@ void Controller::processInput(GLFWwindow* window, Scene* scene) {
 
                         scene->addObject(movingObj);
                         printf("Vlozen pohybujici se model (ID %d)\n", objId);
+                    }
+                }
+            }
+            else if(modes[modeIndex] == ControlMode::INSERT_CUBIC) {
+                GLfloat depth = 1.0f;
+                glReadPixels(x, newy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
+
+                if (depth < 1.0f && camera != nullptr) {
+                    glm::vec3 screenCoord = glm::vec3(x, newy, depth);
+                    glm::mat4 view = camera->getViewMatrix();
+                    glm::mat4 projection = camera->getProjectionMatrix();
+                    glm::vec4 viewPort = glm::vec4(0, 0, camera->getResolution().x, camera->getResolution().y);
+
+                    glm::vec3 worldPos = glm::unProject(screenCoord, view, projection, viewPort);
+
+                    if (!hasPointA) {
+                        pointA = worldPos;
+                        hasPointA = true;
+                        printf("Bod A: [%.2f, %.2f, %.2f]\n", pointA.x, pointA.y, pointA.z);
+                        pointA.y += 0.2f;
+                    }
+                    else if(!hasPointB) {
+                        pointB = worldPos;
+                        hasPointB = true;
+                        printf("Bod B: [%.2f, %.2f, %.2f]\n", pointB.x, pointB.y, pointB.z);
+                        pointB.y += 0.2f;
+                    }
+                    else if(!hasPointC) {
+                        pointC = worldPos;
+                        hasPointC = true;
+                        printf("Bod C: [%.2f, %.2f, %.2f]\n", pointC.x, pointC.y, pointC.z);
+                        pointC.y += 0.2f;
+                    }
+                    else {
+						glm::vec3 pointD = worldPos;
+
+                        hasPointA = false;
+						hasPointB = false;
+						hasPointC = false;
+                        printf("Bod D: [%.2f, %.2f, %.2f]\n", pointD.x, pointD.y, pointD.z);
+
+                        if (sphereModel == nullptr) {
+                            sphereModel = new Model(UVSphereModel, sizeof(UVSphereModel), UVSphereVertexCount, 8);
+                            sphereShader = new ShaderProgram("shaders/TextureShader.vert", "shaders/TextureShader.frag");
+                            sphereTexture = new Texture("src/textures/smiley.png");
+                        }
+
+                        if (registeredCamera != camera) {
+                            if (registeredCamera != nullptr && sphereShader != nullptr) {
+                                registeredCamera->obs_remove(sphereShader);
+                            }
+                            camera->obs_register(sphereShader);
+                            registeredCamera = camera;
+                        }
+
+                        int objId = nextSpawnedObjectId++;
+                        glm::vec3 controlPoints[4] = { pointA, pointB, pointC, pointD };
+                        for (int i = 0; i < 4; i++) {
+                            DrawableObject* pointObj = new DrawableObject(sphereModel, sphereShader, sphereTexture);
+                            TransformComposite* pointTc = new TransformComposite();
+                            pointTc->addTransformation(new Translate(controlPoints[i].x, controlPoints[i].y, controlPoints[i].z));
+                            pointTc->addTransformation(new Scale(0.05f, 0.05f, 0.05f));
+                            pointObj->setTransformation(pointTc);
+                            scene->addObject(pointObj);
+                        }
+
+                        DrawableObject* movingObj = new DrawableObject(sphereModel, sphereShader, sphereTexture, objId);
+                        TransformComposite* tc = new TransformComposite();
+                        tc->addTransformation(new CubicMovement(pointA, pointB, pointC,pointD, 0.4f));
+                        tc->addTransformation(new Scale(0.2f, 0.2f, 0.2f));
+                        tc->addTransformation(new Rotate(90.0f, 0.0f, 1.0f, 0.0f));
+                        movingObj->setTransformation(tc);
+
+                        scene->addObject(movingObj);
+                        printf("Vlozen pohybujici se model (ID %d)\n", objId);
+
                     }
                 }
             }
