@@ -73,14 +73,12 @@ void DrawableObject::draw() {
 	if (transform != nullptr) {
 		shader->setMatrix("modelMatrix", transform->getMatrix());
 	}
+	else shader->setMatrix("modelMatrix", glm::mat4(1.0f));
 	shader->setMaterial(this->material);
 	if (texture != nullptr) {
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture->getID());
-
-		GLint texLoc = glGetUniformLocation(shader->getId(), "textureUnitID");
-		if (texLoc != -1) {
-			glUniform1i(texLoc, 0);
+		texture->bind(0);
+		if (shader->hasUniform("textureUnitID")) {
+			shader->setUniform("textureUnitID", 0);
 		}
 	}
 

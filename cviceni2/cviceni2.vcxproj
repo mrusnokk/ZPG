@@ -154,10 +154,10 @@
     <ClCompile Include="src\rendering\DrawableObject.cpp" />
     <ClCompile Include="src\rendering\ShaderProgram.cpp" />
     <ClCompile Include="src\rendering\Texture.cpp" />
-    <ClCompile Include="src\scenes\ForestNightScene.h" />
     <ClCompile Include="src\scenes\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\scenes\ForestNightScene.h" />
     <ClInclude Include="src\camera\Camera.h" />
     <ClInclude Include="src\camera\ICameraObserver.h" />
     <ClInclude Include="src\core\Application.h" />
@@ -207,6 +207,7 @@
     <ClInclude Include="src\scenes\TextureScene.h" />
     <ClInclude Include="src\scenes\TriangleScene.h" />
     <ClInclude Include="src\textures\skybox.h" />
+    <ClInclude Include="src\transform\BezierSplineMovement.h" />
     <ClInclude Include="src\transform\CubicMovement.h" />
     <ClInclude Include="src\transform\LineMovement.h" />
     <ClInclude Include="src\transform\Rotate.h" />

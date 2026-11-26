@@ -56,7 +56,7 @@ public:
         };
         this->setSkybox(new Skybox(faces));
 
-        this->addLight(new DirectionalLight(0, glm::vec3(0.4f, -0.8f, -0.4f), glm::vec3(0.35f, 0.46f, 0.75f), 0.85f));
+        this->addLight(new DirectionalLight(0, glm::vec3(0.4f, -0.8f, -0.4f), glm::vec3(0.35f, 0.46f, 0.75f), 0.25f));
 
         this->getOrCreateFlashlight();
 
@@ -113,7 +113,7 @@ public:
         Model* groundModel = new Model(tplain, sizeof(tplain), 6, 8);
         Model* treeModel = new Model(tree, sizeof(tree), 92814, 6);
         Model* bushModel = new Model(bushes, sizeof(bushes), 8730, 6);
-        Model* sunModel = new Model(sphere, sizeof(sphere), 17280, 6);
+        Model* sunModel = new Model(sphere, sizeof(sphere), 2880, 6);
         Model* login = new Model(login_model, sizeof(login_model), 6996, 6);
         Model* clModel = new Model(clockModel, sizeof(clockModel), 44826, 9);
         Model* giftModel = new Model(gift, sizeof(gift), 66624, 6);
@@ -129,7 +129,7 @@ public:
         this->addModel(shrekModel);
 
         Material* groundMat = new Material(glm::vec3(0.08f), glm::vec3(0.85f), glm::vec3(0.15f), 8.0f);
-        Material* treeMat = new Material(glm::vec3(0.1f), glm::vec3(0.8f), glm::vec3(0.2f), 12.0f);
+        Material* treeMat = new Material(glm::vec3(0.1f), glm::vec3(0.8f), glm::vec3(0.5f), 12.0f);
         Material* bushMat = new Material(glm::vec3(0.1f), glm::vec3(0.75f), glm::vec3(0.2f), 10.0f);
         Material* giftMat = new Material(glm::vec3(0.2f), glm::vec3(0.9f, 0.1f, 0.1f), glm::vec3(1.0f, 1.0f, 1.0f), 64.0f);
         Material* shrekMat = new Material(glm::vec3(0.12f), glm::vec3(0.85f), glm::vec3(0.3f), 16.0f);
@@ -191,7 +191,7 @@ public:
 
         for (int i = 0; i < 4; i++) {
             fireflyMoves[i] = new Translate(0.0f, 0.0f, 0.0f);
-            DrawableObject* firefly = new DrawableObject(sunModel, fireflyShaders[i], 200 + i);
+            DrawableObject* firefly = new DrawableObject(sunModel, fireflyShaders[i], 190 + i);
             TransformComposite* fireflyTc = new TransformComposite();
             fireflyTc->addTransformation(fireflyMoves[i]);
             fireflyTc->addTransformation(new Scale(0.04f, 0.04f, 0.04f));
@@ -199,7 +199,7 @@ public:
             this->addObject(firefly);
         }
 
-        DrawableObject* campfireVisual = new DrawableObject(sunModel, fireflyShaders[3], 210);
+        DrawableObject* campfireVisual = new DrawableObject(sunModel, fireflyShaders[3], 194);
         TransformComposite* fireTc = new TransformComposite();
         fireTc->addTransformation(new Translate(0.0f, -0.65f, 2.5f));
         fireTc->addTransformation(new Scale(0.12f, 0.12f, 0.12f));
@@ -208,7 +208,7 @@ public:
 
         patrolMove = new Translate(0.0f, -0.8f, 0.0f);
         patrolRot = new Rotate(0.0f, 0.0f, 1.0f, 0.0f);
-        DrawableObject* shrekObj = new DrawableObject(shrekModel, shrekShader, shrekMat, shrekTexture, 40);
+        DrawableObject* shrekObj = new DrawableObject(shrekModel, shrekShader, shrekMat, shrekTexture, 2);
         TransformComposite* shrekTc = new TransformComposite();
         shrekTc->addTransformation(patrolMove);
         shrekTc->addTransformation(patrolRot);
@@ -225,7 +225,7 @@ public:
             glm::vec3(4.2f, -0.69f, 3.5f)
         };
         for (int i = 0; i < totalGifts; i++) {
-            DrawableObject* g = new DrawableObject(giftModel, giftShader, giftMat, 51 + i);
+            DrawableObject* g = new DrawableObject(giftModel, giftShader, giftMat, 3 + i);
             TransformComposite* gTc = new TransformComposite();
             gTc->addTransformation(new Translate(giftPositions[i].x, giftPositions[i].y, giftPositions[i].z));
             gTc->addTransformation(new Rotate(static_cast<float>(i * 45), 0.0f, 1.0f, 0.0f));
@@ -234,14 +234,14 @@ public:
             this->addObject(g);
         }
 
-        DrawableObject* mySignature = new DrawableObject(login, shader, 300);
+        DrawableObject* mySignature = new DrawableObject(login, shader, 195);
         TransformComposite* loginTc = new TransformComposite();
         loginTc->addTransformation(new Translate(-0.8f, 0.8f, -1.0f));
         loginTc->addTransformation(new Scale(0.2f, 0.2f, 0.2f));
         mySignature->setTransformation(loginTc);
         this->addObject(mySignature);
 
-        DrawableObject* clock = new DrawableObject(clModel, clockShader, 301);
+        DrawableObject* clock = new DrawableObject(clModel, clockShader, 196);
         TransformComposite* clockTc = new TransformComposite();
         clockTc->addTransformation(new Rotate(180.0f, 0.0f, 1.0f, 0.0f));
         clockTc->addTransformation(new Translate(0.0f, 3.0f, 6.0f));
@@ -249,7 +249,7 @@ public:
         clock->setTransformation(clockTc);
         this->addObject(clock);
 
-        DrawableObject* clock2 = new DrawableObject(clModel, clockShader, 302);
+        DrawableObject* clock2 = new DrawableObject(clModel, clockShader, 197);
         TransformComposite* clockTc2 = new TransformComposite();
         clockTc2->addTransformation(new Translate(0.0f, 3.0f, 6.0f));
         clockTc2->addTransformation(new Scale(-1.5f, 1.5f, 1.5f));
@@ -258,7 +258,7 @@ public:
     }
 
     void onObjectClick(int id) override {
-        if (id >= 51 && id <= 55) {
+        if (id >= 3 && id <= 7) {
             if (this->removeObject(id)) {
                 collectedGifts++;
                 printf(">>> DAREK SEBRAN! (Sebrano: %d / %d) <<<\n", collectedGifts, totalGifts);

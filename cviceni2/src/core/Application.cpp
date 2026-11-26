@@ -80,9 +80,6 @@ void Application::onResize(int w, int h) {
 }
 
 void Application::run() {
-
-	glEnable(GL_DEPTH_TEST);
-
 	int fbW, fbH;
 	glfwGetFramebufferSize(window, &fbW, &fbH);
 	onResize(fbW, fbH);

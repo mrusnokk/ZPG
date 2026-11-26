@@ -16,6 +16,18 @@ ShaderProgram::ShaderProgram(const char* vertexFile, const char* fragmentFile) {
 	glAttachShader(id, vertexShader);
 	glLinkProgram(id);
 
+	GLint success;
+	glGetProgramiv(id, GL_LINK_STATUS, &success);
+	if (!success) {
+		char infoLog[1024];
+		glGetProgramInfoLog(id, sizeof(infoLog), nullptr, infoLog);
+		std::cerr << "Shader program linking failed:\n" << infoLog << std::endl;
+		glDeleteShader(vertexShader);
+		glDeleteShader(fragmentShader);
+		glDeleteProgram(id);
+		exit(EXIT_FAILURE);
+	}
+
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 
@@ -112,7 +124,7 @@ bool ShaderProgram::hasUniform(const char* name)const{
 	return glGetUniformLocation(id, name) != -1;
 }
 void ShaderProgram::setMatrix(const char* name, glm::mat4 matrix) {
-	GLuint location = glGetUniformLocation(id, name);
+	GLint location = glGetUniformLocation(id, name);
 
 	if (location != -1) {
 		glUniformMatrix4fv(location, 1, GL_FALSE, &matrix[0][0]);
