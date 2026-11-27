@@ -14,5 +14,6 @@ void main (void)
 	float diff = max(dot(normalize(lightDir),normalize (wNormal)),0.0);
 	
 	vec3 ambient = vec3 (0.1, 0.1, 0.1);
+
 	fragColor =  vec4((ambient*fColor), 1.0) + vec4(diff * fColor, 1.0);
 }

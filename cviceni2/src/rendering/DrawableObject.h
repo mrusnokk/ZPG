@@ -31,6 +31,7 @@ public:
 	DrawableObject(Model* m, ShaderProgram* s, Material* mat, Texture* t, int id = 0);
 	~DrawableObject();
 	void setTexture(Texture* tex);
+	void setShader(ShaderProgram* s);
 	void setMaterial(Material* mat);
 	Material* getMaterial() const;
 	void setTransformation(Transformation* t);

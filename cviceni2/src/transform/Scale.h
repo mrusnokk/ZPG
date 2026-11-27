@@ -11,13 +11,9 @@
 class Scale : public Transformation {
 private:
     glm::vec3 scaleVec;
+
 public:
-    Scale(float x, float y, float z) : scaleVec(x, y, z) {}
-    glm::mat4 getMatrix() override {
-        return glm::scale(glm::mat4(1.0f), scaleVec);
-    }
-    void setScale(float x, float y, float z) 
-    { 
-        scaleVec = glm::vec3(x, y, z); 
-    }
+    Scale(float x, float y, float z);
+    glm::mat4 getMatrix() override;
+    void setScale(float x, float y, float z);
 };

@@ -60,6 +60,10 @@ void DrawableObject::setTexture(Texture* tex) {
 	this->texture = tex;
 }
 
+void DrawableObject::setShader(ShaderProgram* s) {
+	this->shader = s;
+}
+
 void DrawableObject::setMaterial(Material* mat) {
 	this->material = mat;
 }
@@ -70,10 +74,14 @@ Material* DrawableObject::getMaterial() const {
 
 void DrawableObject::draw() {
 	shader->use();
-	if (transform != nullptr) {
-		shader->setMatrix("modelMatrix", transform->getMatrix());
+	if (shader->hasUniform("modelMatrix")) {
+		if (transform != nullptr) {
+			shader->setMatrix("modelMatrix", transform->getMatrix());
+		}
+		else {
+			shader->setMatrix("modelMatrix", glm::mat4(1.0f));
+		}
 	}
-	else shader->setMatrix("modelMatrix", glm::mat4(1.0f));
 	shader->setMaterial(this->material);
 	if (texture != nullptr) {
 		texture->bind(0);

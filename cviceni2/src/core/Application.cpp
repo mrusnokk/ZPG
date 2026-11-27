@@ -94,6 +94,10 @@ void Application::run() {
 		if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS && scenes.size() > 1) activeSceneIndex = 1;
 		if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS && scenes.size() > 2) activeSceneIndex = 2;
 		if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS && scenes.size() > 3) activeSceneIndex = 3;
+		if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS && scenes.size() > 4) activeSceneIndex = 4;
+		if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS && scenes.size() > 5) activeSceneIndex = 5;
+		if (glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS && scenes.size() > 6) activeSceneIndex = 6;
+		if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS && scenes.size() > 7) activeSceneIndex = 7;
 
 		
 		if (!scenes.empty()) {

@@ -11,13 +11,10 @@
 class Translate : public Transformation {
 private:
     glm::vec3 position;
+
 public:
-    Translate(float x, float y, float z) : position(x, y, z) {}
-    glm::mat4 getMatrix() override {
-        return glm::translate(glm::mat4(1.0f), position);
-    }
-    void setPosition(float x, float y, float z) 
-    {
-        position = glm::vec3(x, y, z); 
-    }
+    Translate(float x, float y, float z);
+    glm::mat4 getMatrix() override;
+    void setPosition(float x, float y, float z);
+    glm::vec3 getPosition() const;
 };

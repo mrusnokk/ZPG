@@ -13,26 +13,7 @@ private:
     std::vector<Transformation*> children;
 
 public:
-    void addTransformation(Transformation* t) {
-        if (t != nullptr) {
-            t->addRef();
-            children.push_back(t);
-        }
-    }
-
-    ~TransformComposite() override {
-        for (Transformation* t : children) {
-            if (t != nullptr) {
-                t->release();
-            }
-        }
-    }
-
-    glm::mat4 getMatrix() override {
-        glm::mat4 result = glm::mat4(1.0f);
-        for (Transformation* t : children) {
-            result *= t->getMatrix();
-        }
-        return result;
-    }
+    ~TransformComposite() override;
+    void addTransformation(Transformation* t);
+    glm::mat4 getMatrix() override;
 };

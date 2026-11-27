@@ -151,10 +151,37 @@
     <ClCompile Include="src\core\Controller.cpp" />
     <ClCompile Include="src\core\gl.cpp" />
     <ClCompile Include="src\cviceni2.cpp" />
+    <ClCompile Include="src\lighting\DirectionalLight.cpp" />
+    <ClCompile Include="src\lighting\Flashlight.cpp" />
+    <ClCompile Include="src\lighting\Light.cpp" />
+    <ClCompile Include="src\lighting\Material.cpp" />
+    <ClCompile Include="src\lighting\PointLight.cpp" />
+    <ClCompile Include="src\lighting\SpotLight.cpp" />
     <ClCompile Include="src\rendering\DrawableObject.cpp" />
+    <ClCompile Include="src\rendering\Model.cpp" />
     <ClCompile Include="src\rendering\ShaderProgram.cpp" />
+    <ClCompile Include="src\rendering\Skybox.cpp" />
     <ClCompile Include="src\rendering\Texture.cpp" />
+    <ClCompile Include="src\scenes\BallsScene.cpp" />
+    <ClCompile Include="src\scenes\ClockScene.cpp" />
+    <ClCompile Include="src\scenes\Eb408Scene.cpp" />
+    <ClCompile Include="src\scenes\ForestNightScene.cpp" />
+    <ClCompile Include="src\scenes\ForestScene.cpp" />
+    <ClCompile Include="src\scenes\LoginScene.cpp" />
     <ClCompile Include="src\scenes\Scene.cpp" />
+    <ClCompile Include="src\scenes\SolarScene.cpp" />
+    <ClCompile Include="src\scenes\SphereScene.cpp" />
+    <ClCompile Include="src\scenes\SplineForestScene.cpp" />
+    <ClCompile Include="src\scenes\TextureScene.cpp" />
+    <ClCompile Include="src\scenes\TriangleScene.cpp" />
+    <ClCompile Include="src\transform\BezierSplineMovement.cpp" />
+    <ClCompile Include="src\transform\CubicMovement.cpp" />
+    <ClCompile Include="src\transform\LineMovement.cpp" />
+    <ClCompile Include="src\transform\Rotate.cpp" />
+    <ClCompile Include="src\transform\Scale.cpp" />
+    <ClCompile Include="src\transform\Transformation.cpp" />
+    <ClCompile Include="src\transform\TransformComposite.cpp" />
+    <ClCompile Include="src\transform\Translate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\scenes\ForestNightScene.h" />
@@ -204,6 +231,7 @@
     <ClInclude Include="src\scenes\Scene.h" />
     <ClInclude Include="src\scenes\SolarScene.h" />
     <ClInclude Include="src\scenes\SphereScene.h" />
+    <ClInclude Include="src\scenes\SplineForestScene.h" />
     <ClInclude Include="src\scenes\TextureScene.h" />
     <ClInclude Include="src\scenes\TriangleScene.h" />
     <ClInclude Include="src\textures\skybox.h" />
@@ -239,6 +267,7 @@
     <None Include="Shaders\lightYellow.frag" />
     <None Include="Shaders\multiLight.frag" />
     <None Include="Shaders\multiLight.vert" />
+    <None Include="Shaders\multiLightInstanced.vert" />
     <None Include="Shaders\multiLightTexture.frag" />
     <None Include="Shaders\multiLightTexture.vert" />
     <None Include="Shaders\phongLight.frag" />

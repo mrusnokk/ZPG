@@ -14,6 +14,8 @@
 class Model;
 class ShaderProgram;
 class Texture;
+class DrawableObject;
+class Translate;
 
 enum class ControlMode {
     INFO,
@@ -21,6 +23,12 @@ enum class ControlMode {
     INSERT_CUBIC,
     INSERT_SPLINE,
     DELETE_OBJECT
+};
+
+struct ControlPoint {
+    int id;
+    DrawableObject* obj;
+    Translate* tr;
 };
 
 class Controller {
@@ -51,7 +59,9 @@ private:
     bool hasPointB = false;
     bool hasPointC = false;
 
-    std::vector<glm::vec3> splinePoints;
+    std::vector<Translate*> splinePoints;
+    std::vector<ControlPoint> controlPoints;
+    int selectedPointIndex = -1;
 
     int nextSpawnedObjectId = 200;
 
@@ -60,12 +70,15 @@ private:
     Texture* sphereTexture = nullptr;
     Model* pointModel = nullptr;
     ShaderProgram* pointShader = nullptr;
+    ShaderProgram* selectedPointShader = nullptr;
     Camera* registeredCamera = nullptr;
 
     void syncCamera(Camera* camera);
     bool unprojectPixel(GLint x, GLint newy, Camera* camera, glm::vec3& outWorldPos);
     void ensureSphereResources(Camera* camera);
-    void spawnControlPoint(Scene* scene, Camera* camera, const glm::vec3& pos);
+    int allocateObjectId();
+    void clearSelection();
+    Translate* spawnControlPoint(Scene* scene, Camera* camera, const glm::vec3& pos);
     int spawnSmiley(Scene* scene, Camera* camera, Transformation* movement);
     void spawnSpline(Scene* scene, Camera* camera);
 

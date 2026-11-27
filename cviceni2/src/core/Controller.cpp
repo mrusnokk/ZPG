@@ -17,13 +17,15 @@
 Controller::Controller() {}
 
 Controller::~Controller() {
+    for (ControlPoint& cp : controlPoints) {
+        cp.tr->release();
+    }
+    controlPoints.clear();
+
     if (registeredCamera != nullptr) {
-        if (sphereShader != nullptr) {
-            registeredCamera->obs_remove(sphereShader);
-        }
-        if (pointShader != nullptr) {
-            registeredCamera->obs_remove(pointShader);
-        }
+        if (sphereShader != nullptr) registeredCamera->obs_remove(sphereShader);
+        if (pointShader != nullptr) registeredCamera->obs_remove(pointShader);
+        if (selectedPointShader != nullptr) registeredCamera->obs_remove(selectedPointShader);
         registeredCamera = nullptr;
     }
     delete sphereModel;
@@ -31,6 +33,7 @@ Controller::~Controller() {
     delete sphereTexture;
     delete pointModel;
     delete pointShader;
+    delete selectedPointShader;
 }
 
 void Controller::syncCamera(Camera* camera) {
@@ -39,10 +42,12 @@ void Controller::syncCamera(Camera* camera) {
         if (registeredCamera != nullptr) {
             if (sphereShader != nullptr) registeredCamera->obs_remove(sphereShader);
             if (pointShader != nullptr) registeredCamera->obs_remove(pointShader);
+            if (selectedPointShader != nullptr) registeredCamera->obs_remove(selectedPointShader);
         }
         registeredCamera = camera;
         if (sphereShader != nullptr) camera->obs_register(sphereShader);
         if (pointShader != nullptr) camera->obs_register(pointShader);
+        if (selectedPointShader != nullptr) camera->obs_register(selectedPointShader);
     }
 }
 
@@ -67,29 +72,54 @@ void Controller::ensureSphereResources(Camera* camera) {
     }
 }
 
-void Controller::spawnControlPoint(Scene* scene, Camera* camera, const glm::vec3& pos) {
+int Controller::allocateObjectId() {
+    int id = nextSpawnedObjectId++;
+    if (nextSpawnedObjectId > 255) {
+        nextSpawnedObjectId = 200;
+    }
+    return id;
+}
+
+void Controller::clearSelection() {
+    if (selectedPointIndex >= 0 && selectedPointIndex < static_cast<int>(controlPoints.size())) {
+        controlPoints[selectedPointIndex].obj->setShader(pointShader);
+    }
+    selectedPointIndex = -1;
+}
+
+Translate* Controller::spawnControlPoint(Scene* scene, Camera* camera, const glm::vec3& pos) {
     if (pointModel == nullptr) {
         pointModel = new Model(sphere, sizeof(sphere), 2880, 6);
         pointShader = new ShaderProgram("shaders/basic.vert", "shaders/lightRed.frag");
-        if (camera != nullptr) camera->obs_register(pointShader);
+        selectedPointShader = new ShaderProgram("shaders/basic.vert", "shaders/lightGreen.frag");
+        if (camera != nullptr) {
+            camera->obs_register(pointShader);
+            camera->obs_register(selectedPointShader);
+        }
     }
 
-    DrawableObject* pointObj = new DrawableObject(pointModel, pointShader);
+    int ptId = allocateObjectId();
+    Translate* tr = new Translate(pos.x, pos.y, pos.z);
+    DrawableObject* pointObj = new DrawableObject(pointModel, pointShader, ptId);
     TransformComposite* pointTc = new TransformComposite();
-    pointTc->addTransformation(new Translate(pos.x, pos.y, pos.z));
-    pointTc->addTransformation(new Scale(0.05f, 0.05f, 0.05f));
+    pointTc->addTransformation(tr);
+    pointTc->addTransformation(new Scale(0.07f, 0.07f, 0.07f));
     pointObj->setTransformation(pointTc);
     scene->addObject(pointObj);
+
+    tr->addRef();
+    controlPoints.push_back({ ptId, pointObj, tr });
+    return tr;
 }
 
 int Controller::spawnSmiley(Scene* scene, Camera* camera, Transformation* movement) {
     ensureSphereResources(camera);
-    int objId = nextSpawnedObjectId++;
+    int objId = allocateObjectId();
     DrawableObject* obj = new DrawableObject(sphereModel, sphereShader, sphereTexture, objId);
     TransformComposite* tc = new TransformComposite();
     tc->addTransformation(movement);
     tc->addTransformation(new Scale(0.2f, 0.2f, 0.2f));
-    tc->addTransformation(new Rotate(90.0f, 0.0f, 1.0f, 0.0f));
+    tc->addTransformation(new Rotate(180.0f, 0.0f, 1.0f, 0.0f));
     obj->setTransformation(tc);
     scene->addObject(obj);
     return objId;
@@ -98,7 +128,7 @@ int Controller::spawnSmiley(Scene* scene, Camera* camera, Transformation* moveme
 void Controller::spawnSpline(Scene* scene, Camera* camera) {
     if (splinePoints.size() < 4) return;
     int objId = spawnSmiley(scene, camera, new BezierSplineMovement(splinePoints, 0.4f, true));
-    printf("Vytvorena Bezierova spline krivka (%zu bodu, %zu segmentu) s modelem (ID %d)\n",
+    printf("Created Bezier spline curve (%zu points, %zu segments) with model (ID %d)\n",
         splinePoints.size(), (splinePoints.size() - 1) / 3, objId);
     splinePoints.clear();
 }
@@ -150,7 +180,7 @@ void Controller::processInput(GLFWwindow* window, Scene* scene) {
         if (!fKeyPressed) {
             fKeyPressed = true;
             scene->toggleFlashlight();
-            printf("Baterka: %s\n", scene->isFlashlightOn() ? "ZAPNUTA" : "VYPNUTA");
+            printf("Flashlight: %s\n", scene->isFlashlightOn() ? "ON" : "OFF");
         }
     }
     else if (glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE) {
@@ -164,18 +194,19 @@ void Controller::processInput(GLFWwindow* window, Scene* scene) {
             hasPointA = false;
             hasPointB = false;
             hasPointC = false;
+            clearSelection();
             splinePoints.clear();
 
             if (modes[modeIndex] == ControlMode::INFO)
-                printf("Mod: INFO\n");
+                printf("Mode: INFO\n");
             else if (modes[modeIndex] == ControlMode::INSERT_POINTS)
-                printf("Mod: VKLADANI\n");
+                printf("Mode: INSERT LINE\n");
             else if (modes[modeIndex] == ControlMode::INSERT_CUBIC)
-                printf("Mod: VLOZENI Kubiky\n");
+                printf("Mode: INSERT CUBIC\n");
             else if (modes[modeIndex] == ControlMode::INSERT_SPLINE)
-                printf("Mod: VLOZENI BEZIEROVY SPLINE KRIVKY (Entrem ukoncite vkladani bodu!)\n");
+                printf("Mode: INSERT BEZIER SPLINE (press ENTER to finish)\n");
             else if (modes[modeIndex] == ControlMode::DELETE_OBJECT)
-                printf("Mod: MAZANI\n");
+                printf("Mode: DELETE\n");
         }
     }
     else if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_RELEASE) {
@@ -187,15 +218,16 @@ void Controller::processInput(GLFWwindow* window, Scene* scene) {
             enterKeyPressed = true;
             if (modes[modeIndex] == ControlMode::INSERT_SPLINE) {
                 if (splinePoints.size() < 4) {
-                    printf("Nedostatek bodu (%zu). Pro prvni segment chybi jeste %zu bod(y).\n",
+                    printf("Not enough points (%zu). Need %zu more point(s) for the first segment.\n",
                         splinePoints.size(), 4 - splinePoints.size());
                 }
                 else if ((splinePoints.size() - 1) % 3 != 0) {
                     size_t missing = 3 - ((splinePoints.size() - 1) % 3);
-                    printf("Nedokonceny segment (%zu bodu). Doklikejte jeste %zu bod(y) pro dokonceni segmentu.\n",
+                    printf("Incomplete segment (%zu points). Click %zu more point(s) to finish the segment.\n",
                         splinePoints.size(), missing);
                 }
                 else {
+                    clearSelection();
                     spawnSpline(scene, camera);
                 }
             }
@@ -218,7 +250,7 @@ void Controller::processInput(GLFWwindow* window, Scene* scene) {
 
             if (unprojectPixel(x, newy, camera, pos)) {
                 spawnSmiley(scene, camera, new Translate(pos.x, pos.y + 0.2f, pos.z));
-                printf("Vlozena kulicka na pozici: [%.2f, %.2f, %.2f]\n", pos.x, pos.y + 0.2f, pos.z);
+                printf("Inserted sphere at position: [%.2f, %.2f, %.2f]\n", pos.x, pos.y + 0.2f, pos.z);
             }
         }
     }
@@ -240,6 +272,30 @@ void Controller::processInput(GLFWwindow* window, Scene* scene) {
             glReadPixels(x, newy, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &clickedStencil);
             if (clickedStencil > 0) {
                 scene->onObjectClick(static_cast<int>(clickedStencil));
+            }
+
+            if (modes[modeIndex] != ControlMode::DELETE_OBJECT) {
+                if (selectedPointIndex >= 0 && selectedPointIndex < static_cast<int>(controlPoints.size())) {
+                    glm::vec3 newPos;
+                    if (unprojectPixel(x, newy, camera, newPos)) {
+                        newPos.y += 0.2f;
+                        controlPoints[selectedPointIndex].tr->setPosition(newPos.x, newPos.y, newPos.z);
+                        printf("Point ID %d moved to [%.2f, %.2f, %.2f]\n", controlPoints[selectedPointIndex].id, newPos.x, newPos.y, newPos.z);
+                    }
+                    clearSelection();
+                    return;
+                }
+
+                if (clickedStencil > 0) {
+                    for (size_t i = 0; i < controlPoints.size(); ++i) {
+                        if (controlPoints[i].id == static_cast<int>(clickedStencil)) {
+                            selectedPointIndex = static_cast<int>(i);
+                            controlPoints[i].obj->setShader(selectedPointShader);
+                            printf("Selected control point (ID %d), click where to move it.\n", controlPoints[i].id);
+                            return;
+                        }
+                    }
+                }
             }
 
             if (modes[modeIndex] == ControlMode::INFO) {
@@ -267,17 +323,17 @@ void Controller::processInput(GLFWwindow* window, Scene* scene) {
                     if (!hasPointA) {
                         pointA = worldPos;
                         hasPointA = true;
-                        printf("Bod A: [%.2f, %.2f, %.2f]\n", pointA.x, pointA.y, pointA.z);
+                        printf("Point A: [%.2f, %.2f, %.2f]\n", pointA.x, pointA.y, pointA.z);
                         pointA.y += 0.2f;
                     }
                     else {
                         glm::vec3 pointB = worldPos;
                         hasPointA = false;
-                        printf("Bod B: [%.2f, %.2f, %.2f]\n", pointB.x, pointB.y, pointB.z);
+                        printf("Point B: [%.2f, %.2f, %.2f]\n", pointB.x, pointB.y, pointB.z);
                         pointB.y += 0.2f;
 
                         int objId = spawnSmiley(scene, camera, new LineMovement(pointA, pointB, 0.4f));
-                        printf("Vlozen pohybujici se model (ID %d)\n", objId);
+                        printf("Inserted moving model (ID %d)\n", objId);
                     }
                 }
             }
@@ -287,19 +343,19 @@ void Controller::processInput(GLFWwindow* window, Scene* scene) {
                     if (!hasPointA) {
                         pointA = worldPos;
                         hasPointA = true;
-                        printf("Bod A: [%.2f, %.2f, %.2f]\n", pointA.x, pointA.y, pointA.z);
+                        printf("Point A: [%.2f, %.2f, %.2f]\n", pointA.x, pointA.y, pointA.z);
                         pointA.y += 0.2f;
                     }
                     else if (!hasPointB) {
                         pointB = worldPos;
                         hasPointB = true;
-                        printf("Bod B: [%.2f, %.2f, %.2f]\n", pointB.x, pointB.y, pointB.z);
+                        printf("Point B: [%.2f, %.2f, %.2f]\n", pointB.x, pointB.y, pointB.z);
                         pointB.y += 0.2f;
                     }
                     else if (!hasPointC) {
                         pointC = worldPos;
                         hasPointC = true;
-                        printf("Bod C: [%.2f, %.2f, %.2f]\n", pointC.x, pointC.y, pointC.z);
+                        printf("Point C: [%.2f, %.2f, %.2f]\n", pointC.x, pointC.y, pointC.z);
                         pointC.y += 0.2f;
                     }
                     else {
@@ -307,16 +363,16 @@ void Controller::processInput(GLFWwindow* window, Scene* scene) {
                         hasPointA = false;
                         hasPointB = false;
                         hasPointC = false;
-                        printf("Bod D: [%.2f, %.2f, %.2f]\n", pointD.x, pointD.y, pointD.z);
+                        printf("Point D: [%.2f, %.2f, %.2f]\n", pointD.x, pointD.y, pointD.z);
                         pointD.y += 0.2f;
 
-                        glm::vec3 controlPoints[4] = { pointA, pointB, pointC, pointD };
-                        for (int i = 0; i < 4; i++) {
-                            spawnControlPoint(scene, camera, controlPoints[i]);
-                        }
+                        Translate* tA = spawnControlPoint(scene, camera, pointA);
+                        Translate* tB = spawnControlPoint(scene, camera, pointB);
+                        Translate* tC = spawnControlPoint(scene, camera, pointC);
+                        Translate* tD = spawnControlPoint(scene, camera, pointD);
 
-                        int objId = spawnSmiley(scene, camera, new CubicMovement(pointA, pointB, pointC, pointD, 0.4f));
-                        printf("Vlozen pohybujici se model (ID %d)\n", objId);
+                        int objId = spawnSmiley(scene, camera, new CubicMovement(tA, tB, tC, tD, 0.4f));
+                        printf("Inserted moving model (ID %d)\n", objId);
                     }
                 }
             }
@@ -324,24 +380,31 @@ void Controller::processInput(GLFWwindow* window, Scene* scene) {
                 glm::vec3 worldPos;
                 if (unprojectPixel(x, newy, camera, worldPos)) {
                     worldPos.y += 0.2f;
-                    splinePoints.push_back(worldPos);
-                    spawnControlPoint(scene, camera, worldPos);
+                    splinePoints.push_back(spawnControlPoint(scene, camera, worldPos));
 
-                    printf("Spline bod c. %zu: [%.2f, %.2f, %.2f]\n", splinePoints.size(), worldPos.x, worldPos.y, worldPos.z);
+                    printf("Spline point #%zu: [%.2f, %.2f, %.2f]\n", splinePoints.size(), worldPos.x, worldPos.y, worldPos.z);
 
                     if (splinePoints.size() == 4) {
-                        printf("Segment 1 dokoncen (4 body). Dalsi segment potrebuje dalsi 3 body, nebo stisknete ENTER pro dokonceni.\n");
+                        printf("Segment 1 complete (4 points). Next segment needs 3 more points, or press ENTER to finish.\n");
                     }
                     else if (splinePoints.size() >= 7 && (splinePoints.size() - 1) % 3 == 0) {
                         size_t segNum = (splinePoints.size() - 1) / 3;
-                        printf("Segment %zu dokoncen (%zu bodu). Dalsi segment potrebuje 3 body, nebo stisknete ENTER pro dokonceni.\n", segNum, splinePoints.size());
+                        printf("Segment %zu complete (%zu points). Next segment needs 3 more points, or press ENTER to finish.\n", segNum, splinePoints.size());
                     }
                 }
             }
             else if (modes[modeIndex] == ControlMode::DELETE_OBJECT) {
                 if (clickedStencil > 0 && clickedStencil != 100) {
+                    clearSelection();
+                    for (auto it = controlPoints.begin(); it != controlPoints.end(); ++it) {
+                        if (it->id == static_cast<int>(clickedStencil)) {
+                            it->tr->release();
+                            controlPoints.erase(it);
+                            break;
+                        }
+                    }
                     scene->removeObject(clickedStencil);
-                    printf("Smazan objekt ID %u\n", clickedStencil);
+                    printf("Deleted object ID %u\n", clickedStencil);
                 }
             }
         }

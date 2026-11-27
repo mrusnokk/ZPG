@@ -1,6 +1,6 @@
 #pragma once
-// Vygenerováno z Blenderu.
-// Layout na vrchol: pozice(3) | barva(3) | normála(3)
+// Generated from Blender.
+// Vertex layout: position(3) | color(3) | normal(3)
 
 #define CYBERTRUCK_VERTEX_COUNT 10848
 #define CYBERTRUCK_FLOATS_PER_VERTEX 9

@@ -1,74 +1,26 @@
 /**
  * @file Model.h
- *
  * @brief Class representing 3D model geometry and managing OpenGL vertex arrays and buffers.
- *
  * @author Michael Rusnok (rus0130)
- *
  * @year 2026
- **/
-
+ */
 #pragma once
-
 #include <glad/gl.h>
+#include <glm/glm.hpp>
 #include <cstddef>
+#include <vector>
 
 class Model {
 private:
 	GLuint VAO, VBO;
+	GLuint instanceVBO = 0;
 	int vertexCount;
+	int instanceCount = 0;
+
 public:
-	Model(const float* vertices, size_t size, int count, int floatsPerVertex = 6) {
-		vertexCount = count;
+	Model(const float* vertices, size_t size, int count, int floatsPerVertex = 6);
+	~Model();
 
-		glGenVertexArrays(1, &VAO);
-		glGenBuffers(1, &VBO);
-
-		glBindVertexArray(VAO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
-
-		int stride = floatsPerVertex * sizeof(float);
-		if (floatsPerVertex == 3) {
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-			glEnableVertexAttribArray(0);
-		}
-		else if (floatsPerVertex == 6) {
-
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-			glEnableVertexAttribArray(0);
-
-			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-			glEnableVertexAttribArray(1);
-		}
-		else if (floatsPerVertex == 8) {
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void*)0);
-			glEnableVertexAttribArray(0);
-			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride, (void*)(3 * sizeof(float)));
-			glEnableVertexAttribArray(1);
-			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, stride, (void*)(6 * sizeof(float)));
-			glEnableVertexAttribArray(2);
-		}
-		else if(floatsPerVertex==9){
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (GLvoid*)0);
-			glEnableVertexAttribArray(0);
-
-			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, stride, (GLvoid*)(3 * sizeof(float)));
-			glEnableVertexAttribArray(2);
-
-			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride, (GLvoid*)(6 * sizeof(float)));
-			glEnableVertexAttribArray(1);
-		}
-		
-		glBindVertexArray(0);
-	}
-	void draw() {
-		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, vertexCount);
-		glBindVertexArray(0);
-	}
-	~Model() {
-		glDeleteVertexArrays(1, &VAO);
-		glDeleteBuffers(1, &VBO);
-	}
+	void setInstanceMatrices(const std::vector<glm::mat4>& matrices);
+	void draw();
 };
